@@ -4,7 +4,7 @@
   #include <filesystem>
   #include <iostream>
   #include <string>
-  // #include <string_view>
+  #include <string_view>
   #include <vector>
   #include "utils.hpp"
 
@@ -15,8 +15,8 @@
 
     private:
       /* Static */
-      static const std::array<std::string, 2> inner_pointers;
-      static const std::array<std::string, 2> final_pointers;
+      static const std::array<std::string_view, 2> inner_pointers;
+      static const std::array<std::string_view, 2> final_pointers;
       /* Members */
       size_t dirs = 0;
       size_t files = 0;

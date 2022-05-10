@@ -1,7 +1,7 @@
 #include "../inc/tree.hpp"
 
-const std::array<std::string, 2> Tree::inner_pointers = { "├── ", "│   " };
-const std::array<std::string, 2> Tree::final_pointers = { "└── ", "    " };
+const std::array<std::string_view, 2> Tree::inner_pointers = { "├── ", "│   " };
+const std::array<std::string_view, 2> Tree::final_pointers = { "└── ", "    " };
 
 inline void Tree::summary() {
   std::cout << "\n" << dirs << " directories, " << files << " files - size: " << size.size << *size.unit << ".\n";
@@ -43,12 +43,12 @@ void Tree::traverse(fs::directory_entry dir, std::string prefix) {
 
   for (size_t index = 0; index < entries.size(); index++) {
     fs::directory_entry entry = entries[index];
-    const std::array<std::string, 2> pointers = index == entries.size() - 1 ? Tree::final_pointers : Tree::inner_pointers;
+    const std::array<std::string_view, 2> pointers = index == entries.size() - 1 ? Tree::final_pointers : Tree::inner_pointers;
 
-    if (!entry.is_directory()) display_child_file(entry, prefix + pointers[0]);
+    if (!entry.is_directory()) display_child_file(entry, prefix + (std::string) pointers[0]);
     else {
-    display_child_dir(entry, prefix + pointers[0]);
-    traverse(entry, prefix + pointers[1]);
+    display_child_dir(entry, prefix + (std::string) pointers[0]);
+    traverse(entry, prefix + (std::string) pointers[1]);
     }
   }
   dirs++;
