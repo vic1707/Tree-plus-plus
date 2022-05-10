@@ -1,13 +1,13 @@
 #include "../inc/tree.hpp"
 
-const char* Tree::inner_pointers[2] = { "├── ", "│   " };
-const char* Tree::final_pointers[2] = { "└── ", "    " };
+const std::array<std::string, 2> Tree::inner_pointers = { "├── ", "│   " };
+const std::array<std::string, 2> Tree::final_pointers = { "└── ", "    " };
 
 inline void Tree::summary() {
   std::cout << "\n" << dirs << " directories, " << files << " files - size: " << size.size << *size.unit << ".\n";
 }
 
-void Tree::display_child_file(fs::directory_entry file, char* prefix) {
+void Tree::display_child_file(fs::directory_entry file, std::string prefix) {
   const fs::file_time_type fileTime = fs::last_write_time(file.path());
   const time_t time = decltype(fileTime)::clock::to_time_t(fileTime);
 
@@ -20,7 +20,7 @@ void Tree::display_child_file(fs::directory_entry file, char* prefix) {
   files++;
 }
 
-inline void Tree::display_child_dir(fs::directory_entry dir, char* prefix) {
+inline void Tree::display_child_dir(fs::directory_entry dir, std::string prefix) {
   utils::size_unit readable_size = utils::readable_dir_size(dir);
 
   std::cout << prefix
@@ -30,7 +30,7 @@ inline void Tree::display_child_dir(fs::directory_entry dir, char* prefix) {
   dirs++;
 }
 
-void Tree::traverse(fs::directory_entry dir, char* prefix) {
+void Tree::traverse(fs::directory_entry dir, std::string prefix) {
   std::vector<fs::directory_entry> entries;
   for (const fs::directory_entry &entry : fs::directory_iterator(dir)) {
     // if (!entry.path().filename().string().starts_with(".")) // hidden files & folders are ignored
@@ -43,12 +43,12 @@ void Tree::traverse(fs::directory_entry dir, char* prefix) {
 
   for (size_t index = 0; index < entries.size(); index++) {
     fs::directory_entry entry = entries[index];
-    const char** pointers = index == entries.size() - 1 ? Tree::final_pointers : Tree::inner_pointers;
+    const std::array<std::string, 2> pointers = index == entries.size() - 1 ? Tree::final_pointers : Tree::inner_pointers;
 
-    if (!entry.is_directory()) display_child_file(entry, prefix + *pointers[0]);
+    if (!entry.is_directory()) display_child_file(entry, prefix + pointers[0]);
     else {
-    display_child_dir(entry, prefix + *pointers[0]);
-    traverse(entry, prefix + *pointers[1]);
+    display_child_dir(entry, prefix + pointers[0]);
+    traverse(entry, prefix + pointers[1]);
     }
   }
   dirs++;
@@ -57,7 +57,7 @@ void Tree::traverse(fs::directory_entry dir, char* prefix) {
 Tree::Tree(char* path) {
   fs::directory_entry dir = fs::directory_entry(path);
   size = utils::readable_dir_size(dir);;
-  traverse(dir, (char*) "");
+  traverse(dir, (std::string) "");
 }
 
 Tree::~Tree() {

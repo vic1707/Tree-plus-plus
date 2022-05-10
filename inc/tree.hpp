@@ -3,6 +3,8 @@
   #include <array>
   #include <filesystem>
   #include <iostream>
+  #include <string>
+  // #include <string_view>
   #include <vector>
   #include "utils.hpp"
 
@@ -13,17 +15,17 @@
 
     private:
       /* Static */
-      static const char* inner_pointers[2];
-      static const char* final_pointers[2];
+      static const std::array<std::string, 2> inner_pointers;
+      static const std::array<std::string, 2> final_pointers;
       /* Members */
       size_t dirs = 0;
       size_t files = 0;
       utils::size_unit size;
       /* Methods */
       inline void summary();
-      inline void display_child_dir(fs::directory_entry dir, char* prefix);
-      void display_child_file(fs::directory_entry file, char* prefix);
-      void traverse(fs::directory_entry path, char* prefix);
+      inline void display_child_dir(fs::directory_entry dir, std::string prefix);
+      void display_child_file(fs::directory_entry file, std::string prefix);
+      void traverse(fs::directory_entry path, std::string prefix);
 
     public:
       Tree(char* path);
