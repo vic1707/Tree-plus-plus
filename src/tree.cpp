@@ -56,7 +56,8 @@ void Tree::traverse(fs::directory_entry dir, std::string prefix) {
 
 Tree::Tree(char* path) {
   fs::directory_entry dir = fs::directory_entry(path);
-  size = utils::readable_dir_size(dir);;
+  std::cout << fs::canonical(dir).filename().string() << "\n";
+  size = utils::readable_dir_size(dir);
   traverse(dir, (std::string) "");
 }
 
