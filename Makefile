@@ -1,16 +1,16 @@
-FLAGS = -std=c++20 -c -Wall -Werror -Wextra -I include
+FLAGS = -std=c++20 -c -Wall -Werror -Wextra -Wshadow -I include
 
 .PHONY: clean real-clean
 
-tree: main.o tree.o utils.o # args.o
+tree: main.o tree.o utils.o args.o
 	g++ -o $@ $^
 	make clean
 
 main.o: src/main.cpp
 	g++ $(FLAGS) $<
 
-# args.o: src/args.cpp
-# 	g++ $(FLAGS) $<
+args.o: src/args.cpp
+	g++ $(FLAGS) $<
 
 tree.o: src/tree.cpp
 	g++ $(FLAGS) $<

@@ -13,6 +13,7 @@
       size_t size;
       const std::string_view* unit;
     };
+
     size_unit readable_file_size(size_t size_byte);
     size_unit readable_dir_size(fs::directory_entry path);
   }

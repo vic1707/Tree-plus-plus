@@ -70,6 +70,7 @@
     "functional": "cpp",
     "iterator": "cpp",
     "utility": "cpp",
-    "charconv": "cpp"
+    "charconv": "cpp",
+    "fstream": "cpp"
   }
 }

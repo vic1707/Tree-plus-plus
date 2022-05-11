@@ -6,6 +6,7 @@
   #include <string>
   #include <string_view>
   #include <vector>
+  #include "args.hpp"
   #include "utils.hpp"
 
   namespace fs = std::filesystem;
@@ -18,6 +19,8 @@
       static const std::array<std::string_view, 2> inner_pointers;
       static const std::array<std::string_view, 2> final_pointers;
       /* Members */
+      arguments::args args;
+      std::string path;
       size_t dirs = 0;
       size_t files = 0;
       utils::size_unit size;
@@ -28,7 +31,7 @@
       void traverse(fs::directory_entry path, std::string prefix);
 
     public:
-      Tree(char* path);
+      Tree(char* path, arguments::args args);
       ~Tree();
   };
 
