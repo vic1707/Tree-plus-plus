@@ -1,4 +1,4 @@
-#include "../inc/tree.hpp"
+#include "tree.hpp"
 
 const std::array<std::string_view, 2> Tree::inner_pointers = { "├── ", "│   " };
 const std::array<std::string_view, 2> Tree::final_pointers = { "└── ", "    " };

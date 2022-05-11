@@ -1,4 +1,4 @@
-#include "../inc/utils.hpp"
+#include "utils.hpp"
 
 const std::array<std::string_view, 6> utils::sizes = {"B", "KB", "MB", "GB", "TB", "PB"};
 
