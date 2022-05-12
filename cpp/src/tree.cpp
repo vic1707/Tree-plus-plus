@@ -11,7 +11,7 @@ void Tree::display_child_file(fs::directory_entry file, std::string prefix) {
   const fs::file_time_type fileTime = fs::last_write_time(file.path());
   const time_t time = decltype(fileTime)::clock::to_time_t(fileTime);
 
-  utils::size_unit readable_size = utils::readable_file_size(file.file_size());
+  utils::size_unit readable_size = utils::readable_file_size((float) file.file_size());
 
   std::cout << prefix
             << file.path().filename().string()
@@ -33,7 +33,7 @@ inline void Tree::display_child_dir(fs::directory_entry dir, std::string prefix)
 void Tree::traverse(fs::directory_entry dir, std::string prefix = "") {
   std::vector<fs::directory_entry> entries;
   for (const fs::directory_entry &entry : fs::directory_iterator(dir))
-    if (args.all_files || !entry.path().filename().string().starts_with("."))
+    if (options.all_files || !entry.path().filename().string().starts_with("."))
       entries.push_back(entry);
 
   sort(entries.begin(), entries.end(), [](const fs::directory_entry &left, const fs::directory_entry &right) -> bool {
@@ -53,11 +53,11 @@ void Tree::traverse(fs::directory_entry dir, std::string prefix = "") {
   dirs++;
 }
 
-Tree::Tree(char* p, arguments::args args): args(args), path(fs::canonical(p).filename().string()) {
+Tree::Tree(char* p, arguments::options opt): options(opt), path(fs::canonical(p).filename().string()) {
   fs::directory_entry dir = fs::directory_entry(p);
   size = utils::readable_dir_size(dir);
 
-  if (args.redirect) freopen((path+".tree").c_str(),"w",stdout); // redirect stdout to file <path>.tree
+  if (options.redirect) freopen((path+".tree").c_str(),"w",stdout); // redirect stdout to file <path>.tree
 
   std::cout << path << "\n";
   traverse(dir);

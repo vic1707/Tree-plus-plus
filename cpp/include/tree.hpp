@@ -19,7 +19,7 @@
       static const std::array<std::string_view, 2> inner_pointers;
       static const std::array<std::string_view, 2> final_pointers;
       /* Members */
-      arguments::args args;
+      arguments::options options;
       std::string path;
       size_t dirs = 0;
       size_t files = 0;
@@ -31,7 +31,7 @@
       void traverse(fs::directory_entry path, std::string prefix);
 
     public:
-      Tree(char* path, arguments::args args);
+      Tree(char* path, arguments::options opt);
       ~Tree();
   };
 

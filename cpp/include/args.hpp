@@ -5,12 +5,16 @@
   #include <vector>
 
   namespace arguments {
-    struct args
-    {
+    struct options {
       bool all_files;
       bool dir_first;
       bool foldable;
       bool redirect;
+    };
+
+    struct args
+    {
+      options options;
       std::vector<char*> paths;
     };
 

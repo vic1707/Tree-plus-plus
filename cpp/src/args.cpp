@@ -1,20 +1,20 @@
 #include "args.hpp"
 
 arguments::args arguments::parse_args(int argc, char** argv) {
-  arguments::args args = { false, false, false, false, {} };
+  arguments::args args = { {false, false, false, false}, {} };
 
   for (int i = 1; i < argc; i++) {
     if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
       std::cout << "Usage: ./tree [-h|--help] [-a|--all-files] [-f|--foldable] [-r|--redirect] [--children-count] [path(s)]\n";
       exit(0);
     } else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all-files") == 0) {
-      args.all_files = true;
+      args.options.all_files = true;
     } else if (strcmp(argv[i], "--dir-first") == 0) {
-      args.dir_first = true;
+      args.options.dir_first = true;
     } else if (strcmp(argv[i], "-f") == 0 || strcmp(argv[i], "--foldable") == 0) {
-      args.foldable = true;
+      args.options.foldable = true;
     } else if (strcmp(argv[i], "-r") == 0 || strcmp(argv[i], "--redirect") == 0) {
-      args.redirect = true;
+      args.options.redirect = true;
     } else {
       args.paths.push_back(argv[i]);
     }
