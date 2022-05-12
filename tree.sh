@@ -19,7 +19,7 @@ while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
   -h | --help)
-    echo "Usage: tree.sh [-h|--help] [-a|--all-files] [-f|--foldable] [-r|--redirect] [--children-count] [path]"
+    echo "Usage: ./tree.sh [-h|--help] [-a|--all-files] [-f|--foldable] [-r|--redirect] [--dirs-first|--files-first] [path(s)]"
     exit 0
     ;;
   -a | --all-files)
@@ -34,8 +34,14 @@ while [[ $# -gt 0 ]]; do
     foldable_prefix=""
     shift # pass argument
     ;;
-  --dir-first)
+  --dirs-first)
+    priority_files_or_dirs=1
     type=("d" "f")
+    shift # pass argument
+    ;;
+  --files-first)
+    priority_files_or_dirs=1
+    type=("f" "d")
     shift # pass argument
     ;;
   *)
@@ -62,13 +68,13 @@ tree_dir() {
   local directory=$1
   local prefix=${2:-""}
 
-  # local children=("$directory"/*) # files and directories not separated
-
   local children
   IFS=$'\n' read -r -d '' -a children < <(
-    for type in "${type[@]}"; do
-      find "$directory" -mindepth 1 -maxdepth 1 -type $type "${hidden_files[@]}" | sort -V
-    done
+    [ $priority_files_or_dirs ] &&
+      for type in "${type[@]}"; do
+        find "$directory" -mindepth 1 -maxdepth 1 -type $type "${hidden_files[@]}" | sort -V
+      done ||
+      find "$directory" -mindepth 1 -maxdepth 1 "${hidden_files[@]}" | sort -V
   )
   local child_count=${#children[@]}
 
