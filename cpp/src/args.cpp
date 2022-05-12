@@ -16,7 +16,8 @@ arguments::args arguments::parse_args(int argc, char** argv) {
     } else if (strcmp(argv[i], "-r") == 0 || strcmp(argv[i], "--redirect") == 0) {
       args.options.redirect = true;
     } else {
-      args.paths.push_back(argv[i]);
+      if (std::filesystem::directory_entry(argv[i]).is_directory())
+        args.paths.push_back(argv[i]);
     }
   }
   return args;

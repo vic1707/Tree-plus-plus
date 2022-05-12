@@ -1,6 +1,7 @@
 #ifndef ARGS_HPP
   #define ARGS_HPP
   #include <algorithm>
+  #include <filesystem>
   #include <iostream>
   #include <vector>
 
