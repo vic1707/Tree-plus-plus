@@ -27,7 +27,7 @@
       utils::size_unit size;
       /* Methods */
       inline void display_child_dir(fs::directory_entry dir, std::string prefix);
-      void display_child_file(fs::directory_entry file, std::string prefix);
+      inline void display_child_file(fs::directory_entry file, std::string prefix);
       inline void summary();
       void traverse(fs::directory_entry path, std::string prefix);
 

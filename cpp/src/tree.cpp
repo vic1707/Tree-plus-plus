@@ -7,7 +7,7 @@ inline void Tree::summary() {
   std::cout << "\n" << dirs << " directories, " << files << " files - size: " << size.size << *size.unit << ".\n";
 }
 
-void Tree::display_child_file(fs::directory_entry file, std::string prefix) {
+inline void Tree::display_child_file(fs::directory_entry file, std::string prefix) {
   const fs::file_time_type fileTime = fs::last_write_time(file.path());
   const time_t time = decltype(fileTime)::clock::to_time_t(fileTime);
 
