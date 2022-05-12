@@ -49,7 +49,10 @@ void Tree::traverse(fs::directory_entry dir, std::string prefix = "") {
       display_child_file(entries[index], prefix + (std::string) *entry_pointer);
     else {
       display_child_dir(entries[index], prefix + (std::string) *entry_pointer);
-      traverse(entries[index], prefix + (std::string) *continuity_pointer);
+      const std::string_view* c_pointer = index == entries.size() - 1
+        ? &(Tree::continuity_pointers[1])
+        : &(Tree::continuity_pointers[0]);
+      traverse(entries[index], prefix + (std::string) *c_pointer);
     }
   }
   dirs++;
