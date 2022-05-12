@@ -8,7 +8,8 @@
   namespace arguments {
     struct options {
       bool all_files;
-      bool dir_first;
+      bool dirs_first;
+      bool files_first;
       bool foldable;
       bool redirect;
     };
