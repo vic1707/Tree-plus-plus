@@ -31,14 +31,12 @@ inline void Tree::display_child_dir(fs::directory_entry dir, std::string prefix)
 }
 
 void Tree::traverse(fs::directory_entry dir, std::string prefix = "") {
-  std::vector<fs::directory_entry> entries;
-  for (const fs::directory_entry &entry : fs::directory_iterator(dir))
-    if (options.all_files || !entry.path().filename().string().starts_with("."))
-      entries.push_back(entry);
-
-  sort(entries.begin(), entries.end(), [](const fs::directory_entry &left, const fs::directory_entry &right) -> bool {
-    return left.path().filename() < right.path().filename();
-  });
+  std::vector<fs::directory_entry> entries = 
+    options.dirs_first
+    ? utils::list_dirs_first(dir, options.all_files)
+    : options.files_first
+      ? utils::list_files_first(dir, options.all_files)
+      : utils::list_entries_of_dir(dir, options.all_files);
 
   for (size_t index = 0; index < entries.size(); index++) {
     const std::string_view* entry_pointer = index == entries.size() - 1
