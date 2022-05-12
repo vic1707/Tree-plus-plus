@@ -16,18 +16,19 @@
 
     private:
       /* Static */
-      static const std::array<std::string_view, 2> inner_pointers;
-      static const std::array<std::string_view, 2> final_pointers;
+      static const std::array<std::string_view, 2> continuity_pointers;
+      static const std::array<std::string_view, 2> entry_pointers;
       /* Members */
-      arguments::options options;
-      std::string path;
+      const std::string_view* continuity_pointer;
       size_t dirs = 0;
       size_t files = 0;
+      arguments::options options;
+      std::string path;
       utils::size_unit size;
       /* Methods */
-      inline void summary();
       inline void display_child_dir(fs::directory_entry dir, std::string prefix);
       void display_child_file(fs::directory_entry file, std::string prefix);
+      inline void summary();
       void traverse(fs::directory_entry path, std::string prefix);
 
     public:

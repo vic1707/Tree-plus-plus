@@ -13,8 +13,7 @@
       bool redirect;
     };
 
-    struct args
-    {
+    struct args {
       options options;
       std::vector<char*> paths;
     };
