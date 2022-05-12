@@ -1,7 +1,7 @@
 #include "args.hpp"
 
 arguments::args arguments::parse_args(int argc, char** argv) {
-  arguments::args args = { {false, false, false, false}, {} };
+  arguments::args args = { {false, false, false, false, false}, {} };
 
   for (int i = 1; i < argc; i++) {
     if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
