@@ -1,26 +1,26 @@
-FLAGS = -std=c++20 -c -Wall -Werror -Wextra -Wshadow -I include
+CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I include
+CC = g++
 
-.PHONY: clean real-clean
+SRC = src/main.cpp \
+      src/args.cpp \
+      src/tree.cpp \
+      src/utils.cpp
 
-tree: main.o tree.o utils.o args.o
-	g++ -o $@ $^
-	make clean
+OBJ = $(SRC:.cpp=.o)
 
-main.o: src/main.cpp
-	g++ $(FLAGS) $<
+NAME = tree++
 
-args.o: src/args.cpp
-	g++ $(FLAGS) $<
+.PHONY: all clean fclean re
 
-tree.o: src/tree.cpp
-	g++ $(FLAGS) $<
+all: $(NAME)
 
-utils.o: src/utils.cpp
-	g++ $(FLAGS) $<
+$(NAME): $(OBJ)
+	$(CC) $(CXXFLAGS) -o $(NAME) $(SRC)
 
 clean:
-	rm -f *.o
+	rm -f $(OBJ)
 
-real-clean:
-	rm -f *.o
-	rm -f tree
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
