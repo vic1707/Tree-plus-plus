@@ -13,7 +13,6 @@
 
   class Tree
   {
-
     private:
       /* Static */
       static const std::array<std::string_view, 2> continuity_pointers;
