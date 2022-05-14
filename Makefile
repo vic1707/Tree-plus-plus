@@ -1,11 +1,7 @@
+ACTIONS = all fclean re
 APPS = cpp go v
 
-.PHONY: all fclean re
+.PHONY: $(ACTIONS)
 
-all:
-	for app in $(APPS); do make -C $$app; done
-
-fclean:
-	for app in $(APPS); do make -C $$app fclean; done
-
-re: fclean all
+$(ACTIONS):
+	@for app in $(APPS); do make -C $$app $@; done
