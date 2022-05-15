@@ -1,12 +1,14 @@
 CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I include
-CC = g++
+CXX = g++
 
-SRC = src/main.cpp \
-      src/args.cpp \
+SRC = src/args.cpp \
+      src/main.cpp \
       src/tree.cpp \
       src/utils.cpp
 
-OBJ = $(SRC:.cpp=.o)
+OBJ = $(SRC:src%.cpp=obj%.o)
+
+OUT_DIR = bin
 
 NAME = tree++
 
@@ -15,12 +17,15 @@ NAME = tree++
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CXXFLAGS) -o $(NAME) $(SRC)
+	$(CXX) $(CXXFLAGS) -o $(OUT_DIR)/$(NAME) $(SRC)
+
+$(OBJ): $(SRC)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
