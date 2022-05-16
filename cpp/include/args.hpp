@@ -15,8 +15,9 @@
       bool redirect;
     };
 
+    using Options = options;
     struct args {
-      options options;
+      Options options;
       std::vector<std::string_view> paths;
     };
 
