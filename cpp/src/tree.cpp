@@ -11,7 +11,7 @@ void Tree::display_child_file(fs::directory_entry file, std::string prefix) {
 
   std::cout << prefix
             << file.path().filename().string()
-            << " - size: " << readable_size.size << *readable_size.unit
+            << " - size: " << readable_size.size << *readable_size.unit << " (" << file.file_size() << " bytes)"
             << " - " << std::asctime(std::localtime(&time));
   files++;
 }
