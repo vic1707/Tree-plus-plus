@@ -4,7 +4,7 @@ CXX = g++
 SRC = src/args.cpp \
       src/main.cpp \
       src/tree.cpp \
-      src/utils.cpp
+      src/fs_utils.cpp
 
 OBJ = $(SRC:src%.cpp=obj%.o)
 
@@ -14,12 +14,12 @@ NAME = tree++
 
 .PHONY: all clean fclean re
 
-all: $(NAME)
+all: $(OUT_DIR)/$(NAME)
 
-$(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(OUT_DIR)/$(NAME) $(SRC)
+$(OUT_DIR)/$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(OUT_DIR)/$(NAME) $(OBJ)
 
-$(OBJ): $(SRC)
+$(OBJ): obj/%.o: src/%.cpp include/%.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:

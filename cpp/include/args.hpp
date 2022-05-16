@@ -3,6 +3,7 @@
   #include <algorithm>
   #include <filesystem>
   #include <iostream>
+  #include <string_view>
   #include <vector>
 
   namespace arguments {
@@ -16,7 +17,7 @@
 
     struct args {
       options options;
-      std::vector<char*> paths;
+      std::vector<std::string_view> paths;
     };
 
     args parse_args(int argc, char** argv);

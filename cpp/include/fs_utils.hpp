@@ -8,15 +8,15 @@
 
   namespace fs = std::filesystem;
 
-  namespace utils {
+  namespace fs_utils {
     extern const std::array<std::string_view, 6> sizes;
 
     struct size_unit {
-      float size;
+      double size;
       const std::string_view* unit;
     };
 
-    size_unit readable_file_size(float size_byte);
+    size_unit readable_file_size(double size_byte);
     size_unit readable_dir_size(fs::directory_entry path);
     std::vector<fs::directory_entry> list_files_first(fs::directory_entry dir, bool all_files);
     std::vector<fs::directory_entry> list_files_of_dir(fs::directory_entry dir, bool all_files);
