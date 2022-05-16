@@ -2,7 +2,7 @@
 
 namespace arguments {
   args parse_args(int argc, char** argv) {
-    args args = { {false, false, false, false, false}, {} };
+    args args = { options{false, false, false, false, false}, {} };
 
     for (int i = 1; i < argc; i++) {
       auto argv_sv = std::string_view(argv[i]);

@@ -3,18 +3,25 @@
 namespace fs_utils {
   const std::array<std::string_view, 6> sizes = {"B", "KB", "MB", "GB", "TB", "PB"};
 
-  size_unit readable_file_size(double size_byte) {
-    size_t index = 0;
-    for (; size_byte > 1024.0; size_byte /= 1024.0, index++);
-    return {((double)(int)(size_byte * 100)/100), &sizes[index]}; // two digits after decimal point
+  SizeUnit::SizeUnit(size_t bytes) noexcept : bytes(bytes) {
+    reload_unit();
   }
+  void SizeUnit::reload_unit() {
+    auto sizes_it = sizes.begin();
+    size_t ratio_num = 1;
+    for (size_t ratio_bytes = bytes; ratio_bytes > 1024; ratio_bytes /= 1024, ratio_num*=1024, ++sizes_it);
+    unit = Unit{ 
+      Ratio{ratio_num, 1}, 
+      *sizes_it 
+    };
+  } 
 
-  size_unit readable_dir_size(fs::directory_entry path) {
+  SizeUnit readable_dir_size(fs::directory_entry path) {
     size_t size = 0;
     for (fs::recursive_directory_iterator it(path); it != fs::recursive_directory_iterator(); ++it)
-      if (!fs::is_directory(*it))
+      if (!it->is_directory())
         size += fs::file_size(*it);
-    return readable_file_size((double) size);
+    return SizeUnit(size);
   }
 
   std::vector<fs::directory_entry> list_files_of_dir(fs::directory_entry dir, bool all_files) {
