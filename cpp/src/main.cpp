@@ -1,5 +1,4 @@
-#include "tree.hpp"
-#include "args.hpp"
+#include "main.hpp"
 
 int main(int argc, char** argv) {
   arguments::args args = arguments::parse_args(argc, argv);
