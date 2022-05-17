@@ -48,8 +48,8 @@
     inline constexpr std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) noexcept {
       size_unit.unit.ratio.num == 1
         ? os << size_unit.bytes
-        : os << ((double)(int)(size_unit.get_human_readable() * 100)/100); // two decimal places
-      os  << " " << size_unit.unit.name;
+        : os << ((double)(int)(size_unit.get_human_readable() * 100) / 100); // two decimal places
+      os << " " << size_unit.unit.name;
       return os;
     }
   } // namespace SizeUnit

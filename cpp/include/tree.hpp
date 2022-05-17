@@ -13,11 +13,12 @@
     private:
       /* Members */
       FileDirInfos::DirInfos root;
+
     public:
       /* Constructors */
-      Tree(std::string_view path) : root(fs::directory_entry(path)) {};
+      Tree(std::string_view path) : root(fs::directory_entry(path)){};
       ~Tree() = default;
       /* Methods */
-      const FileDirInfos::DirInfos & get_root() const { return root; }
+      const FileDirInfos::DirInfos &get_root() const { return root; }
   };
 #endif // TREE_HPP

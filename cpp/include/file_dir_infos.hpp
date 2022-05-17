@@ -26,7 +26,7 @@
       /* Constructors */
       FileInfos(const fs::directory_entry &entry) : ItemInfos(entry) {}
     };
-  
+
     struct DirInfos : ItemInfos {
       /* Members */
       std::vector<std::variant<DirInfos, FileInfos>> items;

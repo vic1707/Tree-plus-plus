@@ -25,6 +25,6 @@
       std::vector<std::string_view> paths;
     };
 
-    Arguments parse_args(int argc, char** argv);
+    Arguments parse_args(int argc, char **argv);
   } // namespace arguments
 #endif // ARGS_HPP
