@@ -1,5 +1,4 @@
-CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I include
-CXX = g++
+CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I include -O3
 
 SRC = src/args.cpp \
       src/file_dir_infos.cpp \
@@ -10,16 +9,16 @@ SRC = src/args.cpp \
 
 OBJ = $(SRC:src%.cpp=obj%.o)
 
-OUT_DIR = bin
+OUT_DIR = bin/
 
-NAME = tree++
+NAME = $(OUT_DIR)tree++
 
 .PHONY: all clean fclean re
 
-all: $(OUT_DIR)/$(NAME)
+all: $(NAME)
 
-$(OUT_DIR)/$(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(OUT_DIR)/$(NAME) $(OBJ)
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
 
 $(OBJ): obj/%.o: src/%.cpp include/%.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
