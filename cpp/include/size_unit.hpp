@@ -2,6 +2,7 @@
   #define SIZE_UNIT_HPP
   /* std */
   #include <array>
+  #include <ostream>
   #include <string_view>
 
   namespace SizeUnit {
