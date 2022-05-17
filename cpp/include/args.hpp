@@ -1,10 +1,12 @@
 #ifndef ARGS_HPP
   #define ARGS_HPP
-  #include <algorithm>
+  /* std */
   #include <filesystem>
   #include <iostream>
   #include <string_view>
   #include <vector>
+
+  namespace fs = std::filesystem;
 
   namespace arguments {
     struct options {
@@ -13,14 +15,16 @@
       bool files_first;
       bool foldable;
       bool redirect;
+      // int nb_threads;
+      // int size_indent;
+      // bool size_in_bytes;
     };
 
-    struct args {
-      options options;
+    struct Arguments {
+      options opt;
       std::vector<std::string_view> paths;
     };
 
-    args parse_args(int argc, char** argv);
-  }
-
-#endif
+    Arguments parse_args(int argc, char** argv);
+  } // namespace arguments
+#endif // ARGS_HPP

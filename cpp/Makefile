@@ -2,9 +2,11 @@ CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I include
 CXX = g++
 
 SRC = src/args.cpp \
+      src/file_dir_infos.cpp \
+			src/displayer.cpp \
       src/main.cpp \
-      src/tree.cpp \
-      src/fs_utils.cpp
+			src/size_unit.cpp \
+      src/tree.cpp
 
 OBJ = $(SRC:src%.cpp=obj%.o)
 

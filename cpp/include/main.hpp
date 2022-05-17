@@ -1,5 +1,7 @@
 #ifndef MAIN_HPP
   #define MAIN_HPP
-  #include "tree.hpp"
+  /* custom */
   #include "args.hpp"
-#endif
+  #include "displayer.hpp"
+  #include "tree.hpp"
+#endif // MAIN_HPP
