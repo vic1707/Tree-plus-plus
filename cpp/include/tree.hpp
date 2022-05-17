@@ -16,9 +16,9 @@
 
     public:
       /* Constructors */
-      Tree(std::string_view path) : root(fs::directory_entry(path)){};
-      ~Tree() = default;
+      Tree(std::string_view path) noexcept : root(fs::directory_entry(path)){};
+      ~Tree() noexcept = default;
       /* Methods */
-      const FileDirInfos::DirInfos &get_root() const { return root; }
+      const FileDirInfos::DirInfos &get_root() const noexcept { return root; }
   };
 #endif // TREE_HPP

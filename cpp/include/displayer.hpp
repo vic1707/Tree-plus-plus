@@ -13,16 +13,16 @@
   class Displayer {
     public:
       /* Methods */
-      virtual void display(const Item &item, size_t tab) = 0;
+      virtual void display(const Item &item, size_t tab) noexcept = 0;
   };
 
   class Classic : public Displayer {
     public:
       /* Methods */
-      void display(const Item &item, size_t tab) override;
+      void display(const Item &item, size_t tab) noexcept override;
 
     private:
       /* Methods */
-      void display_info(const FileDirInfos::ItemInfos *info);
+      void display_info(const FileDirInfos::ItemInfos *info) noexcept;
   };
 #endif // DISPLAYER_HPP

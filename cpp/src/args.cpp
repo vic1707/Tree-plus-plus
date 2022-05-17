@@ -1,7 +1,7 @@
 #include "args.hpp"
 
 namespace arguments {
-  Arguments parse_args(int argc, char **argv) {
+  Arguments parse_args(int argc, char **argv) noexcept {
     Arguments args = Arguments{
       .opt = options{false, false, false, false, false},
       .paths = {}

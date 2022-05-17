@@ -3,7 +3,7 @@
 // const std::array<std::string_view, 2> entry_pointers = { "├── ", "└── " };
 // const std::array<std::string_view, 2> continuity_pointers = { "│   ", "    " };
 
-void Classic::display(const Item &item, size_t tab) {
+void Classic::display(const Item &item, size_t tab) noexcept {
   for (size_t i = 0; i < tab; i++)
     std::cout.write("  ", 2);
   if (std::holds_alternative<FileDirInfos::DirInfos>(item)) {
@@ -17,7 +17,7 @@ void Classic::display(const Item &item, size_t tab) {
   }
 }
 
-void Classic::display_info(const FileDirInfos::ItemInfos *info) {
+void Classic::display_info(const FileDirInfos::ItemInfos *info) noexcept {
   char buf[64];
   auto tmval = std::localtime(&info->time);
   strftime(buf, sizeof buf, "%A %c", tmval);
