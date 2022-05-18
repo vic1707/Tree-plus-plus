@@ -34,6 +34,7 @@
       DirInfos(const fs::directory_entry &entry) noexcept;
     };
 
-    inline constexpr void add_item(auto &self, const fs::directory_entry &entry) noexcept;
+    template <typename ItemT>
+    inline constexpr void push_item(auto &self, const fs::directory_entry &entry) noexcept;
   } // namespace FileDirInfos
 #endif // FILE_DIR_INFOS_HPP
