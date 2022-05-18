@@ -18,10 +18,9 @@ void Classic::display(const Item &item, size_t tab) noexcept {
 }
 
 void Classic::display_info(const FileDirInfos::ItemInfos *info) noexcept {
-  char buf[64];
-  auto tmval = std::localtime(&info->time);
-  strftime(buf, sizeof buf, "%A %c", tmval);
-  std::cout << info->path.filename().string() << " - " << info->size << " - " << buf << '\n';
+  char buff[20];
+  std::strftime(buff, sizeof buff, "%Y-%m-%d %H:%M:%S", std::localtime(&info->time));
+  std::cout << info->path.filename().string() << " - " << info->size << " - " << buff << "\n";
 }
 
 // pour le tri la fct partition
