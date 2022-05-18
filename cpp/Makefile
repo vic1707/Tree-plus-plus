@@ -5,7 +5,8 @@ SRC = src/args.cpp \
 			src/displayer.cpp \
       src/main.cpp \
 			src/size_unit.cpp \
-      src/tree.cpp
+      src/tree.cpp \
+			src/utils.cpp
 
 OBJ = $(SRC:src%.cpp=obj%.o)
 

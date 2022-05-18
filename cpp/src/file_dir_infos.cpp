@@ -11,12 +11,12 @@ namespace FileDirInfos {
   ItemInfos::ItemInfos(const fs::directory_entry &entry) noexcept {
     path = entry.path();
     size = fs::file_size(entry.path());
-    time = fs::file_time_type::clock::to_time_t(fs::last_write_time(entry.path()));
+    time = Utils::to_time_t(fs::last_write_time(entry.path()));
   }
 
   DirInfos::DirInfos(const fs::directory_entry &entry) noexcept {
     path = entry.path();
-    time = fs::file_time_type::clock::to_time_t(fs::last_write_time(entry.path()));
+    time = Utils::to_time_t(fs::last_write_time(entry.path()));
     size = SizeUnit::SizeUnit();
     for (fs::directory_iterator it(path); it != fs::directory_iterator(); ++it)
       it->is_directory()

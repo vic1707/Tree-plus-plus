@@ -6,6 +6,7 @@
   #include <variant>
   /* custom */
   #include "size_unit.hpp"
+  #include "utils.hpp"
 
   namespace fs = std::filesystem;
 
