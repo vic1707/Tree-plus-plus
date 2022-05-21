@@ -19,8 +19,6 @@
       /* Constructors */
       ItemInfos() noexcept = default;
       ItemInfos(const fs::directory_entry &entry) noexcept;
-      /* Methods */
-      virtual constexpr void display(size_t) noexcept {}
     };
 
     struct FileInfos : ItemInfos {
