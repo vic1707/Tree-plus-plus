@@ -3,6 +3,7 @@ CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I inc -O3
 SRC = src/args.cpp \
       src/file_dir_infos.cpp \
 			src/displayer.cpp \
+			src/displayers/classic.cpp \
       src/main.cpp \
 			src/size_unit.cpp \
       src/tree.cpp \

@@ -1,8 +1,5 @@
 #ifndef DISPLAYER_HPP
   #define DISPLAYER_HPP
-  /* std */
-  #include <iostream>
-  #include <variant>
   /* custom */
   #include "file_dir_infos.hpp"
 
@@ -11,23 +8,20 @@
 
   using Item = std::variant<FileDirInfos::DirInfos, FileDirInfos::FileInfos>;
   class Displayer {
-    public:
-      /* Methods */
-      virtual void display(const Item &item) noexcept = 0;
     private:
       /* Methods */
       virtual void display_file(const FileDirInfos::FileInfos *item) noexcept = 0;
       virtual void display_folder(const FileDirInfos::DirInfos *item) noexcept = 0;
-  };
+    
+    protected:
+      /* Members */
+      size_t tab_size;
 
-  class Classic : public Displayer {
     public:
       /* Methods */
-      void display(const Item &item) noexcept override;
-
-    private:
-      /* Methods */
-      void display_file(const FileDirInfos::FileInfos *item) noexcept override;
-      void display_folder(const FileDirInfos::DirInfos *item) noexcept override;
+      virtual void display(const Item &item) noexcept = 0;
+      /* Constructors */
+      Displayer(size_t tab_size = 2) noexcept : tab_size(tab_size) {};
   };
+
 #endif // DISPLAYER_HPP
