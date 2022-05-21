@@ -1,5 +1,7 @@
 #ifndef DISPLAYER_HPP
   #define DISPLAYER_HPP
+  /* std */
+  #include <string>
   /* custom */
   #include "file_dir_infos.hpp"
 
@@ -10,8 +12,8 @@
   class Displayer {
     private:
       /* Methods */
-      virtual void display_file(const FileDirInfos::FileInfos *item) noexcept = 0;
-      virtual void display_folder(const FileDirInfos::DirInfos *item) noexcept = 0;
+      virtual void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept = 0;
+      virtual void display_folder(const FileDirInfos::DirInfos *item, std::string prefix) noexcept = 0;
     
     protected:
       /* Members */
@@ -19,9 +21,9 @@
 
     public:
       /* Methods */
-      virtual void display(const Item &item) noexcept = 0;
+      virtual void display(const Item &item, std::string prefix = "") noexcept = 0;
       /* Constructors */
-      Displayer(size_t tab_size = 2) noexcept : tab_size(tab_size) {};
+      Displayer(size_t tab_size) noexcept : tab_size(tab_size) {};
   };
 
 #endif // DISPLAYER_HPP
