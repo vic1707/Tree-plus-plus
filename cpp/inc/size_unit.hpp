@@ -12,7 +12,7 @@
       size_t den;
       /* Constructors */
       constexpr Ratio() noexcept : num(1), den(1) {}
-      constexpr Ratio(std::uintmax_t num, std::uintmax_t den) noexcept : num(num), den(den) {}
+      constexpr Ratio(std::uintmax_t n, std::uintmax_t d) noexcept : num(n), den(d) {}
       /* Operators */
       constexpr float operator*(size_t bytes) const noexcept {
         return static_cast<float>(bytes) * static_cast<float>(den) / static_cast<float>(num);
