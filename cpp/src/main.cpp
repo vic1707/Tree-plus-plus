@@ -5,9 +5,10 @@ int main(int argc, char **argv) {
 
   if (args.paths.empty())
     args.paths.push_back(".");
+
   for (auto path : args.paths) {
     Tree tree(path);
     Classic classic;
-    classic.display(tree.get_root(), 0);
+    classic.display(tree.get_root());
   }
 }
