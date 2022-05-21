@@ -6,7 +6,7 @@
   /* custom */
   #include "displayer.hpp"
 
-  class Classic : public Displayer {
+  class Classic : public Displayer, public EntryDisplayer {
     private:
       /* Methods */
       void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept override;
