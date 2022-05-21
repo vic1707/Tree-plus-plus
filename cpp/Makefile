@@ -10,7 +10,7 @@ SRC = src/args.cpp \
 
 OBJ = $(SRC:src%.cpp=obj%.o)
 
-OUT_DIR = bin/
+OUT_DIR := $(or $(OUT_DIR),bin/)
 
 NAME = $(OUT_DIR)tree++
 
