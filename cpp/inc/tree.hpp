@@ -16,7 +16,7 @@
 
     public:
       /* Constructors */
-      Tree(std::string_view path) noexcept : root(fs::directory_entry(path)){};
+      Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical(path))) {};
       ~Tree() noexcept = default;
       /* Methods */
       const FileDirInfos::DirInfos &get_root() const noexcept { return root; }
