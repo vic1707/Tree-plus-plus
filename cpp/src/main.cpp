@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
 
   for (auto path : args.paths) {
     Tree tree(path);
-    Classic classic;
-    classic.display(tree.get_root());
+    auto displayer = Displayer::get_Displayer();
+    displayer->display(tree.get_root());
   }
 }

@@ -24,6 +24,7 @@
       virtual void display(const Item &item, std::string prefix = "") noexcept = 0;
       /* Constructors */
       Displayer(size_t tab_size) noexcept : tab_size(tab_size) {};
+      static Displayer *get_Displayer();
   };
 
 #endif // DISPLAYER_HPP
