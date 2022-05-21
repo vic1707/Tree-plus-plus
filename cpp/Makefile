@@ -1,4 +1,4 @@
-CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I include -O3
+CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I inc -O3
 
 SRC = src/args.cpp \
       src/file_dir_infos.cpp \
@@ -21,7 +21,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
 
-$(OBJ): obj/%.o: src/%.cpp include/%.hpp
+$(OBJ): obj/%.o: src/%.cpp inc/%.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
