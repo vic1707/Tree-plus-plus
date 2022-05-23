@@ -8,11 +8,11 @@
   #include "displayers_specs/indenter.hpp"
   #include "displayers_specs/formatter.hpp"
   // formatters
-  #include "displayers_specs/name_only.formatter.hpp"
-  #include "displayers_specs/full_infos.formatter.hpp"
+  #include "formatters/name_only.hpp"
+  #include "formatters/full_infos.hpp"
   // indenters
-  #include "displayers_specs/fancy.indenter.hpp"
-  #include "displayers_specs/space.indenter.hpp"
+  #include "indenters/fancy.hpp"
+  #include "indenters/space.hpp"
 
   namespace Displayer {
     class Displayer {

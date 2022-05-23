@@ -1,7 +1,7 @@
 #ifndef FANCY_INDENTER_HPP
   #define FANCY_INDENTER_HPP
   /* custom */
-  #include "indenter.hpp"
+  #include "displayers_specs/indenter.hpp"
 
   namespace Indenter {
     class Fancy : public AIndenter {
