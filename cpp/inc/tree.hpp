@@ -22,6 +22,6 @@
       };
       ~Tree() noexcept = default;
       /* Methods */
-      const FileDirInfos::DirInfos &get_root() const noexcept { return root; }
+      FileDirInfos::DirInfos &get_root() noexcept { return root; }
   };
 #endif // TREE_HPP

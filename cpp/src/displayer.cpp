@@ -2,7 +2,8 @@
 
 namespace Displayer {
 
-  void Displayer::display(const FileDirInfos::DirInfos &directory, std::string prefix) noexcept {
+  void Displayer::display(FileDirInfos::DirInfos &directory, std::string prefix) noexcept {
+    m_sort->sort(directory.items);
     for (auto &child : directory.items) {
       const auto entry_p = &child == &directory.items.back() ? m_indent->last_entry_pointer : m_indent->entry_pointer;
       const auto continuity_p = &child == &directory.items.back() ? m_indent->last_continuity_indent : m_indent->continuity_indent;
@@ -22,10 +23,12 @@ namespace Displayer {
     if(opt == "classic") {
       disp.set_format(std::make_unique<Formatter::NameOnly>());
       disp.set_indent(std::make_unique<Indenter::Space>(size_tab));
+      disp.set_sort(std::make_unique<Sorter::Default>());
     } else if (opt == "fancy")
     {
       disp.set_format(std::make_unique<Formatter::FullInfos>());
       disp.set_indent(std::make_unique<Indenter::Fancy>(size_tab));
+      disp.set_sort(std::make_unique<Sorter::Default>());
     } else {
       throw std::runtime_error("Unknown indenter");
     }
