@@ -17,6 +17,8 @@
   // sorters
   #include "sorters/alpha.hpp"
   #include "sorters/default.hpp"
+  #include "sorters/alpha_folders_firsts.hpp"
+  #include "sorters/alpha_files_firsts.hpp"
 
   namespace Displayer {
     class Displayer {

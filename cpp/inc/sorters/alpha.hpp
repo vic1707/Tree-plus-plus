@@ -11,9 +11,9 @@
         std::sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
           auto get_filename = [](const auto& a) -> std::string {
             if (std::holds_alternative<FileDirInfos::DirInfos>(a))
-              return std::get<FileDirInfos::DirInfos>(a).path.filename().string();
+              return std::get<FileDirInfos::DirInfos>(a).path;
             else
-              return std::get<FileDirInfos::FileInfos>(a).path.filename().string();
+              return std::get<FileDirInfos::FileInfos>(a).path;
           };
           return get_filename(a) < get_filename(b);
         });

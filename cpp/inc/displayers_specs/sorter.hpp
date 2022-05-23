@@ -13,7 +13,7 @@
         /* Destructor */
         virtual ~ASorter() = default;
         /* Members */
-        virtual void sort(Items &items) noexcept = 0;
+        virtual void sort(Items &items) = 0;
     };
   } // namespace Sorter
 #endif // SORTER_HPP

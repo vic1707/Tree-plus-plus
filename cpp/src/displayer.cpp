@@ -1,7 +1,6 @@
 #include "displayer.hpp"
 
 namespace Displayer {
-
   void Displayer::display(FileDirInfos::DirInfos &directory, std::string prefix) noexcept {
     m_sort->sort(directory.items);
     for (auto &child : directory.items) {
@@ -28,7 +27,7 @@ namespace Displayer {
     {
       disp.set_format(std::make_unique<Formatter::FullInfos>());
       disp.set_indent(std::make_unique<Indenter::Fancy>(size_tab));
-      disp.set_sort(std::make_unique<Sorter::Default>());
+      disp.set_sort(std::make_unique<Sorter::AlphaFilesFirsts>());
     } else {
       throw std::runtime_error("Unknown indenter");
     }
