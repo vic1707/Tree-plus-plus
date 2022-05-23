@@ -3,8 +3,7 @@ CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I inc -O3
 
 SRC = src/args.cpp \
       src/file_dir_infos.cpp \
-			src/displayer.cpp \
-			src/displayers/classic.cpp \
+      src/indenter.cpp \
       src/main.cpp \
 			src/size_unit.cpp
 
@@ -19,7 +18,7 @@ NAME = $(OUT_DIR)tree++
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ) -lfmt
 
 $(OBJ): obj/%.o: src/%.cpp inc/%.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
