@@ -2,6 +2,7 @@
   #define TREE_HPP
   /* std */
   #include <filesystem>
+  #include <iostream>
   #include <string_view>
   /* custom */
   #include "args.hpp"
@@ -16,7 +17,9 @@
 
     public:
       /* Constructors */
-      Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical(path))) {};
+      Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical(path))) {
+        std::cout << root.path.filename().string() << "\n";
+      };
       ~Tree() noexcept = default;
       /* Methods */
       const FileDirInfos::DirInfos &get_root() const noexcept { return root; }

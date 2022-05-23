@@ -8,7 +8,6 @@ int main(int argc, char **argv) {
 
   for (auto path : args.paths) {
     Tree tree(path);
-    auto displayer = Displayer::get_Displayer();
-    displayer->display(tree.get_root());
+    Displayer::get_indenter("fancy", 4).display(tree.get_root());
   }
 }

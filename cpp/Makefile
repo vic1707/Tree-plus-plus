@@ -2,8 +2,8 @@ CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I inc -O3
 # CXX = /usr/local/opt/gcc@11/bin/g++-11 # `brew install gcc` MacOS
 
 SRC = src/args.cpp \
+			src/displayer.cpp \
       src/file_dir_infos.cpp \
-      src/displayers_specs/indenter.cpp \
       src/main.cpp \
 			src/size_unit.cpp
 
