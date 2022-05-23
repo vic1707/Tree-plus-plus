@@ -8,7 +8,7 @@
   #include "file_dir_infos.hpp"
 
   namespace Formatter {
-    class NameOnly : virtual public AFormatter {
+    class NameOnly : public AFormatter {
       void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept override {
           std::cout << prefix << item->path.filename().string() << "\n";
         }

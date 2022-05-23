@@ -8,7 +8,7 @@
   #include "file_dir_infos.hpp"
 
   namespace Formatter {
-    class FullInfos : virtual public AFormatter {
+    class FullInfos : public AFormatter {
       void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept override {
         char buff[20];
         std::strftime(buff, sizeof buff, "%Y-%m-%d %H:%M:%S", std::localtime(&item->time));
