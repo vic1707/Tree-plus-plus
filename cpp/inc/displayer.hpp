@@ -17,11 +17,11 @@
   namespace Displayer {
     class Displayer {
       private:
-        std::unique_ptr<Indenter::AIndenter> m_indent;
+        std::unique_ptr<Indenter::IndenterOptions> m_indent;
         std::unique_ptr<Formatter::AFormatter> m_format;
       public:
         void display(const FileDirInfos::DirInfos &item, std::string prefix = "") noexcept;
-        void set_indent(std::unique_ptr<Indenter::AIndenter> indent) { m_indent = std::move(indent); }
+        void set_indent(std::unique_ptr<Indenter::IndenterOptions> indent) { m_indent = std::move(indent); }
         void set_format(std::unique_ptr<Formatter::AFormatter> format) { m_format = std::move(format); }
     };
 
