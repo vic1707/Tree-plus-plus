@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I inc -O3
 
 SRC = src/args.cpp \
       src/file_dir_infos.cpp \
-      src/indenter.cpp \
+      src/displayers_specs/indenter.cpp \
       src/main.cpp \
 			src/size_unit.cpp
 
