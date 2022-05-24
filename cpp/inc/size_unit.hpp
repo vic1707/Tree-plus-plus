@@ -51,6 +51,10 @@
         os << " " << size_unit.unit.name;
         return os;
       }
+
+      friend inline constexpr bool operator<(const SizeUnit &lhs, const SizeUnit &rhs) noexcept {
+        return lhs.bytes < rhs.bytes;
+      }
     };
   } // namespace SizeUnit
 #endif // SIZE_UNIT_HPP
