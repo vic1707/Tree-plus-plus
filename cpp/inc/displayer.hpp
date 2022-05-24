@@ -18,6 +18,7 @@
   // sorters
   #include "sorters/alpha.hpp"
   #include "sorters/default.hpp"
+  #include "sorters/size.hpp"
   // separators
   #include "separators/default.hpp"
   #include "separators/separate_files_folders.hpp"
