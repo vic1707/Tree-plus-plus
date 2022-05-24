@@ -33,7 +33,10 @@
       DirInfos(const fs::directory_entry &entry) noexcept;
     };
 
-    template <typename ItemT>
+    template <typename T>
+    concept Item = std::same_as<T, FileDirInfos::FileInfos> || std::same_as<T, FileDirInfos::DirInfos>;
+
+    template <typename Item>
     inline constexpr void push_item(auto &self, const fs::directory_entry &entry) noexcept;
   } // namespace FileDirInfos
 #endif // FILE_DIR_INFOS_HPP

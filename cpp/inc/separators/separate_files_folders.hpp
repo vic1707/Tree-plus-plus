@@ -4,7 +4,10 @@
   #include "displayers_specs/separator.hpp"
 
   namespace Separator {
-    template <class First, class Second>
+    template <typename T>
+    concept FileDir = std::same_as<T, FileDirInfos::FileInfos> || std::same_as<T, FileDirInfos::DirInfos>;
+
+    template <FileDir First>
     class FileFolder : public ASeparator {
       public:
         void separate(Items &items) final override {

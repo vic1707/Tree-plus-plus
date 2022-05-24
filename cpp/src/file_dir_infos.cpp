@@ -1,10 +1,10 @@
 #include "file_dir_infos.hpp"
 
 namespace FileDirInfos {
-  template <typename ItemT>
+  template <typename Item>
   inline constexpr void push_item(auto &self, const fs::directory_entry &entry) noexcept {
-    auto file = typename decltype(self.items)::value_type(std::in_place_type<ItemT>, entry);
-    self.size += std::get<ItemT>(file).size.bytes;
+    auto file = typename decltype(self.items)::value_type(std::in_place_type<Item>, entry);
+    self.size += std::get<Item>(file).size.bytes;
     self.items.emplace_back(std::move(file));
   }
 

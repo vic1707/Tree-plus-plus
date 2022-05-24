@@ -29,7 +29,7 @@ namespace Displayer {
       disp.set_format(std::make_unique<Formatter::FullInfos>());
       disp.set_indent(std::make_unique<Indenter::Fancy>(size_tab));
       disp.set_sort(std::make_unique<Sorter::Alpha>());
-      disp.set_separator(std::make_unique<Separator::FileFolder<FileDirInfos::FileInfos, FileDirInfos::DirInfos>>());
+      disp.set_separator(std::make_unique<Separator::FileFolder<FileDirInfos::FileInfos>>());
     } else {
       throw std::runtime_error("Unknown indenter");
     }
