@@ -8,7 +8,7 @@
     class FileFolder : public ASeparator {
       public:
         void separate(Items &items) final override {
-          std::partition(items.begin(), items.end(), [](const auto &item) {
+          std::stable_partition(items.begin(), items.end(), [](const auto &item) {
             return std::holds_alternative<First>(item);
           });
         };
