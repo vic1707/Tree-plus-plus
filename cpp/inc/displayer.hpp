@@ -30,6 +30,7 @@
         std::unique_ptr<Formatter::AFormatter> m_format;
         std::unique_ptr<Sorter::ASorter> m_sort;
         std::unique_ptr<Separator::ASeparator> m_separator;
+
       public:
         void display(FileDirInfos::DirInfos &item, std::string prefix = "") noexcept;
         void set_indent(std::unique_ptr<Indenter::IndenterOptions> indent) { m_indent = std::move(indent); }

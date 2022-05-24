@@ -10,8 +10,8 @@
   namespace Formatter {
     class NameOnly : public AFormatter {
       void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept override {
-          std::cout << prefix << item->path.filename().string() << "\n";
-        }
+        std::cout << prefix << item->path.filename().string() << "\n";
+      }
 
       void display_folder(const FileDirInfos::DirInfos *item, std::string prefix) noexcept override {
         std::cout << prefix << item->path.filename().string() << "\n";

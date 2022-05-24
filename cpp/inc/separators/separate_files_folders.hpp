@@ -4,7 +4,7 @@
   #include "displayers_specs/separator.hpp"
 
   namespace Separator {
-    template<class First, class Second>
+    template <class First, class Second>
     class FileFolder : public ASeparator {
       public:
         void separate(Items &items) final override {

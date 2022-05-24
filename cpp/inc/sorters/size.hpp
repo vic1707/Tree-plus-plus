@@ -14,11 +14,9 @@
               else
                 return std::get<FileDirInfos::FileInfos>(a).size;
             };
-          return get_size(a) < get_size(b);
-        });
+            return get_size(a) < get_size(b);
+          });
       }
     };
   } // namespace Sorter
-  
-
 #endif // SIZE_SORTER_HPP

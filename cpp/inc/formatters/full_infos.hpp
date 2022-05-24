@@ -22,5 +22,4 @@
       }
     };
   } // namespace Formatter
-
 #endif // FULL_INFOS_FORMATTER_HPP

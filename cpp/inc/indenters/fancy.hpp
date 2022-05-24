@@ -10,5 +10,4 @@
         Fancy(size_t tab_size = 2) : IndenterOptions("│", "─", "├", "└", tab_size) {}
     };
   } // namespace Indenter
-
 #endif // FANCY_INDENTER_HPP
