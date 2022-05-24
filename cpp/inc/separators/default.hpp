@@ -7,7 +7,7 @@
   namespace Separator {
     class Default : public ASeparator {
       public:
-        void separate(Items &items) final override {}
+        void separate(Items &) final override {}
     };
   } // namespace Separator
 #endif // DEFAULT_SEPARATOR_HPP
