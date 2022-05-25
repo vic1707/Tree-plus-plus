@@ -3,6 +3,7 @@
   /* std */
   #include <string>
   #include <string_view>
+  #include <vector>
   /* custom */
   // specs
   #include "displayers_specs/indenter.hpp"
@@ -26,13 +27,13 @@
       private:
         std::unique_ptr<Indenter::IndenterOptions> m_indent;
         std::unique_ptr<Formatter::AFormatter> m_format;
-        std::unique_ptr<Sorter::ASorter> m_sort;
+        std::vector<std::unique_ptr<Sorter::ASorter>> m_sort;
 
       public:
         void display(FileDirInfos::DirInfos &item, std::string prefix = "") noexcept;
         void set_indent(std::unique_ptr<Indenter::IndenterOptions> indent) { m_indent = std::move(indent); }
         void set_format(std::unique_ptr<Formatter::AFormatter> format) { m_format = std::move(format); }
-        void set_sort(std::unique_ptr<Sorter::ASorter> sort) { m_sort = std::move(sort); }
+        void add_sort(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }
     };
 
     // std::unique_ptr<Displayer> get_indenter(std::string_view opt);
