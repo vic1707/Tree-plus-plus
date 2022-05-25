@@ -1,14 +1,14 @@
-#ifndef EXTENSION_SEPARATOR_HPP
-  #define EXTENSION_SEPARATOR_HPP
+#ifndef EXTENSION_SORTER_HPP
+  #define EXTENSION_SORTER_HPP
   /* std */
   #include <set>
   /* custom */
-  #include "displayers_specs/separator.hpp"
+  #include "displayers_specs/sorter.hpp"
 
-  namespace Separator {
-    class Extension : public ASeparator {
+  namespace Sorter {
+    class Extension : public ASorter {
       public:
-        void separate(Items &items) final override {
+        void sort(Items &items) final override {
           // separate files and folders
           Items::iterator files = std::stable_partition(items.begin(), items.end(), [](const auto &item) {
             return std::holds_alternative<FileDirInfos::FileInfos>(item);
@@ -26,6 +26,5 @@
             });
         };
     };
-  } // namespace Separator
-
+  } // namespace Sorter
 #endif
