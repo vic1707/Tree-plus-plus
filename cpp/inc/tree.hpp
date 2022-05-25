@@ -18,7 +18,7 @@
     public:
       /* Constructors */
       Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical(path))) {
-        std::cout << root.path.filename().string() << "\n";
+        std::cout << root.name.filename << "\n";
       };
       ~Tree() noexcept = default;
       /* Methods */
