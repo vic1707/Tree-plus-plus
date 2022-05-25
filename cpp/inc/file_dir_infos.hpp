@@ -13,17 +13,19 @@
   namespace FileDirInfos {
 
     struct NameInfos {
+      /* Members */
       std::string filename;
       std::string extension;
-
+      /* Constructors */
+      NameInfos() noexcept = default;
       NameInfos(const fs::path &path) : filename(path.filename().string()), extension(path.extension().string()) {}
     };
 
     struct ItemInfos {
       /* Members */
       fs::path path;
-      SizeUnit::SizeUnit size;
       time_t time;
+      NameInfos name;
       /* Constructors */
       ItemInfos() noexcept = default;
       ItemInfos(const fs::directory_entry &entry) noexcept;
@@ -31,13 +33,14 @@
 
     struct FileInfos : ItemInfos {
       /* Members */
-      NameInfos name;
+      SizeUnit::SizeUnit size;
       /* Constructors */
-      FileInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry), name(entry.path()) {}
+      FileInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry), size(fs::file_size(path)) {}
     };
 
     struct DirInfos : ItemInfos {
       /* Members */
+      SizeUnit::SizeUnit size;
       std::vector<std::variant<DirInfos, FileInfos>> items;
       /* Constructors */
       DirInfos(const fs::directory_entry &entry) noexcept;

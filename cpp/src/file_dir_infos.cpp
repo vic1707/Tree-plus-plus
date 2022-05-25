@@ -10,13 +10,11 @@ namespace FileDirInfos {
 
   ItemInfos::ItemInfos(const fs::directory_entry &entry) noexcept {
     path = entry.path();
-    size = fs::file_size(path);
     time = Utils::to_time_t(fs::last_write_time(path));
+    name = NameInfos(path);
   }
 
-  DirInfos::DirInfos(const fs::directory_entry &entry) noexcept {
-    path = entry.path();
-    time = Utils::to_time_t(fs::last_write_time(path));
+  DirInfos::DirInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry) {
     size = SizeUnit::SizeUnit();
     for (fs::directory_iterator it(path); it != fs::directory_iterator(); ++it)
       it->is_directory()
