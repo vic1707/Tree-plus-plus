@@ -21,6 +21,7 @@
   #include "sorters/size.hpp"
   // separators
   #include "separators/default.hpp"
+  #include "separators/extension.hpp"
   #include "separators/separate_files_folders.hpp"
 
   namespace Displayer {
