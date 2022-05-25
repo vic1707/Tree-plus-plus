@@ -4,6 +4,7 @@
 
 namespace Sorter {
   class Default : public ASorter {
-    void sort(Items &) noexcept override {}
+    public:
+      void sort(Items &) noexcept override {}
   };
 } // namespace Sorter

@@ -10,7 +10,6 @@
 namespace fs = std::filesystem;
 
 namespace FileDirInfos {
-
   struct NameInfos {
     /* Members */
     std::string filename;
