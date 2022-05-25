@@ -8,23 +8,17 @@
   namespace Sorter {
     class Extension : public ASorter {
       public:
-        void sort(Items &items) final override {
-          // separate files and folders
-          Items::iterator files = std::stable_partition(items.begin(), items.end(), [](const auto &item) {
-            return std::holds_alternative<FileDirInfos::FileInfos>(item);
+        void sort(Items &items) noexcept {
+          std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
+            auto get_extension = [](const auto& a) -> std::string {
+              if (std::holds_alternative<FileDirInfos::DirInfos>(a))
+                return std::get<FileDirInfos::DirInfos>(a).name.extension;
+              else
+                return std::get<FileDirInfos::FileInfos>(a).name.extension;
+            };
+            return get_extension(a) < get_extension(b);
           });
-
-          // make a set with all extensions in the files
-          std::set<std::string> extensions;
-          for (auto it = items.begin(); it != files; ++it)
-            extensions.insert(std::get<FileDirInfos::FileInfos>(*it).name.extension);
-
-          // separate the files by their extensions
-          for (const auto &ext : extensions)
-            std::stable_partition(items.begin(), files, [&ext](const auto &item) {
-              return std::get<FileDirInfos::FileInfos>(item).name.extension != ext;
-            });
-        };
+        }
     };
   } // namespace Sorter
 #endif

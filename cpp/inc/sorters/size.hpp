@@ -7,7 +7,7 @@
     class Size : public ASorter {
       public:
         void sort(Items &items) final override {
-          std::sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
+          std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
             auto get_size = [](const auto& a) -> SizeUnit::SizeUnit {
               if (std::holds_alternative<FileDirInfos::DirInfos>(a))
                 return std::get<FileDirInfos::DirInfos>(a).size;
