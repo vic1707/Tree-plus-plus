@@ -1,9 +1,9 @@
 #include "args.hpp"
 
-namespace arguments {
+namespace CLI {
   Arguments parse_args(int argc, char **argv) noexcept {
     Arguments args = Arguments{
-      .opt = options{false, false, false, false, false},
+      .opt = Options{false, false, false, false, false},
       .paths = {}
     };
 

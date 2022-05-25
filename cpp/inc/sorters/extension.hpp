@@ -1,7 +1,5 @@
 #ifndef EXTENSION_SORTER_HPP
   #define EXTENSION_SORTER_HPP
-  /* std */
-  #include <set>
   /* custom */
   #include "displayers_specs/sorter.hpp"
 
@@ -21,4 +19,4 @@
         }
     };
   } // namespace Sorter
-#endif
+#endif // EXTENSION_SORTER_HPP

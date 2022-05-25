@@ -8,8 +8,8 @@
 
   namespace fs = std::filesystem;
 
-  namespace arguments {
-    struct options {
+  namespace CLI {
+    struct Options {
       bool all_files;
       bool dirs_first;
       bool files_first;
@@ -21,10 +21,10 @@
     };
 
     struct Arguments {
-      options opt;
+      Options opt;
       std::vector<std::string_view> paths;
     };
 
     Arguments parse_args(int argc, char **argv) noexcept;
-  } // namespace arguments
+  } // namespace CLI
 #endif // ARGS_HPP

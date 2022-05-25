@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 int main(int argc, char **argv) {
-  auto args = arguments::parse_args(argc, argv);
+  auto args = CLI::parse_args(argc, argv);
 
   if (args.paths.empty())
     args.paths.push_back(".");
