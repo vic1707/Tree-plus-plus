@@ -11,6 +11,14 @@
   namespace fs = std::filesystem;
 
   namespace FileDirInfos {
+
+    struct NameInfos {
+      std::string filename;
+      std::string extension;
+
+      NameInfos(const fs::path &path) : filename(path.filename().string()), extension(path.extension().string()) {}
+    };
+
     struct ItemInfos {
       /* Members */
       fs::path path;
@@ -22,8 +30,10 @@
     };
 
     struct FileInfos : ItemInfos {
+      /* Members */
+      NameInfos name;
       /* Constructors */
-      FileInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry) {}
+      FileInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry), name(entry.path()) {}
     };
 
     struct DirInfos : ItemInfos {
