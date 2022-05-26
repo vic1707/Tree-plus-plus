@@ -6,6 +6,6 @@ namespace Indenter {
   class Fancy : public IndenterOptions {
     public:
       /* Constructors */
-      Fancy(size_t width, size_t tab_size = 2) : IndenterOptions(width, "│", "─", "├", "└", tab_size) {}
+      Fancy(size_t tab_size = 2) : IndenterOptions("│", "─", "├", "└", tab_size) {}
   };
 } // namespace Indenter

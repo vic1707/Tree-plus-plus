@@ -8,7 +8,10 @@
 namespace Formatter {
   class AFormatter {
     public:
-      /* Destructor */
+      /* Members */
+      size_t width;
+      /* Constructors */
+      AFormatter(size_t width) noexcept : width(width) {};
       virtual ~AFormatter() = default;
       /* Methods */
       virtual void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept = 0;
