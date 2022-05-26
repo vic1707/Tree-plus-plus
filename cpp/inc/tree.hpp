@@ -2,6 +2,7 @@
 /* std */
 #include <filesystem>
 #include <iostream>
+#include <string>
 #include <string_view>
 /* custom */
 #include "args.hpp"
@@ -16,7 +17,7 @@ class Tree {
 
   public:
     /* Constructors */
-    Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical(path))) {
+    Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical((std::string)path))) {
       std::cout << root.name.filename << "\n";
     };
     ~Tree() noexcept = default;
