@@ -45,5 +45,5 @@ namespace Displayer {
       void add_sorter(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }
   };
 
-  Displayer get_indenter(DisplayerOptions options);
+  Displayer &get_indenter(DisplayerOptions options);
 }

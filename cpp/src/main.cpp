@@ -9,7 +9,7 @@ int get_terminal_width() {
 int main(int argc, char **argv) {
   auto args = CLI::parse_args(argc, argv);
   args.displayer_options.columns = get_terminal_width();
-  auto displ = Displayer::get_indenter(args.displayer_options);
+  auto &displ = Displayer::get_indenter(args.displayer_options);
 
   if (args.paths.empty())
     args.paths.push_back(".");

@@ -19,13 +19,11 @@ namespace Displayer {
     }
   }
 
-  Displayer get_indenter(DisplayerOptions options) {
-    Displayer displ;
+  Displayer &get_indenter(DisplayerOptions options) {
+    static Displayer displ;
 
-    if (!options.all_files){
-      std::cout << "Only directories and files will be displayed.\n";
+    if (!options.all_files)
       displ.add_sorter(std::make_unique<Sorter::NoHiddenFilesOrDirectories>());
-    }
     // Sorters
     if (options.sorters.empty())
       displ.add_sorter(std::make_unique<Sorter::Default>());
