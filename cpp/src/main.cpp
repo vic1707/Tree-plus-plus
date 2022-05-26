@@ -8,12 +8,14 @@ int get_terminal_width() {
 
 int main(int argc, char **argv) {
   auto args = CLI::parse_args(argc, argv);
+  args.displayer_options.columns = get_terminal_width();
+  auto displ = Displayer::get_indenter(args.displayer_options);
 
   if (args.paths.empty())
     args.paths.push_back(".");
 
   for (auto path : args.paths) {
     Tree tree(path);
-    Displayer::get_indenter("fancy", 4).display(tree.get_root());
+    displ.display(tree.get_root());
   }
 }

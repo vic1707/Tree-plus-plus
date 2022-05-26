@@ -1,8 +1,8 @@
 #pragma once
 /* std */
+#include <set>
 #include <string>
 #include <string_view>
-#include <vector>
 /* custom */
 // specs
 #include "displayers_specs/formatter.hpp"
@@ -24,10 +24,12 @@
 
 namespace Displayer {
   struct DisplayerOptions {
-    std::vector<std::string_view> sorters;
+    std::set<std::string_view> sorters;
     std::string_view formatter;
     std::string_view indenter;
     size_t columns;
+    size_t tab_size;
+    bool all_files;
   };
 
   class Displayer {
@@ -43,5 +45,5 @@ namespace Displayer {
       void add_sorter(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }
   };
 
-  Displayer get_indenter(DisplayerOptions options, size_t size_tab = 2);
+  Displayer get_indenter(DisplayerOptions options);
 }

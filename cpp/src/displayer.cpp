@@ -19,19 +19,41 @@ namespace Displayer {
     }
   }
 
-  Displayer get_indenter(std::string_view opt, size_t size_tab) {
-    Displayer disp;
-    if (opt == "classic") {
-      disp.set_format(std::make_unique<Formatter::NameOnly>());
-      disp.set_indent(std::make_unique<Indenter::Space>(size_tab));
-      disp.add_sort(std::make_unique<Sorter::Default>());
-    } else if (opt == "fancy") {
-      disp.set_format(std::make_unique<Formatter::FullInfos>());
-      disp.set_indent(std::make_unique<Indenter::Fancy>(size_tab));
-      disp.add_sort(std::make_unique<Sorter::Alpha>());
-    } else {
-      throw std::runtime_error("Unknown indenter");
+  Displayer get_indenter(DisplayerOptions options) {
+    Displayer displ;
+
+    if (!options.all_files){
+      std::cout << "Only directories and files will be displayed.\n";
+      displ.add_sorter(std::make_unique<Sorter::NoHiddenFilesOrDirectories>());
     }
-    return disp;
+    // Sorters
+    if (options.sorters.empty())
+      displ.add_sorter(std::make_unique<Sorter::Default>());
+    else
+      for (auto &opt : options.sorters)
+        if (opt == "alpha")
+          displ.add_sorter(std::make_unique<Sorter::Alpha>());
+        else if (opt == "extension")
+          displ.add_sorter(std::make_unique<Sorter::Extension>());
+        else if (opt == "size")
+          displ.add_sorter(std::make_unique<Sorter::Size>());
+        else if (opt == "files_folders")
+          displ.add_sorter(std::make_unique<Sorter::SeparateFilesFolders<FileDirInfos::FileInfos>>());
+        else if (opt == "folders_files")
+          displ.add_sorter(std::make_unique<Sorter::SeparateFilesFolders<FileDirInfos::DirInfos>>());
+
+    // Indenter
+    if (options.indenter == "space")
+      displ.set_indent(std::make_unique<Indenter::Space>(options.tab_size));
+    else if (options.indenter == "fancy")
+      displ.set_indent(std::make_unique<Indenter::Fancy>(options.tab_size));
+
+    // Formatter
+    if (options.formatter == "name_only")
+      displ.set_format(std::make_unique<Formatter::NameOnly>(options.columns));
+    else if (options.formatter == "full_infos")
+      displ.set_format(std::make_unique<Formatter::FullInfos>(options.columns));
+
+    return displ;
   }
 } // namespace Displayer

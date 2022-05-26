@@ -2,25 +2,25 @@
 /* std */
 #include <filesystem>
 #include <iostream>
+// includes stoi
+#include <string>
 #include <string_view>
 #include <vector>
+/* custom */
+#include "displayer.hpp"
 
 namespace fs = std::filesystem;
 
 namespace CLI {
   struct Options {
-    bool all_files;
-    bool dirs_first;
-    bool files_first;
-    bool foldable;
     bool redirect;
     // int nb_threads;
-    // int size_indent;
     // bool size_in_bytes;
   };
 
   struct Arguments {
     Options opt;
+    Displayer::DisplayerOptions displayer_options;
     std::vector<std::string_view> paths;
   };
 
