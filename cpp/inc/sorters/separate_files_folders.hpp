@@ -7,7 +7,7 @@ namespace Sorter {
   concept FileDir = std::same_as<T, FileDirInfos::FileInfos> || std::same_as<T, FileDirInfos::DirInfos>;
 
   template <FileDir First>
-  class FileFolder : public ASorter {
+  class SeparateFilesFolders : public ASorter {
     public:
       void sort(Items &items) final override {
         std::stable_partition(items.begin(), items.end(), [](const auto &item) {
