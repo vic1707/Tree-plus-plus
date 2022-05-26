@@ -9,11 +9,11 @@ namespace Sorter {
     public:
       void sort(Items &items) noexcept {
         std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
-          auto get_path = [](const auto& a) -> std::string {
-            if (std::holds_alternative<FileDirInfos::DirInfos>(a))
-              return std::get<FileDirInfos::DirInfos>(a).path;
+          auto get_path = [](const auto& i) -> std::string {
+            if (std::holds_alternative<FileDirInfos::DirInfos>(i))
+              return std::get<FileDirInfos::DirInfos>(i).path;
             else
-              return std::get<FileDirInfos::FileInfos>(a).path;
+              return std::get<FileDirInfos::FileInfos>(i).path;
           };
           return get_path(a) < get_path(b);
         });

@@ -18,6 +18,6 @@ namespace Formatter {
         std::cout << prefix << item->name.filename << "\n";
       }
       /* Constructor */
-      NameOnly(size_t width) noexcept : AFormatter(width) {};
+      NameOnly(size_t w) noexcept : AFormatter(w) {};
   };
 } // namespace Formatter

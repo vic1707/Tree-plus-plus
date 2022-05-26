@@ -30,6 +30,6 @@ namespace Formatter {
         std::cout << fmt::format("{0}{1: >{2}}\n", prefix_name, size_date, width - Utils::utf8_len(prefix_name));
       }
       /* Constructor */
-      FullInfos(size_t width) noexcept : AFormatter(width) {};
+      FullInfos(size_t w) noexcept : AFormatter(w) {};
   };
 } // namespace Formatter

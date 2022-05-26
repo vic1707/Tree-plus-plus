@@ -24,7 +24,7 @@ namespace SizeUnit {
     std::string_view name;
     /* Constructors */
     constexpr Unit() noexcept : ratio(), name("B") {}
-    constexpr Unit(Ratio ratio, std::string_view name) noexcept : ratio(ratio), name(name) {}
+    constexpr Unit(Ratio r, std::string_view n) noexcept : ratio(r), name(n) {}
   };
 
   struct SizeUnit {
@@ -33,17 +33,17 @@ namespace SizeUnit {
     Unit unit;
     /* Constructors */
     constexpr SizeUnit() noexcept = default;
-    constexpr SizeUnit(size_t bytes) noexcept : bytes(bytes) { reload_unit(); };
+    constexpr SizeUnit(size_t b) noexcept : bytes(b) { reload_unit(); };
     /* Methods */
     constexpr float get_human_readable() const noexcept { return unit.ratio * bytes; }
     void reload_unit() noexcept;
     /* Operators */
-    constexpr void operator+=(size_t b) noexcept {
+    void operator+=(size_t b) noexcept {
       bytes += b;
       reload_unit();
     }
 
-    friend inline constexpr std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) noexcept {
+    friend inline std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) noexcept {
       size_unit.unit.ratio.num == 1
         ? os << size_unit.bytes
         : os << ((double)(int)(size_unit.get_human_readable() * 100) / 100); // two decimal places

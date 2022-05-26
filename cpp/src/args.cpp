@@ -5,12 +5,13 @@ namespace CLI {
     Arguments args = Arguments{
       .opt = Options{false},
       .paths = {},
-      .displayer_options = {
-        .indenter = "space",
-        .formatter = "full_infos",
+      .displayer_options = Displayer::DisplayerOptions{
         .sorters = {},
+        .formatter = "full_infos",
+        .indenter = "space",
+        .columns = 80, // initialised later
+        .tab_size = 2,
         .all_files = false,
-        .tab_size = 2
       }
     };
 

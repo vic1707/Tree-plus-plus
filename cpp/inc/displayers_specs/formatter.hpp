@@ -12,7 +12,7 @@ namespace Formatter {
       size_t width;
     public:
       /* Constructors */
-      AFormatter(size_t width) noexcept : width(width) {};
+      AFormatter(size_t w) noexcept : width(w) {};
       virtual ~AFormatter() = default;
       /* Methods */
       virtual void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept = 0;

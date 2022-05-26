@@ -20,8 +20,8 @@ namespace CLI {
 
   struct Arguments {
     Options opt;
-    Displayer::DisplayerOptions displayer_options;
     std::vector<std::string_view> paths;
+    Displayer::DisplayerOptions displayer_options;
   };
 
   Arguments parse_args(int argc, char **argv) noexcept;
