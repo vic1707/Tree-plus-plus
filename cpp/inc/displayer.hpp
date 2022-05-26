@@ -40,7 +40,7 @@ namespace Displayer {
       void display(FileDirInfos::DirInfos &item, std::string prefix = "") noexcept;
       void set_indent(std::unique_ptr<Indenter::IndenterOptions> indent) { m_indent = std::move(indent); }
       void set_format(std::unique_ptr<Formatter::AFormatter> format) { m_format = std::move(format); }
-      void add_sort(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }
+      void add_sorter(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }
   };
 
   Displayer get_indenter(DisplayerOptions options, size_t size_tab = 2);
