@@ -30,6 +30,7 @@ namespace Displayer {
     size_t columns;
     size_t tab_size;
     bool all_files;
+    bool redirect;
   };
 
   class Displayer {

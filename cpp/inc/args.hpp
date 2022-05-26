@@ -13,7 +13,6 @@ namespace fs = std::filesystem;
 
 namespace CLI {
   struct Options {
-    bool redirect;
     // int nb_threads;
     // bool size_in_bytes;
   };

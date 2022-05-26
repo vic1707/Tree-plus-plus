@@ -3,7 +3,7 @@
 namespace CLI {
   Arguments parse_args(int argc, char **argv) noexcept {
     Arguments args = Arguments{
-      .opt = Options{false},
+      .opt = Options{},
       .paths = {},
       .displayer_options = Displayer::DisplayerOptions{
         .sorters = {},
@@ -12,6 +12,7 @@ namespace CLI {
         .columns = 80, // initialised later
         .tab_size = 2,
         .all_files = false,
+        .redirect = false
       }
     };
 
@@ -24,16 +25,14 @@ namespace CLI {
       else if (argv_sv == "-a" || argv_sv == "--all-files")
         args.displayer_options.all_files = true;
       else if (argv_sv == "-r" || argv_sv == "--redirect")
-        args.opt.redirect = true;
+        args.displayer_options.redirect = true;
       else if (argv_sv.starts_with("--tab_size=")) {
         int tab_size = std::stoi((std::string)argv_sv.substr(11));
         if (tab_size < 2)
           std::cerr << "Error: " << "tab_size must be >= 2\n";
         else
           args.displayer_options.tab_size = tab_size;
-      } else if (fs::is_directory(argv_sv))
-        args.paths.push_back(argv_sv);
-      else if (argv_sv.starts_with("--sort-by="))
+      } else if (argv_sv.starts_with("--sort-by="))
         args.displayer_options.sorters.insert(argv_sv.substr(10));
       else if (argv_sv.starts_with("--indenter="))
         args.displayer_options.indenter = argv_sv.substr(11);
@@ -42,8 +41,10 @@ namespace CLI {
       else if (fs::is_directory(argv_sv))
         args.paths.push_back(argv_sv);
       else
-        std::cerr << "Error: " << argv_sv << " is not a directory.\n";
+        std::cerr << "Error: '" << argv_sv << "' is not a directory.\n";
     }
+    if (args.paths.empty())
+      args.paths.push_back(".");
     return args;
   }
 } // namespace arguments

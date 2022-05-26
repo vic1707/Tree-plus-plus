@@ -11,9 +11,6 @@ int main(int argc, char **argv) {
   args.displayer_options.columns = get_terminal_width();
   auto &displ = Displayer::get_indenter(args.displayer_options);
 
-  if (args.paths.empty())
-    args.paths.push_back(".");
-
   for (auto path : args.paths) {
     Tree tree(path);
     displ.display(tree.get_root());
