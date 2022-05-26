@@ -5,23 +5,31 @@
 #include <vector>
 /* custom */
 // specs
-#include "displayers_specs/indenter.hpp"
 #include "displayers_specs/formatter.hpp"
+#include "displayers_specs/indenter.hpp"
 #include "displayers_specs/sorter.hpp"
 // formatters
-#include "formatters/name_only.hpp"
 #include "formatters/full_infos.hpp"
+#include "formatters/name_only.hpp"
 // indenters
 #include "indenters/fancy.hpp"
 #include "indenters/space.hpp"
 // sorters
 #include "sorters/alpha.hpp"
 #include "sorters/default.hpp"
-#include "sorters/size.hpp"
 #include "sorters/extension.hpp"
+#include "sorters/no_hidden_files.hpp"
 #include "sorters/separate_files_folders.hpp"
+#include "sorters/size.hpp"
 
 namespace Displayer {
+  struct DisplayerOptions {
+    std::vector<std::string_view> sorters;
+    std::string_view formatter;
+    std::string_view indenter;
+    size_t columns;
+  };
+
   class Displayer {
     private:
       std::unique_ptr<Indenter::IndenterOptions> m_indent;
@@ -35,6 +43,5 @@ namespace Displayer {
       void add_sort(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }
   };
 
-  // std::unique_ptr<Displayer> get_indenter(std::string_view opt);
-  Displayer get_indenter(std::string_view opt, size_t size_tab = 2);
+  Displayer get_indenter(DisplayerOptions options, size_t size_tab = 2);
 }
