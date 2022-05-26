@@ -6,6 +6,6 @@ namespace Indenter {
   class Space : public IndenterOptions {
     public:
       /* Constructors */
-      Space(size_t tab_size = 2) : IndenterOptions(" ", " ", " ", " ", tab_size) {}
+      Space(size_t width, size_t tab_size = 2) : IndenterOptions(width, " ", " ", " ", " ", tab_size) {}
   };
 } // namespace Indenter
