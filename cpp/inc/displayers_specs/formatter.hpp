@@ -7,9 +7,10 @@
 
 namespace Formatter {
   class AFormatter {
-    public:
+    protected:
       /* Members */
       size_t width;
+    public:
       /* Constructors */
       AFormatter(size_t width) noexcept : width(width) {};
       virtual ~AFormatter() = default;
