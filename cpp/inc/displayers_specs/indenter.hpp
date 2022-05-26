@@ -13,11 +13,11 @@ namespace fs = std::filesystem;
 namespace Indenter {
   struct IndenterOptions {
     /* Members */
+    size_t width;
     std::string continuity_indent;
     std::string entry_pointer;
     std::string last_entry_pointer;
     std::string last_continuity_indent;
-    size_t width;
     /* Constructors */
     IndenterOptions(size_t width, std::string_view continuity_fill = " ", std::string_view fill_indent = " ", std::string_view entry_ankle = " ", std::string_view last_entry_ankle = " ", size_t tab_size = 2) noexcept :
       width(width),
