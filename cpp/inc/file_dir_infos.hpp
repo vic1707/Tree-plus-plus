@@ -35,16 +35,22 @@ namespace FileDirInfos {
     FileInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry) {}
   };
 
+  struct DirInfos;
+  template <typename T>
+  concept Item = std::same_as<T, FileInfos> || std::same_as<T, DirInfos>;
+
   struct DirInfos : ItemInfos {
     /* Members */
+    size_t dirs = 0;
+    size_t total_dirs = 0;
+    size_t files = 0;
+    size_t total_files = 0;
     std::vector<std::variant<DirInfos, FileInfos>> items;
     /* Constructors */
     DirInfos(const fs::directory_entry &entry) noexcept;
+    /* Methods */
+    template <typename Item>
+    inline void push_item(const fs::directory_entry &entry) noexcept;
   };
 
-  template <typename T>
-  concept Item = std::same_as<T, FileDirInfos::FileInfos> || std::same_as<T, FileDirInfos::DirInfos>;
-
-  template <typename Item>
-  inline constexpr void push_item(auto &self, const fs::directory_entry &entry) noexcept;
 } // namespace FileDirInfos

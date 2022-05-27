@@ -2,10 +2,18 @@
 
 namespace FileDirInfos {
   template <typename Item>
-  inline constexpr void push_item(auto &self, const fs::directory_entry &entry) noexcept {
-    auto file = typename decltype(self.items)::value_type(std::in_place_type<Item>, entry);
-    self.size += std::get<Item>(file).size.bytes;
-    self.items.emplace_back(std::move(file));
+  inline void DirInfos::push_item(const fs::directory_entry &entry) noexcept {
+    Item item(entry);
+    if constexpr (std::is_same_v<Item, DirInfos>) {
+      ++dirs;
+      total_dirs += item.dirs + 1;
+      total_files += item.total_files;
+    } else {
+      ++files;
+      ++total_files;
+    }
+    size += item.size.bytes;
+    items.emplace_back(std::move(item));
   }
 
   ItemInfos::ItemInfos(const fs::directory_entry &entry) noexcept {
@@ -18,7 +26,7 @@ namespace FileDirInfos {
   DirInfos::DirInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry) {
     for (fs::directory_iterator it(path); it != fs::directory_iterator(); ++it)
       it->is_directory()
-        ? push_item<DirInfos>(*this, *it)
-        : push_item<FileInfos>(*this, *it);
+        ? push_item<DirInfos>(*it)
+        : push_item<FileInfos>(*it);
   }
 } // namespace FileDirInfos
