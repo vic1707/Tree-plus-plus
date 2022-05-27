@@ -1,7 +1,6 @@
 #pragma once
 /* std */
 #include <filesystem>
-#include <iostream>
 #include <string>
 #include <string_view>
 /* custom */
@@ -17,9 +16,7 @@ class Tree {
 
   public:
     /* Constructors */
-    Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical((std::string)path))) {
-      std::cout << root.name.filename << "\n";
-    };
+    Tree(std::string_view path) noexcept : root(fs::directory_entry(fs::canonical((std::string)path))) {};
     ~Tree() noexcept = default;
     /* Methods */
     FileDirInfos::DirInfos &get_root() noexcept { return root; }

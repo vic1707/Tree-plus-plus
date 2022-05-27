@@ -38,9 +38,11 @@ namespace Displayer {
       std::unique_ptr<Indenter::IndenterOptions> m_indent;
       std::unique_ptr<Formatter::AFormatter> m_format;
       std::vector<std::unique_ptr<Sorter::ASorter>> m_sort;
+      void display(FileDirInfos::DirInfos &item, std::string prefix = "") noexcept;
+
 
     public:
-      void display(FileDirInfos::DirInfos &item, std::string prefix = "") noexcept;
+      void traverse(FileDirInfos::DirInfos &item, bool &redirect) noexcept;
       void set_indent(std::unique_ptr<Indenter::IndenterOptions> indent) { m_indent = std::move(indent); }
       void set_format(std::unique_ptr<Formatter::AFormatter> format) { m_format = std::move(format); }
       void add_sorter(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }

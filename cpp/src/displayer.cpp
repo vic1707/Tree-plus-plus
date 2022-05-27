@@ -1,6 +1,12 @@
 #include "displayer.hpp"
 
 namespace Displayer {
+  void Displayer::traverse(FileDirInfos::DirInfos &directory, bool &redirect) noexcept {
+    if (redirect) freopen((directory.name.filename + ".tree").c_str(),"w",stdout); // redirect stdout to file <path>.tree
+    std::cout << directory.name.filename << "\n";
+    display(directory);
+  }
+
   void Displayer::display(FileDirInfos::DirInfos &directory, std::string prefix) noexcept {
     for (auto &sorter : m_sort)
       sorter->sort(directory.items);
