@@ -5,6 +5,7 @@ namespace Displayer {
     if (redirect) freopen((directory.name.filename + ".tree").c_str(),"w",stdout); // redirect stdout to file <path>.tree
     std::cout << directory.name.filename << "\n";
     display(directory);
+    if (redirect) fclose(stdout); // close file <path>.tree
   }
 
   void Displayer::display(FileDirInfos::DirInfos &directory, std::string prefix) noexcept {
