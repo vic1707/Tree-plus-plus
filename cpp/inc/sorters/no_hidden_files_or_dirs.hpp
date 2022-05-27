@@ -1,6 +1,4 @@
 #pragma once
-/* std */
-#include <string>
 /* custom */
 #include "displayers_specs/sorter.hpp"
 
@@ -9,7 +7,7 @@ namespace Sorter {
     public:
       void sort(Items &items) noexcept {
         // remove all hidden files or directories
-        std::erase_if(items, [](const auto &item) -> std::string {
+        std::erase_if(items, [](const auto &item) -> bool {
           if (std::holds_alternative<FileDirInfos::FileInfos>(item))
             return std::get<FileDirInfos::FileInfos>(item).name.filename.front() == '.';
           else
