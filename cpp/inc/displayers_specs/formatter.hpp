@@ -1,6 +1,5 @@
 #pragma once
 /* std */
-#include <iostream>
 #include <string>
 /* custom */
 #include "file_dir_infos.hpp"

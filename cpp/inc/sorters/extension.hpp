@@ -1,4 +1,6 @@
 #pragma once
+/* std */
+#include <string>
 /* custom */
 #include "displayers_specs/sorter.hpp"
 
