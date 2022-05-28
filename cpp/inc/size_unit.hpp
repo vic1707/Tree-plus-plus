@@ -43,6 +43,11 @@ namespace SizeUnit {
       reload_unit();
     }
 
+    void operator-=(size_t b) noexcept {
+      bytes -= b;
+      reload_unit();
+    }
+
     friend inline std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) noexcept {
       size_unit.unit.ratio.num == 1
         ? os << size_unit.bytes
