@@ -32,8 +32,6 @@ namespace Displayer {
   Displayer &get_indenter(DisplayerOptions options) {
     static Displayer displ;
 
-    if (!options.all_files)
-      displ.add_sorter(std::make_unique<Sorter::NoHiddenFilesOrDirectories>());
     // Sorters
     if (options.sorters.empty())
       displ.add_sorter(std::make_unique<Sorter::Default>());

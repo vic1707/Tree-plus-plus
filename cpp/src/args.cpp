@@ -3,7 +3,9 @@
 namespace CLI {
   Arguments parse_args(int argc, char **argv) noexcept {
     Arguments args = Arguments{
-      .opt = Options{},
+      .opt = Options{
+        .hidden = false,
+      },
       .paths = {},
       .displayer_options = Displayer::DisplayerOptions{
         .sorters = {},
@@ -11,7 +13,6 @@ namespace CLI {
         .indenter = "space",
         .columns = 80, // initialised later
         .tab_size = 2,
-        .all_files = false,
         .redirect = false
       }
     };
@@ -23,7 +24,7 @@ namespace CLI {
         exit(0);
       }
       else if (argv_sv == "-a" || argv_sv == "--all-files")
-        args.displayer_options.all_files = true;
+        args.opt.hidden = true;
       else if (argv_sv == "-r" || argv_sv == "--redirect")
         args.displayer_options.redirect = true;
       else if (argv_sv.starts_with("--tab_size=")) {

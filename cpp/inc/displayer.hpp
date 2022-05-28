@@ -18,7 +18,6 @@
 #include "sorters/alpha.hpp"
 #include "sorters/default.hpp"
 #include "sorters/extension.hpp"
-#include "sorters/no_hidden_files_or_dirs.hpp"
 #include "sorters/separate_files_folders.hpp"
 #include "sorters/size.hpp"
 
@@ -29,7 +28,6 @@ namespace Displayer {
     std::string_view indenter;
     size_t columns;
     size_t tab_size;
-    bool all_files;
     bool redirect;
   };
 
