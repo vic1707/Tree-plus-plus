@@ -27,7 +27,7 @@ namespace CLI {
         args.opt.hidden = true;
       else if (argv_sv == "-r" || argv_sv == "--redirect")
         args.displayer_options.redirect = true;
-      else if (argv_sv.starts_with("--tab_size=")) {
+      else if (argv_sv.starts_with("--tab-size=")) {
         int tab_size = std::stoi((std::string)argv_sv.substr(11));
         if (tab_size < 2)
           std::cerr << "Error: " << "tab_size must be >= 2\n";
