@@ -6,7 +6,7 @@ namespace Displayer {
       freopen((directory.name.filename + ".tree").c_str(), "w", stdout); // redirect stdout to file <path>.tree
     std::cout << directory.name.filename << "\n";
     display(directory);
-    std::cout << "\n" << directory.child_count.dirs << " directories (" << directory.total_child_count.dirs << " total) " << directory.child_count.files << " files (" << directory.total_child_count.files << " total) - " << directory.size << "\n";
+    std::cout << "\n" << directory.children << " - " << directory.size << "\n";
     if (redirect)
       fclose(stdout); // close file <path>.tree
   }

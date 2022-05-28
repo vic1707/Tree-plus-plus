@@ -7,13 +7,13 @@ namespace FileDirInfos {
     Item item;
     if constexpr (std::is_same_v<Item, DirInfos>) {
       item = DirInfos(entry, hidden);
-      ++child_count.dirs;
-      total_child_count.dirs += item.child_count.dirs + 1;
-      total_child_count.files += item.total_child_count.files;
+      ++children.local.dirs;
+      children.total.dirs += item.children.total.dirs + 1;
+      children.total.files += item.children.total.files;
     } else {
       item = FileInfos(entry);
-      ++child_count.files;
-      ++total_child_count.files;
+      ++children.local.files;
+      ++children.total.files;
     }
     size += item.size.bytes;
     items.emplace_back(std::move(item));
