@@ -3,6 +3,7 @@
 int get_terminal_width() {
   struct winsize w;
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+  if (w.ws_col == 0) return 150;
   return w.ws_col;
 }
 
