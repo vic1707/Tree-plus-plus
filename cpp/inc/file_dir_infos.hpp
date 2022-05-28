@@ -32,6 +32,7 @@ namespace FileDirInfos {
 
   struct FileInfos : ItemInfos {
     /* Constructors */
+    FileInfos() noexcept = default;
     FileInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry) {}
   };
 
@@ -51,10 +52,11 @@ namespace FileDirInfos {
     ItemsCount total_child_count;
     std::vector<std::variant<DirInfos, FileInfos>> items;
     /* Constructors */
-    DirInfos(const fs::directory_entry &entry) noexcept;
+    DirInfos() noexcept = default;
+    DirInfos(const fs::directory_entry &entry, bool &hidden) noexcept;
     /* Methods */
     template <typename Item>
-    inline void push_item(const fs::directory_entry &entry) noexcept;
+    inline void push_item(const fs::directory_entry &entry, bool &hidden) noexcept;
   };
 
 } // namespace FileDirInfos

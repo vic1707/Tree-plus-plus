@@ -12,5 +12,5 @@ int main(int argc, char **argv) {
   auto &displ = Displayer::get_indenter(args.displayer_options);
 
   for (auto path : args.paths)
-    displ.traverse(Tree(path).get_root(), args.displayer_options.redirect);
+    displ.traverse(Tree(path, args.displayer_options.all_files).get_root(), args.displayer_options.redirect);
 }
