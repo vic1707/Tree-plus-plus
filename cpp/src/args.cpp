@@ -1,5 +1,12 @@
 #include "args.hpp"
 
+size_t get_terminal_width() {
+  struct winsize w;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+  if (w.ws_col == 0) return 150;
+  return w.ws_col;
+}
+
 namespace CLI {
   Arguments parse_args(int argc, char **argv) noexcept {
     Arguments args = Arguments{
@@ -11,7 +18,7 @@ namespace CLI {
         .sorters = {},
         .formatter = "full_infos",
         .indenter = "space",
-        .columns = 80, // initialised later
+        .columns = get_terminal_width(),
         .tab_size = 2,
         .redirect = false
       }

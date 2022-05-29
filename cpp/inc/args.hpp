@@ -5,6 +5,8 @@
 // includes stoi
 #include <string>
 #include <string_view>
+#include <sys/ioctl.h>
+#include <unistd.h>
 #include <vector>
 /* custom */
 #include "displayer.hpp"
