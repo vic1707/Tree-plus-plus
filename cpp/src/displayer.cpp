@@ -53,12 +53,16 @@ namespace Displayer {
       displ.set_indent(std::make_unique<Indenter::Space>(options.tab_size));
     else if (options.indenter == "fancy")
       displ.set_indent(std::make_unique<Indenter::Fancy>(options.tab_size));
+    else
+      displ.set_indent(std::make_unique<Indenter::Fancy>(options.tab_size));
 
     // Formatter
     if (options.formatter == "name_only")
       displ.set_format(std::make_unique<Formatter::NameOnly>(options.columns));
     else if (options.formatter == "full_infos")
       displ.set_format(std::make_unique<Formatter::FullInfos>(options.columns));
+    else
+      displ.set_format(std::make_unique<Formatter::NameOnly>(options.columns));
 
     return displ;
   }
