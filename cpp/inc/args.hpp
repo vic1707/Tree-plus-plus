@@ -17,7 +17,7 @@ namespace CLI {
   struct Options {
     bool hidden;
     // int nb_threads;
-    // bool size_in_bytes;
+    bool size_in_bytes;
   };
 
   struct Arguments {

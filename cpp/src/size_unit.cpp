@@ -3,6 +3,8 @@
 namespace SizeUnit {
   const std::array<std::string_view, 6> sizes = {"B", "KB", "MB", "GB", "TB", "PB"};
 
+  bool SizeUnit::size_in_bytes = false;
+
   void SizeUnit::reload_unit() noexcept {
     auto sizes_it = sizes.begin();
     size_t ratio_num = 1;

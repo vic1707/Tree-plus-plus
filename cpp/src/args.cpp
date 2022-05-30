@@ -12,6 +12,7 @@ namespace CLI {
     Arguments args = Arguments{
       .opt = Options{
         .hidden = false,
+        .size_in_bytes = false
       },
       .paths = {},
       .displayer_options = Displayer::DisplayerOptions{
@@ -32,6 +33,8 @@ namespace CLI {
       }
       else if (argv_sv == "-a" || argv_sv == "--all-files")
         args.opt.hidden = true;
+      else if ( argv_sv == "--size-in-bytes")
+        args.opt.size_in_bytes = true;
       else if (argv_sv == "-r" || argv_sv == "--redirect")
         args.displayer_options.redirect = true;
       else if (argv_sv.starts_with("--tab-size=")) {

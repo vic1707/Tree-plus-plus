@@ -28,6 +28,7 @@ namespace SizeUnit {
   };
 
   struct SizeUnit {
+    static bool size_in_bytes;
     /* Members */
     size_t bytes;
     Unit unit;
@@ -53,6 +54,7 @@ namespace SizeUnit {
         ? os << size_unit.bytes
         : os << ((double)(int)(size_unit.get_human_readable() * 100) / 100); // two decimal places
       os << " " << size_unit.unit.name;
+      if (size_in_bytes && size_unit.unit.ratio.num != 1) os << " (" << size_unit.bytes << " B)";
       return os;
     }
 
