@@ -3,6 +3,8 @@
 #include <array>
 #include <ostream>
 #include <string_view>
+/* fmt */
+#include <fmt/format.h>
 
 namespace SizeUnit {
   struct Ratio {
@@ -50,11 +52,11 @@ namespace SizeUnit {
     }
 
     friend inline std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) noexcept {
-      size_unit.unit.ratio.num == 1
-        ? os << size_unit.bytes
-        : os << ((double)(int)(size_unit.get_human_readable() * 100) / 100); // two decimal places
-      os << " " << size_unit.unit.name;
-      if (size_in_bytes && size_unit.unit.ratio.num != 1) os << " (" << size_unit.bytes << " B)";
+      const auto human_readable = fmt::format("{0} {1: >2}", ((double)(int)(size_unit.get_human_readable() * 100) / 100), size_unit.unit.name); // two decimal places
+      if (size_in_bytes && size_unit.unit.ratio.num != 1) 
+        os << fmt::format("({0} B) - {1: >10}", size_unit.bytes, human_readable);
+      else
+        os << human_readable;
       return os;
     }
 
