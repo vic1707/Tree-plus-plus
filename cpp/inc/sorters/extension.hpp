@@ -9,7 +9,7 @@ namespace Sorter {
     public:
       void sort(Items &items) noexcept final {
         std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
-          auto get_extension = [](const auto& i) -> std::string {
+          auto get_extension = [](const auto &i) -> std::string {
             if (std::holds_alternative<FileDirInfos::DirInfos>(i))
               return std::get<FileDirInfos::DirInfos>(i).name.extension;
             else

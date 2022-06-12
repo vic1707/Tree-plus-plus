@@ -7,11 +7,11 @@ class Controller {
   private:
     /* Members */
     std::vector<std::unique_ptr<Sorter::ASorter>> m_sort;
-    const model::Options& m_options;
+    const model::Options &m_options;
   
   public:
     /* Constructors */
-    Controller(const model::Options& options);
+    Controller(const model::Options &options);
     /* Methods */
     std::vector<FileDirInfos::DirInfos> create_models();
 };

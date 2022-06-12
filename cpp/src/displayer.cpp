@@ -11,7 +11,7 @@
 #include <indenters/space.hpp>
 
 namespace Displayer {
-  Displayer::Displayer(const model::Options& options): m_options(options) {
+  Displayer::Displayer(const model::Options &options): m_options(options) {
     // create indenter
     if (m_options.indenter == "space")
       m_indent = std::make_unique<Indenter::Space>(m_options.tab_size);
@@ -33,7 +33,7 @@ namespace Displayer {
 
   void Displayer::display(const std::vector<FileDirInfos::DirInfos> &dirs) {
     std::ofstream file;
-    for (const auto& directory : dirs) {
+    for (const auto &directory : dirs) {
       if (m_options.redirect) {
         file = std::ofstream(directory.name.filename + ".tree");
         m_stream = &file;

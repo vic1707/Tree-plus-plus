@@ -6,7 +6,7 @@
 #include <sorters/separate_files_folders.hpp>
 #include <sorters/size.hpp>
 
-Controller::Controller(const model::Options& options) : m_options(options) {
+Controller::Controller(const model::Options &options) : m_options(options) {
   // Sorters
   if (options.sorters.empty())
     this->m_sort.emplace_back(new Sorter::Default());

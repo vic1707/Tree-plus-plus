@@ -8,7 +8,7 @@ namespace Sorter {
     public:
       void sort(Items &items) final {
         std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
-          auto get_size = [](const auto& i) -> SizeUnit {
+          auto get_size = [](const auto &i) -> SizeUnit {
             if (std::holds_alternative<FileDirInfos::DirInfos>(i))
               return std::get<FileDirInfos::DirInfos>(i).size;
             else

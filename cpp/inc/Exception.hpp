@@ -10,7 +10,7 @@ class Exception : public std::exception {
 
   public:
     /* Constructors */
-    Exception(std::string&& message) : _message(message) {}
+    Exception(std::string &&message) : _message(message) {}
     virtual ~Exception() throw() {}
     /* Methods */
     virtual const char* what() const throw() { return _message.c_str(); }
