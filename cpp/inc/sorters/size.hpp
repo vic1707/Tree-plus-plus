@@ -6,7 +6,7 @@
 namespace Sorter {
   class Size : public ASorter {
     public:
-      void sort(Items &items) final override {
+      void sort(Items &items) final {
         std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
           auto get_size = [](const auto& i) -> SizeUnit::SizeUnit {
             if (std::holds_alternative<FileDirInfos::DirInfos>(i))

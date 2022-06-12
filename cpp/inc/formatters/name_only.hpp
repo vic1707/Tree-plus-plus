@@ -10,12 +10,12 @@ namespace Formatter {
   class NameOnly : public AFormatter {
     public:
       /* Methods */
-      void display_file(const FileDirInfos::FileInfos *item, std::string prefix) noexcept override {
-        std::cout << prefix << item->name.filename << "\n";
+      void display_file(const FileDirInfos::FileInfos *item, std::string_view prefix) noexcept final {
+        fmt::format_to(std::ostreambuf_iterator<char>(*stream), "{}{}\n", prefix, item->name.filename);
       }
 
-      void display_folder(const FileDirInfos::DirInfos *item, std::string prefix) noexcept override {
-        std::cout << prefix << item->name.filename << "\n";
+      void display_folder(const FileDirInfos::DirInfos *item, std::string_view prefix) noexcept final {
+        fmt::format_to(std::ostreambuf_iterator<char>(*stream), "{}{}\n", prefix, item->name.filename);
       }
       /* Constructor */
       NameOnly(size_t w) noexcept : AFormatter(w) {};

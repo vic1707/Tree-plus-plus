@@ -29,13 +29,13 @@ namespace FileDirInfos {
     SizeUnit::SizeUnit size;
     /* Constructors */
     ItemInfos() noexcept = default;
-    ItemInfos(const fs::directory_entry &entry) noexcept;
+    ItemInfos(fs::directory_entry entry);
   };
 
   struct FileInfos : ItemInfos {
     /* Constructors */
     FileInfos() noexcept = default;
-    FileInfos(const fs::directory_entry &entry) noexcept : ItemInfos(entry) {}
+    FileInfos(fs::directory_entry entry) noexcept : ItemInfos(entry) {}
   };
 
   struct ItemsCount {
@@ -53,9 +53,10 @@ namespace FileDirInfos {
       if (children.total.dirs == 0 && children.total.files == 0) return os << "Empty directory";
       auto const dirs_plural = children.local.dirs == 1 ? "y" : "ies";
       auto const files_plural = children.local.files == 1 ? "" : "s";
-      auto const total_dirs = children.local.dirs != children.total.dirs ? fmt::format(" ({} total)", children.total.dirs) : "";
-      auto const total_files = children.local.files != children.total.files ? fmt::format(" ({} total)", children.total.files) : "";
-      return os << children.local.dirs << " director" << dirs_plural << total_dirs << ", " << children.local.files << " file" << files_plural << total_files;
+      auto const total_dirs = children.local.dirs != children.total.dirs ? fmt::format("({} total)", children.total.dirs) : std::string();
+      auto const total_files = children.local.files != children.total.files ? fmt::format("({} total)", children.total.files) : std::string();
+      auto result = fmt::format("{} director{} {} and {} file{} {}", children.local.dirs, dirs_plural, total_dirs, children.local.files, files_plural, total_files);
+      return os << result;
     }
   };
 
@@ -69,10 +70,10 @@ namespace FileDirInfos {
     std::vector<std::variant<DirInfos, FileInfos>> items;
     /* Constructors */
     DirInfos() noexcept = default;
-    DirInfos(const fs::directory_entry &entry, bool &hidden) noexcept;
+    DirInfos(fs::directory_entry entry, bool hidden) noexcept;
     /* Methods */
     template <typename Item>
-    inline void push_item(const fs::directory_entry &entry, bool &hidden) noexcept;
+    inline void push_item(fs::directory_entry entry, bool hidden);
   };
 
 } // namespace FileDirInfos

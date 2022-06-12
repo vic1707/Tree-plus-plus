@@ -1,10 +1,15 @@
-#include "main.hpp"
+#include <Options.hpp>
+#include <Controller.hpp>
+#include <displayer.hpp>
 
 int main(int argc, char **argv) {
-  auto args = CLI::parse_args(argc, argv);
-  auto &displ = Displayer::get_indenter(args.displayer_options);
-  SizeUnit::SizeUnit::size_in_bytes = args.opt.size_in_bytes;
+  auto options = model::Options(argc, argv);
 
-  for (auto path : args.paths)
-    displ.traverse(Tree(path, args.opt.hidden).get_root(), args.displayer_options.redirect);
+  Controller controller(options);
+
+  auto ls_dirinfos = controller.create_models();
+
+  Displayer::Displayer displayer(options);
+
+  displayer.display(ls_dirinfos);
 }

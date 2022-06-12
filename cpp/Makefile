@@ -1,12 +1,12 @@
 CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I inc -O3
 # CXX = /usr/local/opt/gcc@11/bin/g++-11 -I /usr/local/include -L /usr/local/lib # `brew install gcc` MacOS
 
-SRC = src/args.cpp \
-			src/displayer.cpp \
+SRC = src/controller.cpp \
+      src/displayer.cpp \
       src/file_dir_infos.cpp \
       src/main.cpp \
 			src/size_unit.cpp \
-			src/utils.cpp 
+			src/options.cpp
 
 OBJ = $(SRC:src%.cpp=obj%.o)
 

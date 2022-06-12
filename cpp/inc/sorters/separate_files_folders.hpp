@@ -9,7 +9,7 @@ namespace Sorter {
   template <FileDir First>
   class SeparateFilesFolders : public ASorter {
     public:
-      void sort(Items &items) final override {
+      void sort(Items &items) final {
         std::stable_partition(items.begin(), items.end(), [](const auto &item) {
           return std::holds_alternative<First>(item);
         });

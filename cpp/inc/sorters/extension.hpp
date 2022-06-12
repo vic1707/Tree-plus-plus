@@ -7,7 +7,7 @@
 namespace Sorter {
   class Extension : public ASorter {
     public:
-      void sort(Items &items) noexcept {
+      void sort(Items &items) noexcept final {
         std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
           auto get_extension = [](const auto& i) -> std::string {
             if (std::holds_alternative<FileDirInfos::DirInfos>(i))

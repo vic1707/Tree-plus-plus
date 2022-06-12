@@ -1,50 +1,34 @@
 #pragma once
 /* std */
-#include <set>
 #include <string>
 #include <string_view>
+#include <unordered_set>
 /* custom */
-// specs
+// displayers_specs
 #include "displayers_specs/formatter.hpp"
 #include "displayers_specs/indenter.hpp"
-#include "displayers_specs/sorter.hpp"
-// formatters
-#include "formatters/full_infos.hpp"
-#include "formatters/name_only.hpp"
-// indenters
-#include "indenters/fancy.hpp"
-#include "indenters/space.hpp"
-// sorters
-#include "sorters/alpha.hpp"
-#include "sorters/default.hpp"
-#include "sorters/extension.hpp"
-#include "sorters/separate_files_folders.hpp"
-#include "sorters/size.hpp"
+#include <Options.hpp>
+#include <string_view>
 
 namespace Displayer {
-  struct DisplayerOptions {
-    std::set<std::string_view> sorters;
-    std::string_view formatter;
-    std::string_view indenter;
-    size_t columns;
-    size_t tab_size;
-    bool redirect;
-  };
 
   class Displayer {
     private:
+      /* Members */
+      const model::Options& m_options;
       std::unique_ptr<Indenter::IndenterOptions> m_indent;
       std::unique_ptr<Formatter::AFormatter> m_format;
-      std::vector<std::unique_ptr<Sorter::ASorter>> m_sort;
-      void display(FileDirInfos::DirInfos &item, std::string prefix = "") noexcept;
-
-
+      std::ostream* m_stream;
+      /* Methods */
+      void display_dir(const FileDirInfos::DirInfos& dir_infos, std::string prefix = std::string());
+      std::ostream& getStream() const {
+        return *m_stream;
+      }
+      
     public:
-      void traverse(FileDirInfos::DirInfos &item, bool &redirect) noexcept;
-      void set_indent(std::unique_ptr<Indenter::IndenterOptions> indent) { m_indent = std::move(indent); }
-      void set_format(std::unique_ptr<Formatter::AFormatter> format) { m_format = std::move(format); }
-      void add_sorter(std::unique_ptr<Sorter::ASorter> sort) { m_sort.push_back(std::move(sort)); }
+      /* Constructors */
+      Displayer(const model::Options& options);
+      /* Methods */
+      void display(const std::vector<FileDirInfos::DirInfos> &dirs);
   };
-
-  Displayer &get_indenter(DisplayerOptions options);
 }
