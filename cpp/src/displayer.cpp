@@ -39,9 +39,9 @@ namespace Displayer {
         m_stream = &file;
       }
       m_format->set_stream(m_stream);
-      getStream() << directory.name.filename << "\n";
+      *m_stream << directory.name.filename << "\n";
       display_dir(directory);
-      getStream() << "\n" << directory.children << " - " << directory.size << "\n";
+      *m_stream << "\n" << directory.children << " - " << directory.size << "\n";
     }
   }
 

@@ -20,10 +20,7 @@ namespace Displayer {
       std::ostream *m_stream;
       /* Methods */
       void display_dir(const FileDirInfos::DirInfos &dir_infos, std::string prefix = std::string());
-      std::ostream &getStream() const {
-        return *m_stream;
-      }
-      
+
     public:
       /* Constructors */
       Displayer(const model::Options &options);
