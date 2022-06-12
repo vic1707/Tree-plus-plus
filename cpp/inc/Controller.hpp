@@ -1,6 +1,7 @@
 #pragma once
-#include "Options.hpp"
-#include "displayers_specs/sorter.hpp"
+/* custom */
+#include <displayers_specs/sorter.hpp>
+#include <Options.hpp>
 
 class Controller {
   private:

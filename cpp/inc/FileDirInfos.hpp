@@ -1,13 +1,13 @@
 #pragma once
 /* std */
 #include <filesystem>
-#include <vector>
 #include <variant>
+#include <vector>
 /* fmt */
 #include <fmt/format.h>
 /* custom */
-#include "size_unit.hpp"
-#include "utils.hpp"
+#include <SizeUnit.hpp>
+#include <utils.hpp>
 
 namespace fs = std::filesystem;
 
@@ -26,7 +26,7 @@ namespace FileDirInfos {
     fs::path path;
     time_t time;
     NameInfos name;
-    SizeUnit::SizeUnit size;
+    SizeUnit size;
     /* Constructors */
     ItemInfos() noexcept = default;
     ItemInfos(fs::directory_entry entry);

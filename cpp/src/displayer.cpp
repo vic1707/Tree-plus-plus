@@ -1,20 +1,14 @@
+/* std */
 #include <fstream>
-
-#include "displayer.hpp"
-// formatters
-#include "formatters/full_infos.hpp"
-#include "formatters/name_only.hpp"
-// indenters
-#include "indenters/fancy.hpp"
-#include "indenters/space.hpp"
-// sorters
-#include "sorters/alpha.hpp"
-#include "sorters/default.hpp"
-#include "sorters/extension.hpp"
-#include "sorters/separate_files_folders.hpp"
-#include "sorters/size.hpp"
-
+/* custom */
+#include <Displayer.hpp>
 #include <Exception.hpp>
+// formatters
+#include <formatters/full_infos.hpp>
+#include <formatters/name_only.hpp>
+// indenters
+#include <indenters/fancy.hpp>
+#include <indenters/space.hpp>
 
 namespace Displayer {
   Displayer::Displayer(const model::Options& options): m_options(options) {

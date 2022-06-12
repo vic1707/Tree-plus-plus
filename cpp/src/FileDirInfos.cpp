@@ -1,4 +1,4 @@
-#include "file_dir_infos.hpp"
+#include <FileDirInfos.hpp>
 
 namespace FileDirInfos {
   template <typename Item>
@@ -21,7 +21,7 @@ namespace FileDirInfos {
 
   ItemInfos::ItemInfos(fs::directory_entry entry) {
     path = entry.path();
-    size = entry.is_directory() ? SizeUnit::SizeUnit() : fs::file_size(path);
+    size = entry.is_directory() ? SizeUnit() : fs::file_size(path);
     time = Utils::to_time_t(fs::last_write_time(path));
     name = NameInfos(path);
   }

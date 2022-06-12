@@ -3,7 +3,7 @@
 #include <variant>
 #include <vector>
 /* custom */
-#include "file_dir_infos.hpp"
+#include <FileDirInfos.hpp>
 
 using Items = std::vector<std::variant<FileDirInfos::DirInfos, FileDirInfos::FileInfos>>;
 namespace Sorter {

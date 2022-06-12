@@ -1,8 +1,10 @@
-#include "Options.hpp"
+/* std */
+#include <filesystem>
+#include <iostream>
 #include <sys/ioctl.h>
 #include <unistd.h>
-#include <iostream>
-#include <filesystem>
+/* custom */
+#include <Options.hpp>
 
 namespace fs = std::filesystem;
 

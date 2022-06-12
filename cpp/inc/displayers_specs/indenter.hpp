@@ -5,7 +5,7 @@
 /* fmt */
 #include <fmt/format.h>
 /* custom */
-#include "file_dir_infos.hpp"
+#include <FileDirInfos.hpp>
 
 namespace fs = std::filesystem;
 

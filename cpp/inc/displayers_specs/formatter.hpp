@@ -1,9 +1,9 @@
 #pragma once
 /* std */
-#include <string_view>
 #include <ostream>
+#include <string_view>
 /* custom */
-#include "file_dir_infos.hpp"
+#include <FileDirInfos.hpp>
 
 namespace Formatter {
   class AFormatter {

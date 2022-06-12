@@ -1,5 +1,7 @@
-#include <string>
+#pragma once
+/* std */
 #include <stdexcept>
+#include <string>
 
 class Exception : public std::exception {
   private:

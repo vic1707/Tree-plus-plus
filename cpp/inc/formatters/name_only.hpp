@@ -3,8 +3,8 @@
 #include <iostream>
 #include <string>
 /* custom */
-#include "displayers_specs/formatter.hpp"
-#include "file_dir_infos.hpp"
+#include <displayers_specs/formatter.hpp>
+#include <FileDirInfos.hpp>
 
 namespace Formatter {
   class NameOnly : public AFormatter {

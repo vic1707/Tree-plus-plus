@@ -4,11 +4,10 @@
 #include <string_view>
 #include <unordered_set>
 /* custom */
-// displayers_specs
-#include "displayers_specs/formatter.hpp"
-#include "displayers_specs/indenter.hpp"
 #include <Options.hpp>
-#include <string_view>
+// displayers_specs
+#include <displayers_specs/formatter.hpp>
+#include <displayers_specs/indenter.hpp>
 
 namespace Displayer {
 
