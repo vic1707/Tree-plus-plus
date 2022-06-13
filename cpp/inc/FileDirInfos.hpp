@@ -70,7 +70,7 @@ namespace FileDirInfos {
     std::vector<std::variant<DirInfos, FileInfos>> items;
     /* Constructors */
     DirInfos() noexcept = default;
-    DirInfos(fs::directory_entry entry, bool hidden) noexcept;
+    DirInfos(fs::directory_entry entry, bool hidden);
     /* Methods */
     template <typename Item>
     inline void push_item(fs::directory_entry entry, bool hidden);

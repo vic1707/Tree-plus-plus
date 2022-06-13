@@ -26,7 +26,7 @@ namespace FileDirInfos {
     name = NameInfos(path);
   }
 
-  DirInfos::DirInfos(fs::directory_entry entry, bool hidden) noexcept : ItemInfos(entry) {
+  DirInfos::DirInfos(fs::directory_entry entry, bool hidden) : ItemInfos(entry) {
     for (fs::directory_iterator it(path); it != fs::directory_iterator(); ++it)
       it->is_directory()
         ? push_item<DirInfos>(*it, hidden)
