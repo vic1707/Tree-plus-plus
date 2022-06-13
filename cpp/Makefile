@@ -1,25 +1,27 @@
-CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I include
-CXX = g++
+CXXFLAGS = -std=c++20 -Wall -Werror -Wextra -Wshadow -I inc -O3
+# CXX = /usr/local/opt/gcc@11/bin/g++-11 -I /usr/local/include -L /usr/local/lib # `brew install gcc` MacOS
 
-SRC = src/args.cpp \
+SRC = src/Controller.cpp \
+      src/Displayer.cpp \
+      src/FileDirInfos.cpp \
       src/main.cpp \
-      src/tree.cpp \
-      src/fs_utils.cpp
+			src/SizeUnit.cpp \
+			src/Options.cpp
 
 OBJ = $(SRC:src%.cpp=obj%.o)
 
-OUT_DIR = bin
+OUT_DIR := $(or $(OUT_DIR),bin/)
 
-NAME = tree++
+NAME = $(OUT_DIR)tree++
 
 .PHONY: all clean fclean re
 
-all: $(OUT_DIR)/$(NAME)
+all: $(NAME)
 
-$(OUT_DIR)/$(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(OUT_DIR)/$(NAME) $(OBJ)
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ) -lfmt
 
-$(OBJ): obj/%.o: src/%.cpp include/%.hpp
+$(OBJ): obj/%.o: src/%.cpp inc/%.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:

@@ -1,3 +1,4 @@
 *.o
 *.tree
 tree++
+.DS_Store

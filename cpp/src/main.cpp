@@ -1,9 +1,16 @@
-#include "tree.hpp"
-#include "args.hpp"
+/* custom */
+#include <Controller.hpp>
+#include <Displayer.hpp>
+#include <Options.hpp>
 
-int main(int argc, char** argv) {
-  arguments::args args = arguments::parse_args(argc, argv);
+int main(int argc, char **argv) {
+  auto options = model::Options(argc, argv);
 
-  if (args.paths.empty()) args.paths.push_back(".");
-  for (auto path : args.paths) Tree tree(path, args.options);
+  Controller controller(options);
+
+  auto ls_dirinfos = controller.create_models();
+
+  Displayer::Displayer displayer(options);
+
+  displayer.display(ls_dirinfos);
 }
