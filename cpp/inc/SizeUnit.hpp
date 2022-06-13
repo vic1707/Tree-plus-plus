@@ -15,7 +15,7 @@ struct Ratio {
   constexpr Ratio(std::uintmax_t n, std::uintmax_t d) noexcept : num(n), den(d) {}
   /* Operators */
   constexpr float operator*(size_t bytes) const noexcept {
-    return static_cast<float>(bytes) * static_cast<float>(den) / static_cast<float>(num);
+    return static_cast<float>(bytes) * static_cast<float>(this->den) / static_cast<float>(this->num);
   }
 };
 
@@ -35,19 +35,19 @@ struct SizeUnit {
   Unit unit;
   /* Constructors */
   constexpr SizeUnit() noexcept = default;
-  constexpr SizeUnit(size_t b) noexcept : bytes(b) { reload_unit(); };
+  constexpr SizeUnit(size_t b) noexcept : bytes(b) { this->reload_unit(); };
   /* Methods */
   constexpr float get_human_readable() const noexcept { return unit.ratio * bytes; }
   void reload_unit() noexcept;
   /* Operators */
   void operator+=(size_t b) noexcept {
-    bytes += b;
-    reload_unit();
+    this->bytes += b;
+    this->reload_unit();
   }
 
   void operator-=(size_t b) noexcept {
-    bytes -= b;
-    reload_unit();
+    this->bytes -= b;
+    this->reload_unit();
   }
 
   friend inline std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) {
