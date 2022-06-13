@@ -18,7 +18,7 @@ namespace model {
     bool size_in_bytes;
 
     /* Constructors */
-    Options() noexcept;
+    Options();
     Options(int argc, char** argv) : Options() {
       parse_args(argc, argv);
     }

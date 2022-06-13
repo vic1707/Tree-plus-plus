@@ -35,7 +35,7 @@ namespace FileDirInfos {
   struct FileInfos : ItemInfos {
     /* Constructors */
     FileInfos() noexcept = default;
-    FileInfos(fs::directory_entry entry) noexcept : ItemInfos(entry) {}
+    FileInfos(fs::directory_entry entry) : ItemInfos(entry) {}
   };
 
   struct ItemsCount {
@@ -49,7 +49,7 @@ namespace FileDirInfos {
     ItemsCount local;
     ItemsCount total;
     /* Operators */
-    friend inline std::ostream &operator<<(std::ostream &os, const ChildCount &children) noexcept {
+    friend inline std::ostream &operator<<(std::ostream &os, const ChildCount &children) {
       if (children.total.dirs == 0 && children.total.files == 0) return os << "Empty directory";
       auto const dirs_plural = children.local.dirs < 1 ? "y" : "ies";
       auto const files_plural = children.local.files < 1 ? "" : "s";

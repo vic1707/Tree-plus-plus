@@ -22,7 +22,7 @@ namespace fs = std::filesystem;
 #endif
 
 namespace model {
-  Options::Options() noexcept :
+  Options::Options() :
     paths(),
     sorters(),
     formatter(),

@@ -22,7 +22,7 @@ namespace Formatter {
         if (s == nullptr) throw std::invalid_argument("stream is nullptr");
         this->stream = std::ostreambuf_iterator<char>(*s);
       }
-      virtual void display_file(const FileDirInfos::FileInfos *item, std::string_view prefix) noexcept = 0;
-      virtual void display_folder(const FileDirInfos::DirInfos *item, std::string_view prefix) noexcept = 0;
+      virtual void display_file(const FileDirInfos::FileInfos *item, std::string_view prefix) = 0;
+      virtual void display_folder(const FileDirInfos::DirInfos *item, std::string_view prefix) = 0;
   };
 } // namespace Formatter

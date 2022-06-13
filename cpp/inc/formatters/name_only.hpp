@@ -10,11 +10,11 @@ namespace Formatter {
   class NameOnly : public AFormatter {
     public:
       /* Methods */
-      void display_file(const FileDirInfos::FileInfos *item, std::string_view prefix) noexcept final {
+      void display_file(const FileDirInfos::FileInfos *item, std::string_view prefix) final {
         fmt::format_to(stream, "{}{}\n", prefix, item->name.filename);
       }
 
-      void display_folder(const FileDirInfos::DirInfos *item, std::string_view prefix) noexcept final {
+      void display_folder(const FileDirInfos::DirInfos *item, std::string_view prefix) final {
         fmt::format_to(stream, "{}{}\n", prefix, item->name.filename);
       }
       /* Constructor */

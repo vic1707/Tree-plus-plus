@@ -50,7 +50,7 @@ struct SizeUnit {
     reload_unit();
   }
 
-  friend inline std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) noexcept {
+  friend inline std::ostream &operator<<(std::ostream &os, const SizeUnit &size_unit) {
     const auto human_readable = fmt::format("{0} {1: >2}", ((double)(int)(size_unit.get_human_readable() * 100) / 100), size_unit.unit.name); // two decimal places
     if (size_in_bytes && size_unit.unit.ratio.num != 1) 
       os << fmt::format("({0} B) - {1: >10}", size_unit.bytes, human_readable);
