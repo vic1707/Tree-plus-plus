@@ -28,9 +28,10 @@ std::vector<FileDirInfos::DirInfos> Controller::create_models() {
   std::vector<FileDirInfos::DirInfos> models;
   models.reserve(this->m_options.paths.size());
   for (auto path : this->m_options.paths) {
-    models.emplace_back(fs::directory_entry(fs::canonical((std::string)path)), this->m_options.hidden);
+    FileDirInfos::DirInfos model(fs::directory_entry(fs::canonical((std::string)path)), this->m_options.hidden);
     for (auto &sorter : this->m_sort)
-      sorter->sort(models.back().items);
+      sorter->sort(model.items);
+    models.emplace_back(model);
   }
   return models;
 }
