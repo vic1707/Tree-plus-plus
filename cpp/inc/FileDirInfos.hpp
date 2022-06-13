@@ -6,8 +6,8 @@
 /* fmt */
 #include <fmt/format.h>
 /* custom */
-#include <SizeUnit.hpp>
-#include <utils.hpp>
+#include "SizeUnit.hpp"
+#include "utils.hpp"
 
 namespace fs = std::filesystem;
 
