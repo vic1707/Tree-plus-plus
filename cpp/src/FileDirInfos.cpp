@@ -2,8 +2,7 @@
 
 namespace FileDirInfos {
   template <typename Item>
-  inline void DirInfos::push_item(fs::directory_entry entry, bool hidden) {
-    if (!hidden && entry.path().filename().string().front() == '.') return;
+  inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, bool hidden) {
     Item item;
     if constexpr (std::is_same_v<Item, DirInfos>) {
       item = DirInfos(entry, hidden);
@@ -16,7 +15,7 @@ namespace FileDirInfos {
       ++children.total.files;
     }
     size += item.size.bytes;
-    items.emplace_back(std::move(item));
+    return item;
   }
 
   ItemInfos::ItemInfos(fs::directory_entry entry) {
@@ -27,9 +26,12 @@ namespace FileDirInfos {
   }
 
   DirInfos::DirInfos(fs::directory_entry entry, bool hidden) : ItemInfos(entry) {
-    for (fs::directory_iterator it(path); it != fs::directory_iterator(); ++it)
-      it->is_directory()
-        ? push_item<DirInfos>(*it, hidden)
-        : push_item<FileInfos>(*it, hidden);
+    for (fs::directory_iterator it(path); it != fs::directory_iterator(); ++it) {
+      if (!hidden && entry.path().filename().string().front() == '.') continue;
+      auto item = it->is_directory()
+        ? build_item<DirInfos>(*it, hidden)
+        : build_item<FileInfos>(*it, hidden);
+      items.emplace_back(std::move(item));
+    }
   }
 } // namespace FileDirInfos

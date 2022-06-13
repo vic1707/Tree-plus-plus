@@ -73,7 +73,7 @@ namespace FileDirInfos {
     DirInfos(fs::directory_entry entry, bool hidden);
     /* Methods */
     template <typename Item>
-    inline void push_item(fs::directory_entry entry, bool hidden);
+    inline std::variant<DirInfos, FileInfos> build_item(fs::directory_entry entry, bool hidden);
   };
 
 } // namespace FileDirInfos
