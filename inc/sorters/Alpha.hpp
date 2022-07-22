@@ -2,20 +2,20 @@
 /* std */
 #include <string>
 /* custom */
-#include <displayers_specs/sorter.hpp>
+#include <displayers_specs/Sorter.hpp>
 
 namespace Sorter {
-  class Extension : public ASorter {
+  class Alpha : public ASorter {
     public:
       void sort(Items &items) final {
         std::stable_sort(items.begin(), items.end(), [](const auto &a, const auto &b) {
-          auto get_extension = [](const auto &i) -> std::string {
+          auto get_path = [](const auto &i) -> const auto& {
             if (std::holds_alternative<FileDirInfos::DirInfos>(i))
-              return std::get<FileDirInfos::DirInfos>(i).name.extension;
+              return std::get<FileDirInfos::DirInfos>(i).path;
             else
-              return std::get<FileDirInfos::FileInfos>(i).name.extension;
+              return std::get<FileDirInfos::FileInfos>(i).path;
           };
-          return get_extension(a) < get_extension(b);
+          return get_path(a) < get_path(b);
         });
       }
   };

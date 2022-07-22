@@ -8,6 +8,10 @@
     "string": "cpp",
     "string_view": "cpp",
     "variant": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "__split_buffer": "cpp",
+    "deque": "cpp",
+    "*.tcc": "cpp",
+    "new": "cpp"
   }
 }

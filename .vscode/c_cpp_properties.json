@@ -3,7 +3,7 @@
         {
             "name": "tree",
             "includePath": [
-                "${workspaceFolder}/cpp/inc"
+                "${workspaceFolder}/inc"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

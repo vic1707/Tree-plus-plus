@@ -8,15 +8,15 @@
 namespace fs = std::filesystem;
 
 #ifndef _WIN32
-#include <sys/ioctl.h>
-#include <unistd.h>
+  #include <sys/ioctl.h>
+  #include <unistd.h>
   size_t get_terminal_width() {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     if (w.ws_col == 0) return 150;
     return w.ws_col;
   }
-#else 
+#else
   size_t get_terminal_width() {
     return 150;
   }

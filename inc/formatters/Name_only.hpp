@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 /* custom */
-#include <displayers_specs/formatter.hpp>
+#include <displayers_specs/Formatter.hpp>
 #include <FileDirInfos.hpp>
 
 namespace Formatter {

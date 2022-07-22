@@ -1,6 +1,6 @@
 #pragma once
 /* custom */
-#include <displayers_specs/sorter.hpp>
+#include <displayers_specs/Sorter.hpp>
 
 namespace Sorter {
   template <typename T>

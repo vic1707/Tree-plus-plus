@@ -1,4 +1,3 @@
-*.o
-*.tree
-tree++
+build
+.xmake
 .DS_Store

@@ -4,11 +4,11 @@
 #include <Displayer.hpp>
 #include <Exception.hpp>
 // formatters
-#include <formatters/full_infos.hpp>
-#include <formatters/name_only.hpp>
+#include <formatters/Full_infos.hpp>
+#include <formatters/Name_only.hpp>
 // indenters
-#include <indenters/fancy.hpp>
-#include <indenters/space.hpp>
+#include <indenters/Fancy.hpp>
+#include <indenters/Space.hpp>
 
 namespace Displayer {
   Displayer::Displayer(const model::Options &options): m_options(options) {

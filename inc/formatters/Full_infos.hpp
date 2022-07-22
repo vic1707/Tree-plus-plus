@@ -6,9 +6,9 @@
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 /* custom */
-#include <displayers_specs/formatter.hpp>
+#include <displayers_specs/Formatter.hpp>
 #include <FileDirInfos.hpp>
-#include <utils.hpp>
+#include <Utils.hpp>
 
 namespace Formatter {
   class FullInfos : public AFormatter {

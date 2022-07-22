@@ -1,6 +1,6 @@
 #pragma once
 /* custom */
-#include <displayers_specs/indenter.hpp>
+#include <displayers_specs/Indenter.hpp>
 
 namespace Indenter {
   class Fancy : public IndenterOptions {

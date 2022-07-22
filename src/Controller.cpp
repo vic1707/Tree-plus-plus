@@ -1,10 +1,10 @@
 #include <Controller.hpp>
 
-#include <sorters/alpha.hpp>
-#include <sorters/default.hpp>
-#include <sorters/extension.hpp>
-#include <sorters/separate_files_folders.hpp>
-#include <sorters/size.hpp>
+#include <sorters/Alpha.hpp>
+#include <sorters/Default.hpp>
+#include <sorters/Extension.hpp>
+#include <sorters/Separate_files_folders.hpp>
+#include <sorters/Size.hpp>
 
 Controller::Controller(const model::Options &options) : m_options(options) {
   // Sorters

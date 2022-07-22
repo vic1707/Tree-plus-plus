@@ -6,8 +6,8 @@
 /* custom */
 #include "Options.hpp"
 // displayers_specs
-#include "displayers_specs/formatter.hpp"
-#include "displayers_specs/indenter.hpp"
+#include "displayers_specs/Formatter.hpp"
+#include "displayers_specs/Indenter.hpp"
 
 namespace Displayer {
 

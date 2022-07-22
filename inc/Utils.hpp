@@ -1,7 +1,7 @@
 #pragma once
 /* std */
-#include <chrono>
 #include <algorithm>
+#include <chrono>
 #include <string_view>
 
 namespace Utils {
