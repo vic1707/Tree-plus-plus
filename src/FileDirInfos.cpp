@@ -34,7 +34,7 @@ namespace FileDirInfos {
         : build_item<FileInfos>(*it, hidden, sorters);
       this->items.emplace_back(std::move(item));
     }
-    for (auto &sorter : sorters)
+    for (const auto &sorter : sorters)
       sorter->sort(this->items);
   }
 } // namespace FileDirInfos
