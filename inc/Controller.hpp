@@ -1,4 +1,6 @@
 #pragma once
+/* std */
+#include <vector>
 /* custom */
 #include "displayers_specs/Sorter.hpp"
 #include "Options.hpp"
