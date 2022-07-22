@@ -3,7 +3,7 @@
 
 namespace FileDirInfos {
   template <typename Item>
-  inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, bool hidden, std::vector<std::unique_ptr<Sorter::ASorter>> &sorters) {
+  inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters) {
     Item item;
     if constexpr (std::is_same_v<Item, DirInfos>) {
       item = DirInfos(entry, hidden, sorters);
@@ -26,7 +26,7 @@ namespace FileDirInfos {
     size(entry.is_directory() ? SizeUnit() : fs::file_size(this->path))
   {}
 
-  DirInfos::DirInfos(fs::directory_entry entry, bool hidden, std::vector<std::unique_ptr<Sorter::ASorter>> &sorters) : ItemInfos(entry) {
+  DirInfos::DirInfos(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters) : ItemInfos(entry) {
     for (fs::directory_iterator it(this->path); it != fs::directory_iterator(); ++it) {
       if (!hidden && entry.path().filename().string().front() == '.') continue;
       auto item = it->is_directory()
