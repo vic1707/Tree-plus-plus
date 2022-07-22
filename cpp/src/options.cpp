@@ -1,14 +1,15 @@
 /* std */
 #include <filesystem>
 #include <iostream>
-#include <sys/ioctl.h>
-#include <unistd.h>
+
 /* custom */
 #include <Options.hpp>
 
 namespace fs = std::filesystem;
 
 #ifndef _WIN32
+#include <sys/ioctl.h>
+#include <unistd.h>
   size_t get_terminal_width() {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);

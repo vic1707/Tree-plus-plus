@@ -35,7 +35,7 @@ struct SizeUnit {
   Unit unit;
   /* Constructors */
   constexpr SizeUnit() noexcept = default;
-  constexpr SizeUnit(size_t b) noexcept : bytes(b) { this->reload_unit(); };
+  SizeUnit(size_t b) noexcept : bytes(b) { this->reload_unit(); };
   /* Methods */
   constexpr float get_human_readable() const noexcept { return unit.ratio * bytes; }
   void reload_unit() noexcept;
