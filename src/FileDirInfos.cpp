@@ -1,11 +1,12 @@
 #include <FileDirInfos.hpp>
+#include "displayers_specs/Sorter.hpp"
 
 namespace FileDirInfos {
   template <typename Item>
-  inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, bool hidden) {
+  inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, bool hidden, std::vector<std::unique_ptr<Sorter::ASorter>> *sorters) {
     Item item;
     if constexpr (std::is_same_v<Item, DirInfos>) {
-      item = DirInfos(entry, hidden);
+      item = DirInfos(entry, hidden, sorters);
       ++this->children.local.dirs;
       this->children.total.dirs += item.children.total.dirs + 1;
       this->children.total.files += item.children.total.files;
@@ -25,13 +26,15 @@ namespace FileDirInfos {
     size(entry.is_directory() ? SizeUnit() : fs::file_size(this->path))
   {}
 
-  DirInfos::DirInfos(fs::directory_entry entry, bool hidden) : ItemInfos(entry) {
+  DirInfos::DirInfos(fs::directory_entry entry, bool hidden, std::vector<std::unique_ptr<Sorter::ASorter>> *sorters) : ItemInfos(entry) {
     for (fs::directory_iterator it(this->path); it != fs::directory_iterator(); ++it) {
       if (!hidden && entry.path().filename().string().front() == '.') continue;
       auto item = it->is_directory()
-        ? build_item<DirInfos>(*it, hidden)
-        : build_item<FileInfos>(*it, hidden);
+        ? build_item<DirInfos>(*it, hidden, sorters)
+        : build_item<FileInfos>(*it, hidden, sorters);
       this->items.emplace_back(std::move(item));
     }
+    for (auto &sorter : *sorters)
+      sorter->sort(this->items);
   }
 } // namespace FileDirInfos

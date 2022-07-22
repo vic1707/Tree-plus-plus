@@ -6,6 +6,7 @@
 /* fmt */
 #include <fmt/format.h>
 /* custom */
+namespace Sorter {class ASorter;} // #include "displayers_specs/Sorter.hpp"
 #include "SizeUnit.hpp"
 #include "Utils.hpp"
 
@@ -70,10 +71,10 @@ namespace FileDirInfos {
     std::vector<std::variant<DirInfos, FileInfos>> items;
     /* Constructors */
     DirInfos() noexcept = default;
-    DirInfos(fs::directory_entry entry, bool hidden);
+    DirInfos(fs::directory_entry entry, bool hidden, std::vector<std::unique_ptr<Sorter::ASorter>> *sorters);
     /* Methods */
     template <typename Item>
-    inline std::variant<DirInfos, FileInfos> build_item(fs::directory_entry entry, bool hidden);
+    inline std::variant<DirInfos, FileInfos> build_item(fs::directory_entry entry, bool hidden, std::vector<std::unique_ptr<Sorter::ASorter>> *sorters);
   };
 
 } // namespace FileDirInfos
