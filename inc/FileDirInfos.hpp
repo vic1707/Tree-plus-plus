@@ -56,7 +56,7 @@ namespace FileDirInfos {
       auto const files_plural = children.local.files < 1 ? "" : "s";
       auto const total_dirs = children.local.dirs != children.total.dirs ? fmt::format(" ({} total)", children.total.dirs) : std::string();
       auto const total_files = children.local.files != children.total.files ? fmt::format(" ({} total)", children.total.files) : std::string();
-      auto result = fmt::format("{} director{}{} and {} file{} {}", children.local.dirs, dirs_plural, total_dirs, children.local.files, files_plural, total_files);
+      auto result = fmt::format("{} director{}{} and {} file{}{}", children.local.dirs, dirs_plural, total_dirs, children.local.files, files_plural, total_files);
       return os << result;
     }
   };
