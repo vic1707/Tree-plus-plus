@@ -13,12 +13,12 @@ namespace fs = std::filesystem;
   size_t get_terminal_width() {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    if (w.ws_col == 0) return 150;
+    if (w.ws_col == 0) return 200;
     return w.ws_col;
   }
 #else
   size_t get_terminal_width() {
-    return 150;
+    return 200;
   }
 #endif
 
