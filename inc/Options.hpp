@@ -15,7 +15,6 @@ namespace model {
     // size_t nb_threads;
     bool redirect;
     bool hidden;
-    bool size_in_bytes;
 
     /* Constructors */
     Options();

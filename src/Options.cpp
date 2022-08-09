@@ -4,6 +4,7 @@
 
 /* custom */
 #include <Options.hpp>
+#include <SizeUnit.hpp>
 
 namespace fs = std::filesystem;
 
@@ -31,8 +32,7 @@ namespace model {
     columns(get_terminal_width()),
     tab_size(2),
     redirect(false),
-    hidden(false),
-    size_in_bytes(false)
+    hidden(false)
   {}
 
   void Options::parse_args(int argc, char **argv) {
@@ -45,7 +45,7 @@ namespace model {
       else if (argv_sv == "-a" || argv_sv == "--all-files")
         this->hidden = true;
       else if ( argv_sv == "--size-in-bytes")
-        this->size_in_bytes = true;
+        SizeUnit::size_in_bytes = true;
       else if (argv_sv == "-r" || argv_sv == "--redirect")
         this->redirect = true;
       else if (argv_sv.starts_with("--tab-size=")) {
