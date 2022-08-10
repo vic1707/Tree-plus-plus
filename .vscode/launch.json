@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/cpp/bin/tree++",
+            "program": "${workspaceFolder}/bin/tree++",
             "args": [],
             "cwd": "${workspaceFolder}"
         }
