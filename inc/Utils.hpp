@@ -2,6 +2,7 @@
 /* std */
 #include <algorithm>
 #include <chrono>
+#include <string>
 #include <string_view>
 
 namespace Utils {
@@ -14,5 +15,10 @@ namespace Utils {
   [[nodiscard]] inline constexpr size_t utf8_len(std::string_view s) {
     return std::count_if(s.begin(), s.end(),
       [](char c) { return (static_cast<unsigned char>(c) &0xC0) != 0x80; } );
+  }
+
+  inline constexpr void char_to_lower(char& c) { c = std::tolower(c); };
+  inline constexpr void word_to_lower(std::string& w) {
+    std::for_each(w.begin(), w.end(), char_to_lower);
   }
 } // namespace Utils
