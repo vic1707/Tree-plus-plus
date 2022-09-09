@@ -84,5 +84,9 @@
     "memory_resource": "cpp",
     "stop_token": "cpp",
     "cinttypes": "cpp"
-  }
+  },
+  "clangd.arguments": [
+    "--background-index",
+    "--compile-commands-dir=${workspaceFolder}/.vscode"
+  ]
 }

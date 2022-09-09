@@ -1,3 +1,4 @@
 build
 .xmake
 .DS_Store
+.vscode/.cache
