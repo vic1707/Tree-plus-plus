@@ -23,6 +23,8 @@ jobs:
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
       -
         name: MacOs Xmake config
         if: matrix.os == 'macos-latest'
