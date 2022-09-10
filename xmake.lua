@@ -17,4 +17,5 @@ for _, arch in ipairs(archs) do
         add_includedirs("inc")
         set_languages("c++20")
         add_packages("fmt")
+        add_cxxflags("-Wall -Wextra -pedantic")
 end
