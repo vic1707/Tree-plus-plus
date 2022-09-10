@@ -20,11 +20,15 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
+
+      # if running on ubuntu, we need to install g++
+      - 
+        name: Install g++
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install g++ gcc
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
-        with:
-          xmake-version: latest
       -
         name: Build
         run: xmake -y
