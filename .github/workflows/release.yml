@@ -20,13 +20,14 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
-      # if on macos
-      - name: Install dependencies
-        if: matrix.os == 'macos-latest'
-        run: xmake config --cxx $(brew --prefix llvm@14)/bin/clang
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
+      # if on macos
+      -
+        name: Use latest LLVM version
+        if: matrix.os == 'macos-latest'
+        run: xmake config --cxx $(brew --prefix llvm@14)/bin/clang
       -
         name: Build
         run: xmake -y
