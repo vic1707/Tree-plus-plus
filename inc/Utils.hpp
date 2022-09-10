@@ -18,7 +18,7 @@ namespace Utils {
   }
 
   inline constexpr void char_to_lower(char& c) { c = std::tolower(c); };
-  inline constexpr void word_to_lower(std::string& w) {
+  inline void word_to_lower(std::string& w) {
     std::for_each(w.begin(), w.end(), char_to_lower);
   }
 } // namespace Utils
