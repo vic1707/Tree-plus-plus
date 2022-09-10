@@ -20,11 +20,11 @@ namespace Sorter {
         });
       }
     private:
-      fs::path get_filename(const auto &i) {
+      std::string get_filename(const auto &i) {
         if (std::holds_alternative<FileDirInfos::DirInfos>(i))
-          return std::get<FileDirInfos::DirInfos>(i).path.filename();
+          return std::get<FileDirInfos::DirInfos>(i).name.filename;
         else
-          return std::get<FileDirInfos::FileInfos>(i).path.filename();
+          return std::get<FileDirInfos::FileInfos>(i).name.filename;
       };
   };
 } // namespace Sorter
