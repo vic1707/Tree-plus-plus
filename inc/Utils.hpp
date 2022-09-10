@@ -17,7 +17,7 @@ namespace Utils {
       [](char c) { return (static_cast<unsigned char>(c) &0xC0) != 0x80; } );
   }
 
-  inline constexpr void char_to_lower(char& c) { c = std::tolower(c); };
+  inline void char_to_lower(char& c) { c = std::tolower(c); };
   inline void word_to_lower(std::string& w) {
     std::for_each(w.begin(), w.end(), char_to_lower);
   }
