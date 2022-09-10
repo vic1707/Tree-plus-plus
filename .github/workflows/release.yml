@@ -25,9 +25,13 @@ jobs:
         uses: xmake-io/github-action-setup-xmake@v1
       # if on macos
       -
-        name: Use latest LLVM version
+        name: MacOs Xmake config
         if: matrix.os == 'macos-latest'
-        run: xmake config --cxx=$(brew --prefix llvm@14)/bin/clang -y
+        run: xmake config -y --cxflags="-Wall -Wextra -pedantic" --cxx=$(brew --prefix llvm@14)/bin/clang
+      -
+        name: Windows & Linux Xmake config
+        if: matrix.os != 'macos-latest'
+        run: xmake config -y --cxflags="-Wall -Wextra -pedantic"
       -
         name: Build
-        run: xmake -y
+        run: xmake
