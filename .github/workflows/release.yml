@@ -26,7 +26,15 @@ jobs:
       -
         name: MacOs Xmake config
         if: matrix.os == 'macos-latest'
-        run: xmake config -y --cxx=$(brew --prefix llvm@14)/bin/clang
+        run: xmake config -y --cxflags="-Wall -Wextra -pedantic" --cxx=$(brew --prefix llvm@14)/bin/clang
+      -
+        name: Linux Xmake config
+        if: matrix.os == 'ubuntu-22.04'
+        run: xmake config -y --cxflags="-Wall -Wextra -pedantic"
+      -
+        name: Windows Xmake config
+        if: matrix.os == 'windows-latest'
+        run: xmake config -y --cxflags="-Wall -WX"
       -
         name: Build
-        run: xmake -y
+        run: xmake
