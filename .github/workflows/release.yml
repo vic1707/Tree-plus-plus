@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+  # workflow_dispatch:
+  #   inputs:
+  #     version:
+  #         description: The version of the project to build
+  #         type: string
+  #         required: true
+  #         default: 'latest'
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+      -
+        name: Build
+        run: xmake
