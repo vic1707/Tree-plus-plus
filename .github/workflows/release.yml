@@ -24,15 +24,17 @@ jobs:
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
       -
-        name: MacOs build
+        name: MacOs Xmake config
         if: matrix.os == 'macos-latest'
-        run: xmake -y --cxflags="-Wall -Wextra -pedantic" --cxx=$(brew --prefix llvm@14)/bin/clang
+        run: xmake config -y --cxflags="-Wall -Wextra -pedantic" --cxx=$(brew --prefix llvm@14)/bin/clang
       -
-        name: Linux build
+        name: Linux Xmake config
         if: matrix.os == 'ubuntu-22.04'
-        run: xmake -y --cxflags="-Wall -Wextra -pedantic"
+        run: xmake config -y --cxflags="-Wall -Wextra -pedantic"
+      # -
+      #   name: Windows Xmake config
+      #   if: matrix.os == 'windows-latest'
+      #   run: xmake config -y --cxflags="-Wall -WX"
       -
-        name: Windows build
-        if: matrix.os == 'windows-latest'
-        run: xmake -y --cxflags="-Wall -WX"
-
+        name: Build
+        run: xmake -y
