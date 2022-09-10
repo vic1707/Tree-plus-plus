@@ -27,7 +27,7 @@ jobs:
       -
         name: Use latest LLVM version
         if: matrix.os == 'macos-latest'
-        run: xmake config --cxx $(brew --prefix llvm@14)/bin/clang
+        run: xmake config --cxx=$(brew --prefix llvm@14)/bin/clang
       -
         name: Build
         run: xmake -y
