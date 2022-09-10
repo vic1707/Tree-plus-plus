@@ -12,7 +12,7 @@ namespace Utils {
     return std::chrono::system_clock::to_time_t(sctp);
   };
 
-  [[nodiscard]] inline constexpr size_t utf8_len(std::string_view s) {
+  [[nodiscard]] inline size_t utf8_len(std::string_view s) {
     return std::count_if(s.begin(), s.end(),
       [](char c) { return (static_cast<unsigned char>(c) &0xC0) != 0x80; } );
   }
