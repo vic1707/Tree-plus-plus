@@ -14,22 +14,16 @@ jobs:
   release:
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-latest]
+        os: [ubuntu-22.04, windows-latest, macos-12.5]
     runs-on: ${{ matrix.os }}
     steps:
       -
         name: Checkout
         uses: actions/checkout@v3
-
-      # if running on ubuntu, we need to install g++
-      - 
-        name: Install g++
-        if: matrix.os == 'ubuntu-22.04'
-        run: |
-          sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-          sudo add-apt-repository -y ppa:deadsnakes/ppa
-          sudo apt -q update
-          sudo apt-get install g++ gcc ninja-build
+      # if on macos
+      - name: Install dependencies
+        if: matrix.os == 'macos-12.5'
+        run: $(brew --prefix llvm@14)/bin/clang
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
