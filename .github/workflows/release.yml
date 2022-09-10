@@ -23,7 +23,7 @@ jobs:
       # if on macos
       - name: Install dependencies
         if: matrix.os == 'macos-latest'
-        run: $(brew --prefix llvm@14)/bin/clang
+        run: xmake config --cxx $(brew --prefix llvm@14)/bin/clang
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
