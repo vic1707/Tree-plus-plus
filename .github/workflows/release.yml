@@ -31,10 +31,10 @@ jobs:
         name: Linux Xmake config
         if: matrix.os == 'ubuntu-22.04'
         run: xmake config -y --cxflags="-Wall -Wextra -pedantic"
-      # -
-      #   name: Windows Xmake config
-      #   if: matrix.os == 'windows-latest'
-      #   run: xmake config -y --cxflags="-Wall -WX"
+      -
+        name: Windows Xmake config
+        if: matrix.os == 'windows-latest'
+        run: xmake config -y -vD --cxflags="-Wall -WX"
       -
         name: Build
         run: xmake -y
