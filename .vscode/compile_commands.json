@@ -1,31 +1,31 @@
 [
 {
   "directory": "/Users/vic1707/Documents/Perso/tree-plus-plus",
-  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/8b3275c0a9f04e1d8350d6d4e7b608b6/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/arm64/release/src/FileDirInfos.cpp.o", "src/FileDirInfos.cpp"],
+  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-target", "x86_64-apple-macos12.5", "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/5e9f9c3c66294a89afd6684bb8a75d74/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/x86_64/release/src/FileDirInfos.cpp.o", "src/FileDirInfos.cpp"],
   "file": "src/FileDirInfos.cpp"
 },
 {
   "directory": "/Users/vic1707/Documents/Perso/tree-plus-plus",
-  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/8b3275c0a9f04e1d8350d6d4e7b608b6/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/arm64/release/src/SizeUnit.cpp.o", "src/SizeUnit.cpp"],
+  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-target", "x86_64-apple-macos12.5", "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/5e9f9c3c66294a89afd6684bb8a75d74/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/x86_64/release/src/SizeUnit.cpp.o", "src/SizeUnit.cpp"],
   "file": "src/SizeUnit.cpp"
 },
 {
   "directory": "/Users/vic1707/Documents/Perso/tree-plus-plus",
-  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/8b3275c0a9f04e1d8350d6d4e7b608b6/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/arm64/release/src/Options.cpp.o", "src/Options.cpp"],
+  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-target", "x86_64-apple-macos12.5", "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/5e9f9c3c66294a89afd6684bb8a75d74/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/x86_64/release/src/Options.cpp.o", "src/Options.cpp"],
   "file": "src/Options.cpp"
 },
 {
   "directory": "/Users/vic1707/Documents/Perso/tree-plus-plus",
-  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/8b3275c0a9f04e1d8350d6d4e7b608b6/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/arm64/release/src/Displayer.cpp.o", "src/Displayer.cpp"],
+  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-target", "x86_64-apple-macos12.5", "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/5e9f9c3c66294a89afd6684bb8a75d74/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/x86_64/release/src/Displayer.cpp.o", "src/Displayer.cpp"],
   "file": "src/Displayer.cpp"
 },
 {
   "directory": "/Users/vic1707/Documents/Perso/tree-plus-plus",
-  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/8b3275c0a9f04e1d8350d6d4e7b608b6/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/arm64/release/src/Controller.cpp.o", "src/Controller.cpp"],
+  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-target", "x86_64-apple-macos12.5", "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/5e9f9c3c66294a89afd6684bb8a75d74/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/x86_64/release/src/Controller.cpp.o", "src/Controller.cpp"],
   "file": "src/Controller.cpp"
 },
 {
   "directory": "/Users/vic1707/Documents/Perso/tree-plus-plus",
-  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/8b3275c0a9f04e1d8350d6d4e7b608b6/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/arm64/release/src/main.cpp.o", "src/main.cpp"],
+  "arguments": ["/usr/bin/xcrun -sdk macosx clang", "-c", "-Qunused-arguments", "-target", "x86_64-apple-macos12.5", "-isysroot", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk", "-std=c++20", "-Iinc", "-I", "/Users/vic1707/.xmake/packages/f/fmt/9.1.0/5e9f9c3c66294a89afd6684bb8a75d74/include", "-Wall", "-Wextra", "-pedantic", "-o", "build/.objs/treepp/macosx/x86_64/release/src/main.cpp.o", "src/main.cpp"],
   "file": "src/main.cpp"
 }]
