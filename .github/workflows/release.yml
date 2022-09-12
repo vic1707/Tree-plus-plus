@@ -46,7 +46,7 @@ jobs:
         if: matrix.os == 'ubuntu-22.04'
         run: |
           xmake -y
-          xmake f -p cross -a arm64 --sdk=${{ steps.arm-none-eabi-gcc-action.outputs.path }}
+          xmake f -p linux -a arm64 --sdk=${{ steps.arm-none-eabi-gcc-action.outputs.path }}
           xmake -y
       -
         name: Build (Windows)
