@@ -47,7 +47,7 @@ jobs:
         if: matrix.os == 'ubuntu-22.04'
         run: |
           xmake -y
-          xrepo remove --all fmt -y
+          # xrepo remove --all fmt -y
           xmake f -p cross -a arm64 -c -y --sdk=/tmp/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/
           xmake -y
       -
