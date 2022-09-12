@@ -47,6 +47,7 @@ jobs:
         run: |
           TOOLCHAIN_PATH=${{ steps.arm-none-eabi-gcc-action.outputs.path }}
           xmake -y
+          xrepo remove --all fmt
           xmake f -p linux -a arm64 --sdk=${TOOLCHAIN_PATH%/bin} -c -y
           xmake -y
       -
