@@ -25,9 +25,6 @@ jobs:
         uses: carlosperate/arm-none-eabi-gcc-action@v1
         id: arm-none-eabi-gcc-action
       -
-        name: The `path` to the toolchain executables can then be obtained as an output
-        run: echo "The output path is ${{ steps.arm-none-eabi-gcc-action.outputs.path }}"
-      -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
       -
@@ -41,16 +38,16 @@ jobs:
         name: Build (MacOs)
         if: matrix.os == 'macos-latest'
         run: |
-          xmake
+          xmake -y
           xmake f -a arm64
-          xmake
+          xmake -y
       -
         name: Build (Linux)
         if: matrix.os == 'ubuntu-22.04'
         run: |
-          xmake
+          xmake -y
           xmake f -p cross -a arm64 --sdk=${{ steps.arm-none-eabi-gcc-action.outputs.path }}
-          xmake
+          xmake -y
       -
         name: Build (Windows)
         if: matrix.os == 'windows-latest'
