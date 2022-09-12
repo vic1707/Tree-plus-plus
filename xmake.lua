@@ -6,6 +6,7 @@ add_requires("fmt")
 
 target("treepp")
     set_kind("binary")
+    set_filename("treepp_$(plat)_$(arch)")
     set_languages("cxx20")
     add_files("src/**.cpp")
     add_includedirs("inc")
