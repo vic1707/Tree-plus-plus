@@ -66,13 +66,10 @@ jobs:
         name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
         run: xmake update -s dev
       -
-        name: MacOs Xmake config
-        run: xmake config -y --cxx=$(brew --prefix llvm@14)/bin/clang
-      -
         name: Build (MacOs)
         run: |
-          xmake -y
-          xmake f -a arm64 -y
+          xmake -y --cxx=$(brew --prefix llvm@14)/bin/clang
+          xmake -y --cxx=$(brew --prefix llvm@14)/bin/clang f -a arm64
           xmake
 
   # release:
