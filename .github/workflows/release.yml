@@ -11,11 +11,8 @@ on:
   #         default: 'latest'
 
 jobs:
-  release:
-    strategy:
-      matrix:
-        os: [ubuntu-22.04] # , macos-latest, windows-latest
-    runs-on: ${{ matrix.os }}
+  build-ubuntu:
+    runs-on: ubuntu-22.04
     steps:
       -
         name: Checkout
@@ -32,26 +29,55 @@ jobs:
         name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
         run: xmake update -s dev
       -
-        name: MacOs Xmake config
-        if: matrix.os == 'macos-latest'
-        run: xmake config -y --cxx=$(brew --prefix llvm@14)/bin/clang
-      -
-        name: Build (MacOs)
-        if: matrix.os == 'macos-latest'
-        run: |
-          xmake -y
-          xmake f -a arm64
-          xmake -y
-      -
-        name: Build (Linux)
-        if: matrix.os == 'ubuntu-22.04'
+        name: Build
         run: |
           xmake -y
           # xrepo remove --all fmt -y
           xmake f -p cross -a arm64 -c -y --sdk=/tmp/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/
           xmake -y
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+      -
+        name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
+        run: xmake update -s dev
       -
         name: Build (Windows)
-        if: matrix.os == 'windows-latest'
         run: |
           xmake -y
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+      -
+        name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
+        run: xmake update -s dev
+      -
+        name: MacOs Xmake config
+        run: xmake config -y --cxx=$(brew --prefix llvm@14)/bin/clang
+      -
+        name: Build (MacOs)
+        run: |
+          xmake -y
+          xmake f -a arm64
+          xmake -y
+
+  # release:
+  #   needs: [build-ubuntu, build-windows, build-macos]
+  #   steps:
+  #     -
+  #       name: Checkout
+  #       uses: actions/checkout@v3
