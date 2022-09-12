@@ -68,8 +68,9 @@ jobs:
       -
         name: Build (MacOs)
         run: |
-          xmake -y --cxx=$(brew --prefix llvm@14)/bin/clang
-          xmake -y --cxx=$(brew --prefix llvm@14)/bin/clang f -a arm64
+          xmake f -y --cxx=$(brew --prefix llvm@14)/bin/clang
+          xmake
+          xmake f -y --cxx=$(brew --prefix llvm@14)/bin/clang -a arm64
           xmake
 
   # release:
