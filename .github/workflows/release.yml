@@ -72,8 +72,8 @@ jobs:
         name: Build (MacOs)
         run: |
           xmake -y
-          xmake f -a arm64
-          xmake -y
+          xmake f -a arm64 -y
+          xmake
 
   # release:
   #   needs: [build-ubuntu, build-windows, build-macos]
