@@ -21,12 +21,38 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Setup ARM toolchains
+        uses: carlosperate/arm-none-eabi-gcc-action@v1
+        id: arm-none-eabi-gcc-action
+      -
+        name: The `path` to the toolchain executables can then be obtained as an output
+        run: echo "The output path is ${{ steps.arm-none-eabi-gcc-action.outputs.path }}"
+      -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
+      -
+        name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
+        run: xmake update -s dev
       -
         name: MacOs Xmake config
         if: matrix.os == 'macos-latest'
         run: xmake config -y --cxx=$(brew --prefix llvm@14)/bin/clang
       -
-        name: Build
-        run: xmake -y
+        name: Build (MacOs)
+        if: matrix.os == 'macos-latest'
+        run: |
+          xmake
+          xmake f -a arm64
+          xmake
+      -
+        name: Build (Linux)
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          xmake
+          xmake f -p cross -a arm64 --sdk=${{ steps.arm-none-eabi-gcc-action.outputs.path }}
+          xmake
+      -
+        name: Build (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          xmake -y
