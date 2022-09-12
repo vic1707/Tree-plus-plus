@@ -45,8 +45,9 @@ jobs:
         name: Build (Linux)
         if: matrix.os == 'ubuntu-22.04'
         run: |
+          TOOLCHAIN_PATH=${{ steps.arm-none-eabi-gcc-action.outputs.path }}
           xmake -y
-          xmake f -p linux -a arm64 --sdk=${{ steps.arm-none-eabi-gcc-action.outputs.path }}
+          xmake f -p linux -a arm64 --sdk=${TOOLCHAIN_PATH%/bin} -c
           xmake -y
       -
         name: Build (Windows)
