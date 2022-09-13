@@ -46,6 +46,8 @@ jobs:
         name: Build (Windows)
         run: |
           xmake -y
+          xmake f -a arm64 -y -c
+          xmake -y
 
   build-macos:
     runs-on: macos-latest
