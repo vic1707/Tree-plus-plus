@@ -27,7 +27,7 @@ jobs:
         name: Build
         run: |
           xmake -y
-          xmake f -a x86_64 -p cross -y -c
+          xmake f -a x86_64 -y -c
           xmake -y
 
   build-windows:
