@@ -2,7 +2,14 @@
 add_rules("mode.release", "mode.debug")
 
 -- add requires libs
-add_requires("fmt")
+add_requires("fmt 9.X")
+
+-- not necesssary on macosx
+if not is_plat("macosx") and not is_arch(os.arch()) then
+    -- cross architecture compilation requirements
+    add_requires("muslcc")
+    set_toolchains("@muslcc")
+end
 
 target("treepp")
     set_kind("binary")

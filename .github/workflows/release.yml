@@ -18,11 +18,6 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
-        name: Setup ARM toolchains
-        run: |
-          wget https://releases.linaro.org/components/toolchain/binaries/latest-7/aarch64-linux-gnu/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu.tar.xz -O /tmp/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu.tar.xz
-          tar -xf /tmp/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu.tar.xz -C /tmp
-      -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
       # -
@@ -32,8 +27,7 @@ jobs:
         name: Build
         run: |
           xmake -y
-          # xrepo remove --all fmt -y
-          xmake f -p cross -a arm64 -c -y --sdk=/tmp/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/
+          xmake f -a x86_64 -p cross -y -c
           xmake -y
 
   build-windows:
