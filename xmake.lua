@@ -13,13 +13,14 @@ end
 
 target("treepp")
     set_kind("binary")
-    set_filename("treepp_$(plat)_$(arch)")
     set_languages("cxx20")
     add_files("src/**.cpp")
     add_includedirs("inc")
     add_packages("fmt")
+    -- naming and flags which are OS specific
     if is_plat("windows") then
-        -- add_cxxflags("/Wall /WX")
+        set_filename("treepp_$(plat)_$(arch).exe")
     else
+        set_filename("treepp_$(plat)_$(arch)")
         add_cxxflags("-Wall -Wextra -pedantic")
     end
