@@ -44,7 +44,7 @@ jobs:
         name: Build (Windows)
         run: |
           xmake -y
-          xmake f -a arm64 -y -c
+          xmake f -a arm64 -p cross --toolchain=msvc -y -c
           xmake -y
 
   build-macos:
