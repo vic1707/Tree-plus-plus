@@ -20,9 +20,7 @@ jobs:
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
-      -
-        name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
-        run: xmake update -s dev
+          xmake-version: branch@dev
       -
         name: Build
         run: |
@@ -39,9 +37,7 @@ jobs:
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
-      -
-        name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
-        run: xmake update -s dev
+          xmake-version: branch@dev
       -
         name: Build (Windows)
         run: |
@@ -58,9 +54,7 @@ jobs:
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
-      -
-        name: Update Xmake to `dev` branch # because need features that aren't released yet (will be in 2.7.2)
-        run: xmake update -s dev
+          xmake-version: branch@dev
       -
         name: Build (MacOs)
         run: |
