@@ -2,13 +2,8 @@ name: Release
 
 on:
   push:
-  # workflow_dispatch:
-  #   inputs:
-  #     version:
-  #         description: The version of the project to build
-  #         type: string
-  #         required: true
-  #         default: 'latest'
+    branches:
+      - main
 
 jobs:
   build-ubuntu:
