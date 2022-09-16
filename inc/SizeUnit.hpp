@@ -34,7 +34,7 @@ struct SizeUnit {
   size_t bytes;
   Unit unit;
   /* Constructors */
-  constexpr SizeUnit() noexcept = default;
+  SizeUnit() noexcept = default;
   SizeUnit(size_t b) noexcept : bytes(b) { this->reload_unit(); };
   /* Methods */
   constexpr float get_human_readable() const noexcept { return unit.ratio * bytes; }
@@ -61,5 +61,19 @@ struct SizeUnit {
 
   friend inline constexpr bool operator<(const SizeUnit &lhs, const SizeUnit &rhs) noexcept {
     return lhs.bytes < rhs.bytes;
+  }
+};
+
+template <> struct fmt::formatter<SizeUnit> {
+  constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
+    return ctx.begin();
+  }
+
+  template <typename FormatContext>
+  auto format(const SizeUnit& p, FormatContext& ctx) const -> decltype(ctx.out()) {
+    const auto human_readable = fmt::format("{0} {1: >2}", ((double)(int)(p.get_human_readable() * 100) / 100), p.unit.name); // two decimal places
+    return (SizeUnit::size_in_bytes && p.unit.ratio.num != 1) 
+      ? fmt::format_to(ctx.out(), "({0} B) - {1: >10}", p.bytes, human_readable)
+      : fmt::format_to(ctx.out(), "{}", human_readable);
   }
 };

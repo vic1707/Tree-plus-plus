@@ -1,0 +1,72 @@
+name: Release
+
+on:
+  wokflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+        default: 'patch'
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-22.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: branch@dev
+      -
+        name: Build
+        run: |
+          xmake -y
+          xmake f -a arm64 -y -c
+          xmake -y
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: branch@dev
+      -
+        name: Build (Windows)
+        run: |
+          xmake -y
+        # xmake f -a arm64 -p cross --toolchain=msvc -y -c
+        # xmake -y
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: branch@dev
+      -
+        name: Build (MacOs)
+        run: |
+          xmake f -y --cxx=$(brew --prefix llvm@14)/bin/clang
+          xmake
+          xmake f -y --cxx=$(brew --prefix llvm@14)/bin/clang -a arm64
+          xmake
+
+  # release:
+  #   needs: [build-ubuntu, build-windows, build-macos]
+  #   steps:
+  #     -
+  #       name: Checkout
+  #       uses: actions/checkout@v3

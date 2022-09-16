@@ -28,7 +28,7 @@ namespace FileDirInfos {
 
   DirInfos::DirInfos(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters) : ItemInfos(entry) {
     for (fs::directory_iterator it(this->path); it != fs::directory_iterator(); ++it) {
-      if (!hidden && entry.path().filename().string().front() == '.') continue;
+      if (!hidden && it->path().filename().string().front() == '.') continue;
       auto item = it->is_directory()
         ? build_item<DirInfos>(*it, hidden, sorters)
         : build_item<FileInfos>(*it, hidden, sorters);
