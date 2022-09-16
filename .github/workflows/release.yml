@@ -1,9 +1,12 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
+  wokflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+        default: 'patch'
 
 jobs:
   build-ubuntu:
