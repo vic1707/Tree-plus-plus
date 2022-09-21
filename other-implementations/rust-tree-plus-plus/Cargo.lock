@@ -160,14 +160,7 @@ name = "rust-tree-plus-plus"
 version = "1.0.0"
 dependencies = [
  "clap",
- "size",
 ]
-
-[[package]]
-name = "size"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "63c9c8350184b6b037d09dc77df55f1324df076a706d0191b79ec270cc4d756b"
 
 [[package]]
 name = "strsim"
