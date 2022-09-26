@@ -45,6 +45,10 @@ namespace FileDirInfos {
     size_t files = 0;
   };
 
+  struct DirInfos;
+  template <typename T>
+  concept Item = std::same_as<T, FileInfos> || std::same_as<T, DirInfos>;
+
   struct ChildCount {
     /* Members */
     ItemsCount local;
@@ -59,11 +63,10 @@ namespace FileDirInfos {
       auto result = fmt::format("{} director{}{} and {} file{}{}", children.local.dirs, dirs_plural, total_dirs, children.local.files, files_plural, total_files);
       return os << result;
     }
+    /* Methods */
+    constexpr void add_file() noexcept;
+    constexpr void add_dir(const DirInfos& dir) noexcept;
   };
-
-  struct DirInfos;
-  template <typename T>
-  concept Item = std::same_as<T, FileInfos> || std::same_as<T, DirInfos>;
 
   struct DirInfos : ItemInfos {
     /* Members */

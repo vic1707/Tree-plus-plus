@@ -2,18 +2,27 @@
 #include "displayers_specs/Sorter.hpp"
 
 namespace FileDirInfos {
+
+  constexpr void ChildCount::add_file() noexcept {
+    ++this->local.files;
+    ++this->total.files;
+  }
+
+  constexpr void ChildCount::add_dir(const DirInfos& dir) noexcept {
+      ++this->local.dirs;
+      this->total.dirs += dir.children.total.dirs + 1;
+      this->total.files += dir.children.total.files;
+    }
+
   template <typename Item>
   inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters) {
     Item item;
     if constexpr (std::is_same_v<Item, DirInfos>) {
       item = DirInfos(entry, hidden, sorters);
-      ++this->children.local.dirs;
-      this->children.total.dirs += item.children.total.dirs + 1;
-      this->children.total.files += item.children.total.files;
+      this->children.add_dir(item);
     } else {
       item = FileInfos(entry);
-      ++this->children.local.files;
-      ++this->children.total.files;
+      this->children.add_file();
     }
     this->size += item.size.bytes;
     return item;
