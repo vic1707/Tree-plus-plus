@@ -1,30 +1,27 @@
 #include <Controller.hpp>
 /* Sorters */
 #include <sorters/Alpha.hpp>
-#include <sorters/Default.hpp>
 #include <sorters/Extension.hpp>
 #include <sorters/Separate_files_folders.hpp>
 #include <sorters/Size.hpp>
 /* Filters */
-#include <filters/Default.hpp>
 #include <filters/Extensions.hpp>
 
 Controller::Controller(const model::Options &options) : m_options(options) {
   // Sorters
-  if (options.sorters.empty())
-    this->m_sort.emplace_back(new Sorter::Default());
-  else
-    for (auto &opt : options.sorters)
-      if (opt == "alpha")
-        this->m_sort.emplace_back(new Sorter::Alpha());
-      else if (opt == "extension")
-        this->m_sort.emplace_back(new Sorter::Extension());
-      else if (opt == "size")
-        this->m_sort.emplace_back(new Sorter::Size());
-      else if (opt == "files_folders")
-        this->m_sort.emplace_back(new Sorter::SeparateFilesFolders<FileDirInfos::FileInfos>());
-      else if (opt == "folders_files")
-        this->m_sort.emplace_back(new Sorter::SeparateFilesFolders<FileDirInfos::DirInfos>());
+  if (options.sorters.empty()) return;
+
+  for (auto &opt : options.sorters)
+    if (opt == "alpha")
+      this->m_sort.emplace_back(new Sorter::Alpha());
+    else if (opt == "extension")
+      this->m_sort.emplace_back(new Sorter::Extension());
+    else if (opt == "size")
+      this->m_sort.emplace_back(new Sorter::Size());
+    else if (opt == "files_folders")
+      this->m_sort.emplace_back(new Sorter::SeparateFilesFolders<FileDirInfos::FileInfos>());
+    else if (opt == "folders_files")
+      this->m_sort.emplace_back(new Sorter::SeparateFilesFolders<FileDirInfos::DirInfos>());
 }
 
 std::vector<FileDirInfos::DirInfos> Controller::create_models() {
