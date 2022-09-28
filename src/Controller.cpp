@@ -10,8 +10,6 @@
 
 Controller::Controller(const model::Options &options) : m_options(options) {
   // Sorters
-  if (options.sorters.empty()) return;
-
   for (auto &opt : options.sorters)
     if (opt == "alpha")
       this->m_sort.emplace_back(new Sorter::Alpha());
