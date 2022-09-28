@@ -1,10 +1,13 @@
 #include <Controller.hpp>
-
+/* Sorters */
 #include <sorters/Alpha.hpp>
 #include <sorters/Default.hpp>
 #include <sorters/Extension.hpp>
 #include <sorters/Separate_files_folders.hpp>
 #include <sorters/Size.hpp>
+/* Filters */
+#include <filters/Default.hpp>
+#include <filters/Extensions.hpp>
 
 Controller::Controller(const model::Options &options) : m_options(options) {
   // Sorters
@@ -28,7 +31,7 @@ std::vector<FileDirInfos::DirInfos> Controller::create_models() {
   std::vector<FileDirInfos::DirInfos> models;
   models.reserve(this->m_options.paths.size());
   for (auto path : this->m_options.paths) {
-    FileDirInfos::DirInfos model(fs::directory_entry(fs::canonical((std::string)path)), this->m_options.hidden, this->m_sort);
+    FileDirInfos::DirInfos model(fs::directory_entry(fs::canonical((std::string)path)), this->m_options.hidden, this->m_sort, this->m_filter);
     models.emplace_back(model);
   }
   return models;
