@@ -6,6 +6,7 @@
 #include <sorters/Size.hpp>
 /* Filters */
 #include <filters/Extensions.hpp>
+#include <filters/Hidden.hpp>
 
 Controller::Controller(const model::Options &options) : m_options(options) {
   // Sorters
