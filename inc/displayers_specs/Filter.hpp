@@ -1,5 +1,7 @@
 #pragma once
 /* std */
+#include <string_view>
+#include <unordered_set>
 #include <variant>
 #include <vector>
 /* custom */
@@ -10,7 +12,7 @@ namespace Filter {
   class AFilter {
     private:
       /* Members */
-      std::vector<std::string> m_discriminants;
+      std::unordered_set<std::string_view> m_discriminants;
     public:
       /* Destructor */
       virtual ~AFilter() = default;
