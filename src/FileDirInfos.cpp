@@ -16,10 +16,10 @@ namespace FileDirInfos {
     }
 
   template <typename Item>
-  inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters) {
+  inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters) {
     Item item;
     if constexpr (std::is_same_v<Item, DirInfos>) {
-      item = DirInfos(entry, hidden, sorters, filters);
+      item = DirInfos(entry, sorters, filters);
       this->children.add_dir(item);
     } else {
       item = FileInfos(entry);
@@ -36,12 +36,11 @@ namespace FileDirInfos {
     size(entry.is_directory() ? SizeUnit() : fs::file_size(this->path))
   {}
 
-  DirInfos::DirInfos(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters) : ItemInfos(entry) {
+  DirInfos::DirInfos(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters) : ItemInfos(entry) {
     for (fs::directory_iterator it(this->path); it != fs::directory_iterator(); ++it) {
-      if (!hidden && it->path().filename().string().front() == '.') continue;
       auto item = it->is_directory()
-        ? build_item<DirInfos>(*it, hidden, sorters, filters)
-        : build_item<FileInfos>(*it, hidden, sorters, filters);
+        ? build_item<DirInfos>(*it, sorters, filters)
+        : build_item<FileInfos>(*it, sorters, filters);
       this->items.emplace_back(std::move(item));
     }
     for (const auto &sorter : sorters)

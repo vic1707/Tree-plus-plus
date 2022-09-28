@@ -16,7 +16,6 @@ namespace model {
     size_t tab_size;
     // size_t nb_threads;
     bool redirect;
-    bool hidden;
 
     /* Constructors */
     Options();

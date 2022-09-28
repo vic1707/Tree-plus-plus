@@ -27,12 +27,14 @@ namespace model {
   Options::Options() :
     paths(),
     sorters(),
+    filters(
+      { {"hidden", {}} }
+    ),
     formatter(),
     indenter(),
     columns(get_terminal_width()),
     tab_size(2),
-    redirect(false),
-    hidden(false)
+    redirect(false)
   {}
 
   void Options::parse_args(int argc, char **argv) {
@@ -43,7 +45,7 @@ namespace model {
         exit(0);
       }
       else if (argv_sv == "-a" || argv_sv == "--all-files")
-        this->hidden = true;
+        this->filters.erase("hidden");
       else if ( argv_sv == "--size-in-bytes")
         SizeUnit::size_in_bytes = true;
       else if (argv_sv == "-r" || argv_sv == "--redirect")

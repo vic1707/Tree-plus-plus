@@ -75,10 +75,10 @@ namespace FileDirInfos {
     std::vector<std::variant<DirInfos, FileInfos>> items;
     /* Constructors */
     DirInfos() noexcept = default;
-    DirInfos(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters);
+    DirInfos(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters);
     /* Methods */
     template <typename Item>
-    inline std::variant<DirInfos, FileInfos> build_item(fs::directory_entry entry, bool hidden, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters);
+    inline std::variant<DirInfos, FileInfos> build_item(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters);
   };
 
 } // namespace FileDirInfos
