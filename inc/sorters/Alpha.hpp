@@ -1,9 +1,7 @@
 #pragma once
 /* std */
 #include <algorithm>
-#include <cctype>
 #include <string>
-#include <iostream>
 /* custom */
 #include <displayers_specs/Sorter.hpp>
 
