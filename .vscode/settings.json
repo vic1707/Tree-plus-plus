@@ -20,5 +20,6 @@
   "rust-analyzer.inlayHints.reborrowHints.enable": "never",
   "rust-analyzer.inlayHints.renderColons": false,
   "rust-analyzer.inlayHints.typeHints.hideClosureInitialization": false,
-  "rust-analyzer.inlayHints.typeHints.hideNamedConstructor": false
+  "rust-analyzer.inlayHints.typeHints.hideNamedConstructor": false,
+  "rust-analyzer.checkOnSave.command": "clippy"
 }
