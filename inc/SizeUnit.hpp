@@ -45,8 +45,18 @@ struct SizeUnit {
     this->reload_unit();
   }
 
+  void operator+=(SizeUnit b) noexcept {
+    this->bytes += b.bytes;
+    this->reload_unit();
+  }
+
   void operator-=(size_t b) noexcept {
     this->bytes -= b;
+    this->reload_unit();
+  }
+
+  void operator-=(SizeUnit b) noexcept {
+    this->bytes -= b.bytes;
     this->reload_unit();
   }
 
