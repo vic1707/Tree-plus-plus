@@ -27,11 +27,11 @@ namespace Filter {
       void remove_from_parent(std::__wrap_iter<std::variant<FileDirInfos::DirInfos, FileDirInfos::FileInfos> *> i, FileDirInfos::DirInfos &p) {
         if (std::holds_alternative<FileDirInfos::FileInfos>(*i)) {
           p.children.remove_file();
-          p.size -= std::get<FileDirInfos::FileInfos>(*i).size;
+          if (!keepSize) p.size -= std::get<FileDirInfos::FileInfos>(*i).size;
         } else {
           const auto dir = std::get<FileDirInfos::DirInfos>(*i);
           p.children.remove_dir(dir);
-          p.size -= dir.size;
+          if (!keepSize) p.size -= dir.size;
         }
         p.items.erase(i);
       }
