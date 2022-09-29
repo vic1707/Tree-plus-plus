@@ -6,6 +6,9 @@
 #include <Options.hpp>
 #include <SizeUnit.hpp>
 
+#include <displayers_specs/Filter.hpp>
+bool Filter::AFilter::keepSize = false;
+
 namespace fs = std::filesystem;
 
 #ifndef _WIN32
@@ -62,6 +65,8 @@ namespace model {
         this->indenter = argv_sv.substr(11);
       else if (argv_sv.starts_with("--formatter="))
         this->formatter = argv_sv.substr(12);
+      else if (argv_sv.starts_with("--keep-size"))
+        Filter::AFilter::keepSize = true;
       else if (fs::is_directory(argv_sv))
         this->paths.insert(argv_sv);
       else

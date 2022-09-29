@@ -6,16 +6,14 @@
 
 namespace Filter {
   class Extensions : public AFilter {
-    private:
-      std::unordered_set<std::string_view> m_discriminants;
     public:
       /* Constructors */
-      Extensions(const std::unordered_set<std::string_view> &discriminants) : m_discriminants(discriminants) {}
+      Extensions(const std::unordered_set<std::string_view> &d): AFilter(d) {};
       /* Methods */
-      void filter(Items &items) final {
-        for (auto it = items.begin(); it != items.end(); ++it) {
+      void filter(FileDirInfos::DirInfos &parent) final {
+        for (auto it = parent.items.begin(); it != parent.items.end(); ++it) {
           if (std::find(m_discriminants.begin(), m_discriminants.end(), this->get_extension(*it)) != m_discriminants.end()) return;
-          items.erase(it);
+          remove_from_parent(it, parent);
           --it;
         }
       }

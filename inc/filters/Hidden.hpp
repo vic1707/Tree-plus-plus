@@ -1,14 +1,15 @@
 #pragma once
 /* custom */
 #include <displayers_specs/Filter.hpp>
+#include <iostream>
 
 namespace Filter {
   class Hidden : public AFilter {
     public:
-      void filter(Items &items) final {
-        for (auto it = items.begin(); it != items.end(); ++it) {
-          if (this->get_filename(*it).front() != '.') return;
-          items.erase(it);
+      void filter(FileDirInfos::DirInfos &parent) final {
+        for (auto it = parent.items.begin(); it != parent.items.end(); ++it) {
+          if (this->get_filename(*it).front() != '.') continue;
+          remove_from_parent(it, parent);
           --it;
         }
       }

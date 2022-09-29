@@ -65,8 +65,10 @@ namespace FileDirInfos {
       return os << result;
     }
     /* Methods */
-    constexpr void add_file() noexcept;
-    constexpr void add_dir(const DirInfos& dir) noexcept;
+    void add_file() noexcept;
+    void remove_file() noexcept;
+    void add_dir(const DirInfos& dir) noexcept;
+    void remove_dir(const DirInfos& dir) noexcept;
   };
 
   struct DirInfos : ItemInfos {

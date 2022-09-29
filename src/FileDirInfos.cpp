@@ -4,16 +4,27 @@
 
 namespace FileDirInfos {
 
-  constexpr void ChildCount::add_file() noexcept {
+  void ChildCount::add_file() noexcept {
     ++this->local.files;
     ++this->total.files;
   }
 
-  constexpr void ChildCount::add_dir(const DirInfos& dir) noexcept {
-      ++this->local.dirs;
-      this->total.dirs += dir.children.total.dirs + 1;
-      this->total.files += dir.children.total.files;
-    }
+  void ChildCount::remove_file() noexcept {
+    --this->local.files;
+    --this->total.files;
+  }
+
+  void ChildCount::add_dir(const DirInfos& dir) noexcept {
+    ++this->local.dirs;
+    this->total.dirs += dir.children.total.dirs + 1;
+    this->total.files += dir.children.total.files;
+  }
+
+  void ChildCount::remove_dir(const DirInfos& dir) noexcept {
+    --this->local.dirs;
+    this->total.dirs -= dir.children.total.dirs + 1;
+    this->total.files -= dir.children.total.files;
+  }
 
   template <typename Item>
   inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters) {
@@ -44,7 +55,7 @@ namespace FileDirInfos {
       this->items.emplace_back(std::move(item));
     }
     for (const auto &filter : filters)
-      filter->filter(this->items);
+      filter->filter(*this);
     for (const auto &sorter : sorters)
       sorter->sort(this->items);
   }
