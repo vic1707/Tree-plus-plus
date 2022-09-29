@@ -57,8 +57,8 @@ namespace FileDirInfos {
     /* Operators */
     friend inline std::ostream &operator<<(std::ostream &os, const ChildCount &children) {
       if (children.total.dirs == 0 && children.total.files == 0) return os << "Empty directory";
-      auto const dirs_plural = children.local.dirs < 1 ? "y" : "ies";
-      auto const files_plural = children.local.files < 1 ? "" : "s";
+      auto const dirs_plural = children.local.dirs > 1 ? "ies" : "y";
+      auto const files_plural = children.local.files > 1 ? "s" : "";
       auto const total_dirs = children.local.dirs != children.total.dirs ? fmt::format(" ({} total)", children.total.dirs) : std::string();
       auto const total_files = children.local.files != children.total.files ? fmt::format(" ({} total)", children.total.files) : std::string();
       auto result = fmt::format("{} director{}{} and {} file{}{}", children.local.dirs, dirs_plural, total_dirs, children.local.files, files_plural, total_files);
@@ -93,8 +93,10 @@ template <> struct fmt::formatter<FileDirInfos::ChildCount> {
   template <typename FormatContext>
   auto format(const FileDirInfos::ChildCount& p, FormatContext& ctx) const -> decltype(ctx.out()) {
       if (p.total.dirs == 0 && p.total.files == 0) return fmt::format_to(ctx.out(), "{}", "Empty directory");
-      if (p.total.dirs == 0) return fmt::format_to(ctx.out(), "{} file{}", p.total.files, (p.total.files > 1 ? "s" : ""));
-      if (p.total.files == 0) return fmt::format_to(ctx.out(), "{} director{}", p.total.dirs, (p.total.dirs > 1 ? "ies" : "y"));
-      return fmt::format_to(ctx.out(), "{} director{} and {} file{}", p.total.dirs, (p.total.dirs > 1 ? "ies" : "y"), p.total.files, (p.total.files > 1 ? "s" : ""));
+      auto const dirs_plural = p.local.dirs > 1 ? "ies" : "y";
+      auto const files_plural = p.local.files > 1 ? "s" : "";
+      auto const total_dirs = p.local.dirs != p.total.dirs ? fmt::format(" ({} total)", p.total.dirs) : std::string();
+      auto const total_files = p.local.files != p.total.files ? fmt::format(" ({} total)", p.total.files) : std::string();
+      return fmt::format_to(ctx.out(), "{} director{}{} and {} file{}{}", p.local.dirs, dirs_plural, total_dirs, p.local.files, files_plural, total_files);
   }
 };
