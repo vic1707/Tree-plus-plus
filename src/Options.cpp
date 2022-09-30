@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <iostream>
 #include <string_view>
+#include <unordered_set>
 
 /* custom */
 #include <Options.hpp>
@@ -72,8 +73,9 @@ namespace model {
       else if (argv_sv.starts_with("--filter-by=")) {
         auto filter = argv_sv.substr(12);
         auto filter_options = Utils::split_v(filter, '_');
-        auto options = Utils::split_us(filter_options.at(1), ',');
-        this->filters[filter_options.at(0)] = options;
+        this->filters[filter_options.at(0)] = filter_options.size() > 1
+          ? Utils::split_us(filter_options[1], ',')
+          : std::unordered_set<std::string_view>{};
       }
       else if (fs::is_directory(argv_sv))
         this->paths.insert(argv_sv);
