@@ -23,7 +23,7 @@ Controller::Controller(const model::Options &options) : m_options(options) {
       this->m_sort.emplace_back(new Sorter::SeparateFilesFolders<FileDirInfos::DirInfos>());
   // Filters
   for (auto &opt : options.filters)
-    if (opt.first == "extensions")
+    if (opt.first == "ext")
       this->m_filter.emplace_back(new Filter::Extensions(opt.second));
     else if (opt.first == "hidden")
       this->m_filter.emplace_back(new Filter::Hidden());
