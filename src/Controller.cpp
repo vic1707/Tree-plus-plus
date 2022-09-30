@@ -6,6 +6,7 @@
 #include <sorters/Size.hpp>
 /* Filters */
 #include <filters/Extensions.hpp>
+#include <filters/Files.hpp>
 #include <filters/Hidden.hpp>
 
 Controller::Controller(const model::Options &options) : m_options(options) {
@@ -27,6 +28,8 @@ Controller::Controller(const model::Options &options) : m_options(options) {
       this->m_filter.emplace_back(new Filter::Extensions(opt.second));
     else if (opt.first == "hidden")
       this->m_filter.emplace_back(new Filter::Hidden());
+    else if (opt.first == "files")
+      this->m_filter.emplace_back(new Filter::Files());
 }
 
 std::vector<FileDirInfos::DirInfos> Controller::create_models() {
