@@ -26,10 +26,10 @@ namespace FileDirInfos {
     this->total.files -= dir.children.total.files;
   }
 
-  template <typename Item>
+  template <Item T>
   inline std::variant<DirInfos, FileInfos> DirInfos::build_item(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters) {
-    Item item;
-    if constexpr (std::is_same_v<Item, DirInfos>) {
+    T item;
+    if constexpr (std::is_same_v<T, DirInfos>) {
       item = DirInfos(entry, sorters, filters);
       this->children.add_dir(item);
     } else {

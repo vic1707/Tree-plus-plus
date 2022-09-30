@@ -79,7 +79,7 @@ namespace FileDirInfos {
     DirInfos() noexcept = default;
     DirInfos(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters);
     /* Methods */
-    template <typename Item>
+    template <Item T>
     inline std::variant<DirInfos, FileInfos> build_item(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters);
   };
 
