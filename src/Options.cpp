@@ -1,10 +1,12 @@
 /* std */
 #include <filesystem>
 #include <iostream>
+#include <string_view>
 
 /* custom */
 #include <Options.hpp>
 #include <SizeUnit.hpp>
+#include <Utils.hpp>
 
 #include <displayers_specs/Filter.hpp>
 bool Filter::AFilter::keepSize = false;
@@ -67,6 +69,12 @@ namespace model {
         this->formatter = argv_sv.substr(12);
       else if (argv_sv.starts_with("--keep-size"))
         Filter::AFilter::keepSize = true;
+      else if (argv_sv.starts_with("--filter-by=")) {
+        auto filter = argv_sv.substr(12);
+        auto filter_options = Utils::split_v(filter, '_');
+        auto options = Utils::split_us(filter_options.at(1), ',');
+        this->filters[filter_options.at(0)] = options;
+      }
       else if (fs::is_directory(argv_sv))
         this->paths.insert(argv_sv);
       else
