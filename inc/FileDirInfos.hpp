@@ -14,20 +14,11 @@ namespace Filter {class AFilter;} // #include "displayers_specs/Filter.hpp"
 namespace fs = std::filesystem;
 
 namespace FileDirInfos {
-  struct NameInfos {
-    /* Members */
-    std::string filename;
-    std::string extension;
-    /* Constructors */
-    NameInfos() noexcept = default;
-    NameInfos(const fs::path &path) : filename(path.filename().string()), extension(path.extension().string()) {}
-  };
-
   struct ItemInfos {
     /* Members */
     fs::path path;
     time_t time;
-    NameInfos name;
+    std::string name;
     SizeUnit size;
     /* Constructors */
     ItemInfos() noexcept = default;

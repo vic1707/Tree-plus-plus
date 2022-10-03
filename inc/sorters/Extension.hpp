@@ -15,9 +15,9 @@ namespace Sorter {
     private:
       std::string get_extension(const auto &i) {
         if (std::holds_alternative<FileDirInfos::DirInfos>(i))
-          return std::get<FileDirInfos::DirInfos>(i).name.extension;
+          return "";
         else
-          return std::get<FileDirInfos::FileInfos>(i).name.extension;
+          return Utils::split_v(std::get<FileDirInfos::FileInfos>(i).name, '.').back();
       };
   };
 } // namespace Sorter

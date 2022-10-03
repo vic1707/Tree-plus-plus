@@ -43,7 +43,7 @@ namespace FileDirInfos {
   ItemInfos::ItemInfos(fs::directory_entry entry) :
     path(entry.path()),
     time(Utils::to_time_t(fs::last_write_time(this->path))),
-    name(NameInfos(this->path)),
+    name(this->path.filename().string()),
     size(entry.is_directory() ? SizeUnit() : fs::file_size(this->path))
   {}
 

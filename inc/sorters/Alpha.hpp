@@ -20,9 +20,9 @@ namespace Sorter {
     private:
       std::string get_filename(const auto &i) {
         if (std::holds_alternative<FileDirInfos::DirInfos>(i))
-          return std::get<FileDirInfos::DirInfos>(i).name.filename;
+          return std::get<FileDirInfos::DirInfos>(i).name;
         else
-          return std::get<FileDirInfos::FileInfos>(i).name.filename;
+          return std::get<FileDirInfos::FileInfos>(i).name;
       };
   };
 } // namespace Sorter

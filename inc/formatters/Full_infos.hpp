@@ -17,7 +17,7 @@ namespace Formatter {
       void display_file(const FileDirInfos::FileInfos *item, std::string_view prefix) final {
         char buff[20];
         std::strftime(buff, sizeof buff, "%Y-%m-%d %H:%M:%S", std::localtime(&item->time));
-        auto left_side = fmt::format("{0}{1}", prefix, item->name.filename);
+        auto left_side = fmt::format("{0}{1}", prefix, item->name);
         auto right_side = fmt::format("{0} - {1}", item->size, buff);
         fmt::format_to(this->stream, "{0}{1: >{2}}\n", left_side, right_side, this->width - Utils::utf8_len(left_side));
       }
@@ -25,7 +25,7 @@ namespace Formatter {
       void display_folder(const FileDirInfos::DirInfos *item, std::string_view prefix) final {
         char buff[20];
         std::strftime(buff, sizeof buff, "%Y-%m-%d %H:%M:%S", std::localtime(&item->time));
-        auto left_side = fmt::format("{0}{1} - {2}", prefix, item->name.filename, item->children);
+        auto left_side = fmt::format("{0}{1} - {2}", prefix, item->name, item->children);
         auto right_side = fmt::format("{0} - {1}", item->size, buff);
         fmt::format_to(this->stream, "{0}{1: >{2}}\n", left_side, right_side, this->width - Utils::utf8_len(left_side));
       }
