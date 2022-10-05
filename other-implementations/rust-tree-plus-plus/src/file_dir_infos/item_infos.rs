@@ -17,13 +17,11 @@ impl ItemInfos {
   /// Creates a new `ItemInfos` struct.
   pub fn new(path: &str) -> Self {
     let p = std::fs::canonicalize(path).unwrap();
-    let last_modified = chrono::DateTime::<chrono::Local>::from(std::fs::metadata(&p).unwrap().modified().unwrap());
-    let size = Size::from_bytes(std::fs::metadata(&path).unwrap().len());
-    return Self {
+    Self {
       path: p.as_os_str().to_str().unwrap().to_string(),
-      last_modified,
+      last_modified: chrono::DateTime::<chrono::Local>::from(std::fs::metadata(&p).unwrap().modified().unwrap()),
       name: p.file_name().unwrap().to_str().unwrap().to_string(),
-      size,
-    };
+      size: Size::from_bytes(std::fs::metadata(&path).unwrap().len()),
+    }
   }
 }

@@ -8,8 +8,8 @@ pub struct FileInfos {
 impl FileInfos {
   /// Creates a new `FileInfos` struct.
   pub fn new(path: &str) -> Self {
-    return Self {
+    Self {
       infos: ItemInfos::new(path),
-    };
+    }
   }
 }
