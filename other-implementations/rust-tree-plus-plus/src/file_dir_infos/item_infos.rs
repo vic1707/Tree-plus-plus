@@ -22,12 +22,7 @@ impl ItemInfos {
     return Self {
       path: p.as_os_str().to_str().unwrap().to_string(),
       last_modified,
-      name: p
-      .file_name()
-      .unwrap()
-      .to_str()
-      .unwrap()
-      .to_string(),
+      name: p.file_name().unwrap().to_str().unwrap().to_string(),
       size,
     };
   }

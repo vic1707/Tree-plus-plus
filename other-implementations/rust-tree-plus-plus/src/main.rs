@@ -4,9 +4,9 @@ mod options;
 use clap::Parser;
 
 fn main() {
-    let args = options::Args::parse();
+  let args = options::Args::parse();
 
-    for path in args.paths.iter() {
-        println!("{:?}", path);
-    }
+  for path in args.paths.iter() {
+    println!("{:?}", path);
+  }
 }

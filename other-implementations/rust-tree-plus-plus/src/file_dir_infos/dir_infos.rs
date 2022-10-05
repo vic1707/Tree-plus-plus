@@ -24,14 +24,13 @@ impl DirInfos {
       .unwrap()
       .map(|f| {
         let p = f.unwrap().path();
-        return 
-          if p.is_dir() {
-            count.add_dir(&DirInfos::new(p.as_os_str().to_str().unwrap()).count);
-            Children::Dir(DirInfos::new(p.as_os_str().to_str().unwrap()))
-          } else {
-            count.add_file();
-            Children::File(FileInfos::new(p.as_os_str().to_str().unwrap()))
-          };
+        return if p.is_dir() {
+          count.add_dir(&DirInfos::new(p.as_os_str().to_str().unwrap()).count);
+          Children::Dir(DirInfos::new(p.as_os_str().to_str().unwrap()))
+        } else {
+          count.add_file();
+          Children::File(FileInfos::new(p.as_os_str().to_str().unwrap()))
+        };
       })
       .collect();
     Self {
