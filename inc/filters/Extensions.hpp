@@ -1,9 +1,11 @@
 #pragma once
 /* std */
 #include <string>
+#include <string_view>
+#include <unordered_set>
+#include <variant>
 /* custom */
 #include <displayers_specs/Filter.hpp>
-#include <variant>
 
 namespace Filter {
   class Extensions : public AFilter {
@@ -14,7 +16,7 @@ namespace Filter {
       void filter(FileDirInfos::DirInfos &parent) final {
         for (auto it = parent.items.begin(); it != parent.items.end(); ++it) {
           if (std::holds_alternative<FileDirInfos::DirInfos>(*it)) continue;
-          auto ext = Utils::split_v(std::get<FileDirInfos::FileInfos>(*it).name, '.').back();
+          auto ext = Utils::split<std::vector<std::string>>(std::get<FileDirInfos::FileInfos>(*it).name, '.').back();
           if (m_discriminants.find(ext) == m_discriminants.end()) continue;
           remove_from_parent(it, parent);
           --it;

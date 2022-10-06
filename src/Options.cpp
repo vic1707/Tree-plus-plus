@@ -1,8 +1,10 @@
 /* std */
 #include <filesystem>
 #include <iostream>
+#include <string>
 #include <string_view>
 #include <unordered_set>
+#include <vector>
 
 /* custom */
 #include <Options.hpp>
@@ -72,9 +74,9 @@ namespace model {
         Filter::AFilter::keepSize = true;
       else if (argv_sv.starts_with("--filter-by=")) {
         auto filter = argv_sv.substr(12);
-        auto filter_options = Utils::split_v(filter, '_');
+        auto filter_options = Utils::split<std::vector<std::string_view>>(filter, '_');
         this->filters[filter_options.at(0)] = filter_options.size() > 1
-          ? Utils::split_us(filter_options[1], ',')
+          ? Utils::split<std::unordered_set<std::string_view>>(filter_options[1], ',')
           : std::unordered_set<std::string_view>{};
       }
       else if (fs::is_directory(argv_sv))

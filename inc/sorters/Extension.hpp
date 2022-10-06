@@ -17,7 +17,7 @@ namespace Sorter {
         if (std::holds_alternative<FileDirInfos::DirInfos>(i))
           return "";
         else
-          return Utils::split_v(std::get<FileDirInfos::FileInfos>(i).name, '.').back();
+          return Utils::split<std::vector<std::string>>(std::get<FileDirInfos::FileInfos>(i).name, '.').back();
       };
   };
 } // namespace Sorter
