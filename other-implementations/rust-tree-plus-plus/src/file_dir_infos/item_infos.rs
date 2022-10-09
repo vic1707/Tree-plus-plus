@@ -1,3 +1,5 @@
+use std::fs;
+
 use chrono::{DateTime, Local};
 use size::Size;
 
@@ -16,12 +18,15 @@ pub struct ItemInfos {
 impl ItemInfos {
   /// Creates a new `ItemInfos` struct.
   pub fn new(path: &str) -> Self {
-    let p = std::fs::canonicalize(path).unwrap();
+    let p = std::fs::canonicalize(path).unwrap_or_else(|_| std::path::PathBuf::from(path));
+
+    let metadata = fs::metadata(&p).unwrap();
+
     Self {
-      path: p.as_os_str().to_str().unwrap().to_string(),
-      last_modified: chrono::DateTime::<chrono::Local>::from(std::fs::metadata(&p).unwrap().modified().unwrap()),
-      name: p.file_name().unwrap().to_str().unwrap().to_string(),
-      size: Size::from_bytes(std::fs::metadata(&path).unwrap().len()),
+      path: p.to_string_lossy().to_string(),
+      last_modified: metadata.modified().map(|t| t.into()).unwrap(),
+      name: p.file_name().map(|n| n.to_string_lossy().to_string()).unwrap(),
+      size: Size::from_bytes(metadata.len()),
     }
   }
 }
