@@ -4,6 +4,7 @@ use crate::file_dir_infos::items_count::ChildCount;
 
 use core::fmt::{Display, Formatter, Result as FmtResult};
 
+/// An enum that represents a directory or a file.
 enum Children {
   File(FileInfos),
   Dir(DirInfos),
@@ -20,17 +21,17 @@ impl DirInfos {
   /// Creates a new `DirInfos` struct.
   pub fn new(path: &str) -> Self {
     let mut count = ChildCount::new();
-    let children = std::fs::read_dir(path)
+    let children = std::fs::read_dir(&path)
       .unwrap()
       .map(|f| {
         let p = f.unwrap().path();
-        return if p.is_dir() {
-          count.add_dir(&DirInfos::new(p.as_os_str().to_str().unwrap()).count);
-          Children::Dir(DirInfos::new(p.as_os_str().to_str().unwrap()))
+        if p.is_dir() {
+          count.add_dir(&DirInfos::new(path).count);
+          Children::Dir(DirInfos::new(path))
         } else {
           count.add_file();
-          Children::File(FileInfos::new(p.as_os_str().to_str().unwrap()))
-        };
+          Children::File(FileInfos::new(path))
+        }
       })
       .collect();
     Self {
