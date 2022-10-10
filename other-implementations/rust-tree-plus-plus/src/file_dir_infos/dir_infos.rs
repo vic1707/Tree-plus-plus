@@ -23,11 +23,13 @@ impl DirInfos {
     let mut count = ChildCount::new();
     let children = std::fs::read_dir(&path)
       .unwrap()
-      .map(|f| {
-        let p = f.unwrap().path();
+      .map(|c| {
+        let p = c.unwrap().path();
+        let path = p.to_str().unwrap();
         if p.is_dir() {
-          count.add_dir(&DirInfos::new(path).count);
-          Children::Dir(DirInfos::new(path))
+          let dir = DirInfos::new(path);
+          count.add_dir(&dir.count);
+          Children::Dir(dir)
         } else {
           count.add_file();
           Children::File(FileInfos::new(path))
