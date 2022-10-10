@@ -1,3 +1,4 @@
+use core::fmt::{Display, Formatter, Result as FmtResult};
 use std::fs;
 
 use chrono::{DateTime, Local};
@@ -28,5 +29,12 @@ impl ItemInfos {
       name: p.file_name().map(|n| n.to_string_lossy().to_string()).unwrap(),
       size: Size::from_bytes(metadata.len()),
     }
+  }
+}
+
+/// Implements the `Display` trait for `ItemInfos`.
+impl Display for ItemInfos {
+  fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
+    write!(f, "TODO")
   }
 }
