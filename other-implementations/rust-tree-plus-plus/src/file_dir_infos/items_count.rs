@@ -70,14 +70,13 @@ impl ChildCount {
   /// Increments the number of items in the directory using the numbers
   /// from another `ChildCount` struct.
   pub fn add_dir(&mut self, other: &Self) {
-    self.local.add_dir(&other.local);
+    self.local.dirs += 1;
     self.total.add_dir(&other.total);
   }
 
   /// Decrements the number of items in the directory using the numbers
   /// from another `ChildCount` struct.
   pub fn rm_dir(&mut self, other: &Self) {
-    self.local.rm_dir(&other.local);
     self.total.rm_dir(&other.total);
   }
 }
