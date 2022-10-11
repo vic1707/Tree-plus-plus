@@ -34,6 +34,10 @@ impl ItemInfos {
   pub fn add_size(&mut self, size: Size) {
     self.size = Size::from_bytes(self.size.bytes() + size.bytes());
   }
+
+  pub fn remove_size(&mut self, size: Size) {
+    self.size = Size::from_bytes(self.size.bytes() - size.bytes());
+  }
 }
 
 /// Implements the `Display` trait for `ItemInfos`.
