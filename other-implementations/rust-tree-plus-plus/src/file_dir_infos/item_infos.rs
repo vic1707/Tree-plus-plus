@@ -13,7 +13,7 @@ pub struct ItemInfos {
   /// The name of the file or directory.
   name: String,
   /// The size of the file or directory.
-  size: Size,
+  pub size: Size,
 }
 
 impl ItemInfos {
