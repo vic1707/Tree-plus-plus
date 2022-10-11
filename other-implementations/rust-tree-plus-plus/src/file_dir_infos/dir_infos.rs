@@ -21,6 +21,7 @@ impl DirInfos {
   /// Creates a new `DirInfos` struct.
   pub fn new(path: &str) -> Self {
     let mut count = ChildCount::new();
+    let mut infos = ItemInfos::new(path);
     let children = std::fs::read_dir(&path)
       .unwrap()
       .map(|c| {
@@ -28,16 +29,19 @@ impl DirInfos {
         let path = p.to_str().unwrap();
         if p.is_dir() {
           let dir = DirInfos::new(path);
+          infos.add_size(dir.infos.size);
           count.add_dir(&dir.count);
           Children::Dir(dir)
         } else {
+          let file = FileInfos::new(path);
+          infos.add_size(file.infos.size);
           count.add_file();
-          Children::File(FileInfos::new(path))
+          Children::File(file)
         }
       })
       .collect();
     Self {
-      infos: ItemInfos::new(path),
+      infos,
       count,
       children,
     }

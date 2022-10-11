@@ -27,14 +27,18 @@ impl ItemInfos {
       path: p.to_string_lossy().to_string(),
       last_modified: metadata.modified().map(|t| t.into()).unwrap(),
       name: p.file_name().map(|n| n.to_string_lossy().to_string()).unwrap(),
-      size: Size::from_bytes(metadata.len()),
+      size: if p.is_dir() { Size::from_bytes(0) } else { Size::from_bytes(metadata.len()) },
     }
+  }
+
+  pub fn add_size(&mut self, size: Size) {
+    self.size = Size::from_bytes(self.size.bytes() + size.bytes());
   }
 }
 
 /// Implements the `Display` trait for `ItemInfos`.
 impl Display for ItemInfos {
   fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
-    write!(f, "{} - {}", self.name, self.size)
+    write!(f, "{} - {} ({} B)", self.name, self.size, self.size.bytes())
   }
 }
