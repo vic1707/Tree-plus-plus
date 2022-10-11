@@ -5,7 +5,7 @@ use crate::file_dir_infos::items_count::ChildCount;
 use core::fmt::{Display, Formatter, Result as FmtResult};
 
 /// An enum that represents a directory or a file.
-enum Children {
+pub enum Children {
   File(FileInfos),
   Dir(DirInfos),
 }
