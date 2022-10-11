@@ -35,6 +35,6 @@ impl ItemInfos {
 /// Implements the `Display` trait for `ItemInfos`.
 impl Display for ItemInfos {
   fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
-    write!(f, "TODO")
+    write!(f, "{} - {}", self.name, self.size)
   }
 }

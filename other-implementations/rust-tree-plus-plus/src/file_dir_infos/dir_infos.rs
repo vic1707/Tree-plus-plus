@@ -47,6 +47,6 @@ impl DirInfos {
 /// Implements the `Display` trait for `DirInfos`.
 impl Display for DirInfos {
   fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
-    write!(f, "TODO")
+    write!(f, "{}", self.infos)
   }
 }
