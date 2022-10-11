@@ -27,7 +27,7 @@ impl ItemInfos {
       path: p.to_string_lossy().to_string(),
       last_modified: metadata.modified().map(|t| t.into()).unwrap(),
       name: p.file_name().map(|n| n.to_string_lossy().to_string()).unwrap(),
-      size: if p.is_dir() { Size::from_bytes(0) } else { Size::from_bytes(metadata.len()) },
+      size: Size::from_bytes(if p.is_dir() { 0 } else { metadata.len() }),
     }
   }
 

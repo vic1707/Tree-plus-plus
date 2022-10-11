@@ -4,14 +4,14 @@ use core::fmt::{Display, Formatter, Result as FmtResult};
 
 /// A struct that contains the information of a file.
 pub struct FileInfos {
-  infos: ItemInfos
+  pub infos: ItemInfos,
 }
 
 impl FileInfos {
   /// Creates a new `FileInfos` struct.
   pub fn new(path: &str) -> Self {
     Self {
-      infos: ItemInfos::new(path)
+      infos: ItemInfos::new(path),
     }
   }
 }

@@ -40,11 +40,7 @@ impl DirInfos {
         }
       })
       .collect();
-    Self {
-      infos,
-      count,
-      children,
-    }
+    Self { infos, count, children }
   }
 }
 
