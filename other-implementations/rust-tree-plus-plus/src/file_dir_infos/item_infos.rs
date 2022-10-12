@@ -32,11 +32,11 @@ impl ItemInfos {
   }
 
   pub fn add_size(&mut self, size: Size) {
-    self.size = Size::from_bytes(self.size.bytes() + size.bytes());
+    self.size = self.size + size;
   }
 
   pub fn remove_size(&mut self, size: Size) {
-    self.size = Size::from_bytes(self.size.bytes() - size.bytes());
+    self.size = self.size - size;
   }
 }
 
