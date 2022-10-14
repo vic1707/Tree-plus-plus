@@ -30,14 +30,6 @@ impl ItemInfos {
       size: Size::from_bytes(if p.is_dir() { 0 } else { metadata.len() }),
     }
   }
-
-  pub fn add_size(&mut self, size: Size) {
-    self.size = self.size + size;
-  }
-
-  pub fn remove_size(&mut self, size: Size) {
-    self.size = self.size - size;
-  }
 }
 
 /// Implements the `Display` trait for `ItemInfos`.

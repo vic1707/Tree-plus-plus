@@ -29,12 +29,12 @@ impl DirInfos {
         let path = p.to_str().unwrap();
         if p.is_dir() {
           let dir = DirInfos::new(path);
-          infos.add_size(dir.infos.size);
+          infos.size += dir.infos.size;
           count.add_dir(&dir.count);
           Children::Dir(dir)
         } else {
           let file = FileInfos::new(path);
-          infos.add_size(file.infos.size);
+          infos.size += file.infos.size;
           count.add_file();
           Children::File(file)
         }
