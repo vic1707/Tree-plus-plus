@@ -1,3 +1,5 @@
+#define DEFAULT_COLUMN_WIDTH 200
+
 /* std */
 #include <filesystem>
 #include <iostream>
@@ -22,12 +24,12 @@ namespace fs = std::filesystem;
   size_t get_terminal_width() {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    if (w.ws_col == 0) return 200;
+    if (w.ws_col == 0) return DEFAULT_COLUMN_WIDTH;
     return w.ws_col;
   }
 #else
   size_t get_terminal_width() {
-    return 200;
+    return DEFAULT_COLUMN_WIDTH;
   }
 #endif
 
@@ -56,8 +58,12 @@ namespace model {
         this->filters.erase("hidden");
       else if ( argv_sv == "--size-in-bytes")
         SizeUnit::size_in_bytes = true;
-      else if (argv_sv == "-r" || argv_sv == "--redirect")
+      else if (argv_sv == "-r" || argv_sv == "--redirect") {
         this->redirect = true;
+        this->columns = DEFAULT_COLUMN_WIDTH;
+      }
+      else if (argv_sv.starts_with("--column="))
+        this->columns = std::stoi(std::string(argv[i]).substr(9));
       else if (argv_sv.starts_with("--tab-size=")) {
         int t = std::stoi((std::string)argv_sv.substr(11));
         if (t < 2)
