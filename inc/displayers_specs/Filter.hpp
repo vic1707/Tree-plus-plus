@@ -24,7 +24,7 @@ namespace Filter {
       AFilter() = default;
       AFilter(const std::unordered_set<std::string_view> &d): m_discriminants(d) {};
       /* Methods */
-      void remove_from_parent(std::__wrap_iter<std::variant<FileDirInfos::DirInfos, FileDirInfos::FileInfos> *> i, FileDirInfos::DirInfos &p) {
+      void remove_from_parent(std::vector<std::variant<FileDirInfos::DirInfos, FileDirInfos::FileInfos>>::iterator i, FileDirInfos::DirInfos &p) {
         if (std::holds_alternative<FileDirInfos::FileInfos>(*i)) {
           p.children.remove_file();
           if (!keepSize) p.size -= std::get<FileDirInfos::FileInfos>(*i).size;
