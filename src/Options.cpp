@@ -10,7 +10,8 @@
 
 /* custom */
 #include <Options.hpp>
-#include <size/size.hpp>
+#include <SizeWrapper.hpp>
+bool SizeWrapper::size_in_bytes = false;
 #include <Utils.hpp>
 
 #include <displayers_specs/Filter.hpp>
