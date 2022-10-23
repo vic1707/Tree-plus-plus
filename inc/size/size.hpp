@@ -103,10 +103,11 @@ namespace size {
       /* Formatting */
       friend std::ostream& operator<<(std::ostream& os, const Size& size) {
         const auto& unit = get_unit(size.m_bytes, static_cast<int>(m_base));
+        const auto ratio = static_cast<LD>(size.m_bytes) / static_cast<LD>(unit.value);
 
-        return os << static_cast<LD>(size.m_bytes) / static_cast<LD>(unit.value)
+        return os << ratio
                   << " " << unit.names.at(static_cast<int>(m_style))
-                  << (static_cast<int>(m_style) > 1 && size.m_bytes != 1 ? "s" : "");
+                  << (ratio != 1 && (m_style == Style::Full || m_style == Style::FullLowercase) ? "s" : "");
       }
   }; // class Size
 }; // namespace size

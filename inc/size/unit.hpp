@@ -54,7 +54,7 @@ namespace size {
     const std::array<std::string_view, 4> names; 
   };
 
-  constexpr const Unit BYTE = {Unit_Val::BYTE, {"B", "b", "byte", "byte"}};
+  constexpr const Unit BYTE = {Unit_Val::BYTE, {"B", "b", "Byte", "byte"}};
   constexpr const std::array<const Unit, 16> units = {{
     { Unit_Val::KIBIBYTE, {"KiB", "kib",  "Kibibyte",  "kibibyte"}},
     { Unit_Val::KILOBYTE, { "KB",  "kb",  "Kilobyte",  "kilobyte"}},
