@@ -35,11 +35,11 @@ namespace Displayer {
     std::ofstream file;
     for (const auto &directory : dirs) {
       if (this->m_options.redirect) {
-        file = std::ofstream(directory.name.filename + ".tree");
+        file = std::ofstream(directory.name + ".tree");
         this->m_stream = &file;
       }
       this->m_format->set_stream(this->m_stream);
-      *this->m_stream << directory.name.filename << "\n";
+      *this->m_stream << directory.name << "\n";
       display_dir(directory);
       *this->m_stream << "\n" << directory.children << " - " << directory.size << "\n\n";
     }
