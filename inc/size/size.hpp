@@ -81,6 +81,9 @@ namespace size {
       [[nodiscard]] inline friend auto operator*(const Size& lhs, const Size& rhs) noexcept -> Size { return lhs.m_bytes * rhs.m_bytes; }
       [[nodiscard]] inline friend auto operator/(const Size& lhs, const Size& rhs) noexcept -> Size { return lhs.m_bytes / rhs.m_bytes; }
       [[nodiscard]] inline friend auto operator%(const Size& lhs, const Size& rhs) noexcept -> Size { return lhs.m_bytes % rhs.m_bytes; }
+      // copy assignment operators
+      inline auto operator=(const Size& other) noexcept -> Size& = default;
+      inline auto operator=(Size&& other) noexcept -> Size& = default;
       // compound assignment
       inline friend auto operator+=(Size& lhs, const Size& rhs) noexcept -> Size& { lhs.m_bytes += rhs.m_bytes; return lhs; }
       inline friend auto operator-=(Size& lhs, const Size& rhs) noexcept -> Size& { lhs.m_bytes -= rhs.m_bytes; return lhs; }
