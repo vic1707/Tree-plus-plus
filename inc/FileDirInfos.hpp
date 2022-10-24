@@ -8,7 +8,7 @@
 /* custom */
 namespace Sorter {class ASorter;} // #include "displayers_specs/Sorter.hpp"
 namespace Filter {class AFilter;} // #include "displayers_specs/Filter.hpp"
-#include "SizeUnit.hpp"
+#include <SizeWrapper.hpp>
 #include "Utils.hpp"
 
 namespace fs = std::filesystem;
@@ -19,7 +19,7 @@ namespace FileDirInfos {
     fs::path path;
     time_t time;
     std::string name;
-    SizeUnit size;
+    SizeWrapper size;
     /* Constructors */
     ItemInfos() noexcept = default;
     ItemInfos(fs::directory_entry entry);

@@ -36,7 +36,7 @@ namespace FileDirInfos {
       item = FileInfos(entry);
       this->children.add_file();
     }
-    this->size += item.size.bytes;
+    this->size += item.size;
     return item;
   }
 
@@ -44,7 +44,7 @@ namespace FileDirInfos {
     path(entry.path()),
     time(Utils::to_time_t(fs::last_write_time(this->path))),
     name(this->path.filename().string()),
-    size(entry.is_directory() ? SizeUnit() : fs::file_size(this->path))
+    size(entry.is_directory() ? 0 : fs::file_size(this->path))
   {}
 
   DirInfos::DirInfos(fs::directory_entry entry, const std::vector<std::unique_ptr<Sorter::ASorter>> &sorters, const std::vector<std::unique_ptr<Filter::AFilter>> &filters) : ItemInfos(entry) {

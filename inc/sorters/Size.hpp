@@ -1,7 +1,7 @@
 #pragma once
 /* custom */
 #include <displayers_specs/Sorter.hpp>
-#include <SizeUnit.hpp>
+#include <SizeWrapper.hpp>
 
 namespace Sorter {
   class Size : public ASorter {
@@ -12,7 +12,7 @@ namespace Sorter {
         });
       }
     private:
-      SizeUnit get_size(const auto &i) {
+      SizeWrapper get_size(const auto &i) {
         if (std::holds_alternative<FileDirInfos::DirInfos>(i))
           return std::get<FileDirInfos::DirInfos>(i).size;
         else

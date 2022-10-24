@@ -10,7 +10,8 @@
 
 /* custom */
 #include <Options.hpp>
-#include <SizeUnit.hpp>
+#include <SizeWrapper.hpp>
+bool SizeWrapper::size_in_bytes = false;
 #include <Utils.hpp>
 
 #include <displayers_specs/Filter.hpp>
@@ -57,7 +58,7 @@ namespace model {
       else if (argv_sv == "-a" || argv_sv == "--all-files")
         this->filters.erase("hidden");
       else if ( argv_sv == "--size-in-bytes")
-        SizeUnit::size_in_bytes = true;
+        SizeWrapper::size_in_bytes = true;
       else if (argv_sv == "-r" || argv_sv == "--redirect") {
         this->redirect = true;
         this->columns = DEFAULT_COLUMN_WIDTH;

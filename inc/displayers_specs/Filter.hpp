@@ -6,12 +6,12 @@
 #include <vector>
 /* custom */
 #include <FileDirInfos.hpp>
-#include <SizeUnit.hpp>
+#include <SizeWrapper.hpp>
 
 namespace Filter {
   class AFilter {
     private:
-      SizeUnit get_size(const auto &i) {
+      SizeWrapper get_size(const auto &i) {
         if (std::holds_alternative<FileDirInfos::DirInfos>(i))
           return std::get<FileDirInfos::DirInfos>(i).size;
         else
