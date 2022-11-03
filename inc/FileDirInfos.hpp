@@ -5,6 +5,7 @@
 #include <vector>
 /* fmt */
 #include <fmt/format.h>
+#include <fmt/ostream.h>
 /* custom */
 namespace Sorter {class ASorter;} // #include "displayers_specs/Sorter.hpp"
 namespace Filter {class AFilter;} // #include "displayers_specs/Filter.hpp"
@@ -76,18 +77,4 @@ namespace FileDirInfos {
 
 } // namespace FileDirInfos
 
-template <> struct fmt::formatter<FileDirInfos::ChildCount> {
-  constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
-    return ctx.begin();
-  }
-
-  template <typename FormatContext>
-  auto format(const FileDirInfos::ChildCount& p, FormatContext& ctx) const -> decltype(ctx.out()) {
-      if (p.total.dirs == 0 && p.total.files == 0) return fmt::format_to(ctx.out(), "{}", "Empty directory");
-      auto const dirs_plural = p.local.dirs > 1 ? "ies" : "y";
-      auto const files_plural = p.local.files > 1 ? "s" : "";
-      auto const total_dirs = p.local.dirs != p.total.dirs ? fmt::format(" ({} total)", p.total.dirs) : std::string();
-      auto const total_files = p.local.files != p.total.files ? fmt::format(" ({} total)", p.total.files) : std::string();
-      return fmt::format_to(ctx.out(), "{} director{}{} and {} file{}{}", p.local.dirs, dirs_plural, total_dirs, p.local.files, files_plural, total_files);
-  }
-};
+template <> struct fmt::formatter<FileDirInfos::ChildCount> : ostream_formatter {};
