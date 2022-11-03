@@ -5,13 +5,8 @@
 #include <size/size.hpp>
 
 inline std::string num_format(LD value) {
-  auto modulo = fmod(value, 1.);
-  if (modulo < 0.01)
-    return fmt::format("{}", value);
-  else {
-    auto mod_str = fmt::format("{:.2f}", modulo);
-    return fmt::format("{}.{}", (int)value, mod_str.substr(2));
-  }
+  return fmt::format("{}.{}", (int)value,
+                     fmt::format("{:.{}f}", fmod(value, 1.), 2).substr(2));
 }
 
 struct SizeWrapper: public size::Size {
