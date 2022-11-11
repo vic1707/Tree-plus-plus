@@ -59,10 +59,10 @@ namespace Displayer {
         auto &dir = std::get<FileDirInfos::DirInfos>(child);
         this->m_format->display_folder(&dir, prefixes[is_last + 0]);
         display_dir(dir, prefixes[is_last + 1]);
-      } else {
-        auto &file = std::get<FileDirInfos::FileInfos>(child);
-        this->m_format->display_file(&file, prefixes[is_last + 0]);
+        continue;
       }
+      auto &file = std::get<FileDirInfos::FileInfos>(child);
+      this->m_format->display_file(&file, prefixes[is_last + 0]);
     }
   }
 } // namespace Displayer
