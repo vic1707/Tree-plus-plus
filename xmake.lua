@@ -17,6 +17,7 @@ target("treepp")
     add_files("src/**.cpp")
     add_includedirs("inc")
     add_packages("fmt")
+    set_rundir("$(projectdir)")
     -- naming and flags which are OS specific
     if is_plat("windows") then
         set_filename("treepp_$(plat)_$(arch).exe")
