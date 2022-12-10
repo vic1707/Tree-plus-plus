@@ -9,6 +9,9 @@ on:
         default: 'patch'
 
 jobs:
+  strategy:
+    fail-fast: false
+
   build-ubuntu:
     runs-on: ubuntu-22.04
     steps:
