@@ -18,8 +18,6 @@ jobs:
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
-        with:
-          xmake-version: branch@dev
       -
         name: Build
         run: |
@@ -36,8 +34,6 @@ jobs:
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
-        with:
-          xmake-version: branch@dev
       -
         name: Build (Windows)
         run: |
@@ -54,8 +50,6 @@ jobs:
       -
         name: Setup Xmake
         uses: xmake-io/github-action-setup-xmake@v1
-        with:
-          xmake-version: branch@dev
       -
         name: Build (MacOs)
         run: |
