@@ -76,32 +76,47 @@ namespace size {
     /// The base-2 "yobibyte" unit, equal to 1024 zebibytes.
     YOBIBYTE = ZEBIBYTE << 10,
     /// The base-10 "yottabyte" unit, equal to 1000 zettabytes.
-    YOTTABYTE = 1000 * ZETTABYTE
+    YOTTABYTE = 1000 * ZETTABYTE,
+// new prefixes in 2022, see https://en.wikipedia.org/wiki/Binary_prefix
+// base-10: ronna & quetta
+// base-2: robi & quebi (non official)
+    /// The base-2 "robibyte" unit, equal to 1024 yobibytes.
+    ROBIBYTE = YOBIBYTE << 10,
+    /// The base-10 "ronnabyte" unit, equal to 1000 yottabytes.
+    RONNABYTE = 1000 * YOTTABYTE,
+    /// The base-2 "quebibyte" unit, equal to 1024 robibytes.
+    QUEBIBYTE = ROBIBYTE << 10,
+    /// The base-10 "quettabyte" unit, equal to 1000 ronnabytes.
+    QUETTABYTE = 1000 * RONNABYTE
   };
 
   using Names = std::array<std::string_view, 4>;
   using Unit_Names = std::pair<const Unit, const Names>;
-  constexpr const std::array<Unit_Names, 17> units = {{
-    {     Unit::BYTE, {  "B",   "b",      "Byte",      "byte"}},
-    { Unit::KIBIBYTE, {"KiB", "kib",  "Kibibyte",  "kibibyte"}},
-    { Unit::KILOBYTE, { "KB",  "kb",  "Kilobyte",  "kilobyte"}},
-    { Unit::MEBIBYTE, {"MiB", "mib",  "Mebibyte",  "mebibyte"}},
-    { Unit::MEGABYTE, { "MB",  "mb",  "Megabyte",  "megabyte"}},
-    { Unit::GIBIBYTE, {"GiB", "gib",  "Gibibyte",  "gibibyte"}},
-    { Unit::GIGABYTE, { "GB",  "gb",  "Gigabyte",  "gigabyte"}},
-    { Unit::TEBIBYTE, {"TiB", "tib",  "Tebibyte",  "tebibyte"}},
-    { Unit::TERABYTE, { "TB",  "tb",  "Terabyte",  "terabyte"}},
-    { Unit::PEBIBYTE, {"PiB", "pib",  "Pebibyte",  "pebibyte"}},
-    { Unit::PETABYTE, { "PB",  "pb",  "Petabyte",  "petabyte"}},
-    { Unit::EXBIBYTE, {"EiB", "eib",  "Exbibyte",  "exbibyte"}},
-    {  Unit::EXABYTE, { "EB",  "eb",   "Exabyte",   "exabyte"}},
-    { Unit::ZEBIBYTE, {"ZiB", "zib",  "Zebibyte",  "zebibyte"}},
-    {Unit::ZETTABYTE, { "ZB",  "zb", "Zettabyte", "zettabyte"}},
-    { Unit::YOBIBYTE, {"YiB", "yib",  "Yobibyte",  "yobibyte"}},
-    {Unit::YOTTABYTE, { "YB",  "yb", "Yottabyte", "yottabyte"}}
+  constexpr const std::array<Unit_Names, 21> units = {{
+    {      Unit::BYTE, {  "B",   "b",       "Byte",       "byte"}},
+    {  Unit::KIBIBYTE, {"KiB", "kib",   "Kibibyte",   "kibibyte"}},
+    {  Unit::KILOBYTE, { "KB",  "kb",   "Kilobyte",   "kilobyte"}},
+    {  Unit::MEBIBYTE, {"MiB", "mib",   "Mebibyte",   "mebibyte"}},
+    {  Unit::MEGABYTE, { "MB",  "mb",   "Megabyte",   "megabyte"}},
+    {  Unit::GIBIBYTE, {"GiB", "gib",   "Gibibyte",   "gibibyte"}},
+    {  Unit::GIGABYTE, { "GB",  "gb",   "Gigabyte",   "gigabyte"}},
+    {  Unit::TEBIBYTE, {"TiB", "tib",   "Tebibyte",   "tebibyte"}},
+    {  Unit::TERABYTE, { "TB",  "tb",   "Terabyte",   "terabyte"}},
+    {  Unit::PEBIBYTE, {"PiB", "pib",   "Pebibyte",   "pebibyte"}},
+    {  Unit::PETABYTE, { "PB",  "pb",   "Petabyte",   "petabyte"}},
+    {  Unit::EXBIBYTE, {"EiB", "eib",   "Exbibyte",   "exbibyte"}},
+    {   Unit::EXABYTE, { "EB",  "eb",    "Exabyte",    "exabyte"}},
+    {  Unit::ZEBIBYTE, {"ZiB", "zib",   "Zebibyte",   "zebibyte"}},
+    { Unit::ZETTABYTE, { "ZB",  "zb",  "Zettabyte",  "zettabyte"}},
+    {  Unit::YOBIBYTE, {"YiB", "yib",   "Yobibyte",   "yobibyte"}},
+    { Unit::YOTTABYTE, { "YB",  "yb",  "Yottabyte",  "yottabyte"}},
+    {  Unit::ROBIBYTE, {"RiB", "rib",   "Robibyte",   "robibyte"}},
+    { Unit::RONNABYTE, { "RB",  "rb",  "Ronnabyte",  "ronnabyte"}},
+    { Unit::QUEBIBYTE, {"QiB", "qib",  "Quebibyte",  "quebibyte"}},
+    {Unit::QUETTABYTE, { "QB",  "qb", "Quettabyte", "quettabyte"}}
   }};
 
-  constexpr const Unit_Names& find_unit_pair(const BT bytes, const int base) {
+  [[nodiscard]] constexpr const Unit_Names& find_unit_pair(const BT bytes, const int base) {
     if (bytes < static_cast<BT>(units.at(1 + base).first)) return units.at(0);
 
     for (auto unit = 3 + base; unit < units.size(); unit += 2)
@@ -110,7 +125,7 @@ namespace size {
     return units.at(units.size() - 2 + base);
   }
 
-  constexpr const Unit_Names& find_unit_pair(const Unit unit) {
+  [[nodiscard]] constexpr const Unit_Names& find_unit_pair(const Unit unit) {
     return *std::find_if(units.begin(), units.end(),
       [unit](const Unit_Names& un) { return un.first == unit; });
   }

@@ -15,7 +15,7 @@ struct SizeWrapper: public size::Size<size::Base::Base2> {
   /* Operators */
   friend inline std::ostream& operator<<(std::ostream& os, const SizeWrapper& s) {
     if (size_in_bytes)
-      os << fmt::format("({} B) - {: >10.2#%f %U}", s.bytes(), static_cast<const size::Size<size::Base::Base2>&>(s));
+      os << fmt::format("({} B) - {: >11.2#%f %U}", s.bytes(), static_cast<const size::Size<size::Base::Base2>&>(s));
     else
       os << static_cast<const size::Size<size::Base::Base2>&>(s);
     return os;

@@ -6,28 +6,30 @@
 /* STD */
 #include <array>
 #include <cmath>
+#include <cstddef>
 #include <optional>
 #include <string>
 #include <string_view>
-#include <tuple>
 #include <variant>
-#include <vector>
-#include <iostream>
 
 #define FMT_ENFORCE_COMPILE_STRING
 
-using PositionnalValue = std::optional<char>;
-using PositionnalUnit = std::optional<size::Style>;
-using Positionnal = std::variant<PositionnalValue, PositionnalUnit>;
+using PositionnalValue = char;
+using PositionnalUnit = size::Style;
+using Positionnal = std::variant<PositionnalValue, PositionnalUnit, std::nullopt_t>;
+
+constexpr size_t c_strlen(const char *str) {
+  auto result = size_t(0);
+  while (*(str++) != '\0')
+    ++result;
+  return result;
+}
 
 /* FMT SPEC DEFAULTS */
 constexpr const auto DEFAULT_POSITIONNAL_VALUE = 'N'; // `N` for `No format`
 constexpr const auto DEFAULT_POSITIONNAL_UNIT = size::Style::Abbreviated;
 constexpr const auto DEFAULT_PRECISION = 6; // default precision for floating point numbers see https://en.cppreference.com/w/cpp/io/ios_base/precision
-const std::vector<Positionnal> DEFAULT_POSITIONNALS_CONFIG = {DEFAULT_POSITIONNAL_VALUE, DEFAULT_POSITIONNAL_UNIT};
-const std::vector<std::string> DEFAULT_POSITIONNAL_SEPARATORS_CONFIG = {" "};
-constexpr const std::string_view DEFAULT_FILL = " ";
-constexpr const std::string_view DEFAULT_ALIGN = ">";
+constexpr const auto EMPTY_POSITIONNALS_ARRAY = std::array<Positionnal, 2>{std::nullopt, std::nullopt};
 
 /* FMT Spec for Size library */
 /**
@@ -46,21 +48,21 @@ constexpr const std::string_view DEFAULT_ALIGN = ">";
       * type              ::= 'e' | 'f'                                                         ::= affects the representation of the number
 **/
 template <size::Base unitBase> struct fmt::formatter<size::Size<unitBase>> {
-  std::string format_final = "{:";
+  char format_final[7] = "{:";
   // precision: integer
-  std::optional<int> precision = DEFAULT_PRECISION;
+  std::optional<int> precision;
 
   // base: 'b' - binary, 'd' - decimal
   size::Base base = unitBase;
   // unit type: 'B' - bytes, 'K' - kilobytes, 'M' - megabytes, 'G' - gigabytes, 'T' - terabytes, 'P' - petabytes, 'E' - exabytes, 'Z' - zettabytes, 'Y' - yottabytes
   // if still not specified, will use the most appropriate unit
-  std::optional<size::Unit> unit = std::nullopt;
+  std::optional<size::Unit> unit;
   // positionnal elements
-  std::optional<std::vector<Positionnal>> positionnals;
+  std::optional<std::array<Positionnal, 2>> positionnals;
   // postitionnal separator
-  std::optional<std::vector<std::string>> positionnal_separators;
+  std::optional<std::string_view> separator;
 
-  constexpr auto parse_positionnal_args(fmt::format_parse_context::iterator it) -> Positionnal {
+  [[nodiscard]] constexpr auto parse_positionnal_args(fmt::format_parse_context::iterator it) const -> Positionnal {
     switch (*it) {
       case 'V':
         return DEFAULT_POSITIONNAL_VALUE;
@@ -85,13 +87,16 @@ template <size::Base unitBase> struct fmt::formatter<size::Size<unitBase>> {
   }
 
   template <typename ParseContext>
-  constexpr auto parse(ParseContext& ctx) -> decltype(ctx.begin()) {
+  [[nodiscard]] constexpr auto parse(ParseContext& ctx) -> decltype(ctx.begin()) {
     auto it = ctx.begin(), end = ctx.end();
-    if (it == end || *it == '}') return it;
+    if (it == end || *it == '}') {
+      format_final[c_strlen(format_final)] = '}';
+      return it;
+    }
 
     // append every it to format_final until we reach a '.' or a '#' or the end
-    while (it != end && *it != '.' && *it != '#')
-      format_final += *it++;
+    while (it != end && *it != '.' && *it != '#' && *it != '}')
+      format_final[c_strlen(format_final)] = *it++;
 
     // if we reached a '.', we need to parse the precision
     if (*it == '.') {
@@ -121,87 +126,84 @@ template <size::Base unitBase> struct fmt::formatter<size::Size<unitBase>> {
           case 'Y': unit = (base == size::Base::Base10) ? size::Unit::YOTTABYTE : size::Unit::YOBIBYTE; break;
           default: throw fmt::format_error("invalid unit format (don't know how you got here)");
         }
-      // positionnal
+      // positionnal 1
       if (*it == '%') {
-        positionnals = std::vector<Positionnal>{};
-        positionnal_separators = std::vector<std::string>{};
+        positionnals.emplace(EMPTY_POSITIONNALS_ARRAY);
+        positionnals.value().at(0) = parse_positionnal_args((++it)++);
+        // separator
+        if (*it != '%') {
+          const auto separator_start = it;
+          while (it != end && *it != '%' && *it != '}') ++it;
+          separator = std::string_view{separator_start, static_cast<size_t>(it - separator_start)};
+        } else
+          separator = std::string_view{""};
       }
-      while (*it == '%') {
-        // parse the positionnal argument
-        positionnals->emplace_back(parse_positionnal_args((++it)++));
-        // if it is end then we exit the loop
-        if (it == end) break;
-        // if it is already a '%' then we go back to the beginning of the loop
-        if (*it == '%' || *it == '}') {
-          positionnal_separators->emplace_back("");
-          continue;
-        }
-
-        const auto separator_start = it;
-        while (it != end && *it != '%' && *it != '}') ++it;
-        positionnal_separators->emplace_back(std::string(separator_start, it));
-      }
+      // positionnal 2
+      if (*it == '%')
+        positionnals.value().at(1) = parse_positionnal_args((++it)++);
     }
+
+    format_final[c_strlen(format_final)] = '}';
 
     return it;
   }
 
+  [[nodiscard]] constexpr auto format_value(size::Unit unit_base, int prec, LD ratio, PositionnalValue type) const {
+    switch (type) {
+    case 'f':
+      #ifndef SIZE_KEEP_BYTES_DECIMALS
+      if (unit_base == size::Unit::BYTE || prec == 0)
+      #else
+      if (prec == 0)
+      #endif
+        return fmt::format("{:.0f}", ratio);
+      else
+        return fmt::format(
+            "{}.{}", (BT)ratio,
+            fmt::format("{:.{}f}", fmod(ratio, 1.), prec).substr(2));
+    case 'e':
+      return fmt::format("{:.{}e}", ratio, prec);
+    case 'N':
+      return fmt::format("{}", ratio);
+    default:
+      throw std::invalid_argument("Invalid type for positionnal argument "
+                                  "(don't know how you got here)");
+    }
+  }
+
+  [[nodiscard]] constexpr auto format_unit(size::Names unit_names, PositionnalUnit u) const -> std::string_view {
+    return unit_names.at(static_cast<int>(u));
+  }
+
   template <typename FormatContext>
-  auto format(const size::Size<unitBase>& s, FormatContext& ctx) const -> decltype(ctx.out()) {
-    std::string res;
-    const auto [unit_base, unit_names] = unit.has_value()
-                                       ? size::find_unit_pair(unit.value())
-                                       : s.nearest_unit(base);
+  [[nodiscard]] auto format(const size::Size<unitBase>& s, FormatContext& ctx) const -> decltype(ctx.out()) {
+    const auto [unit_base, unit_names] =
+        unit.has_value() ? size::find_unit_pair(unit.value())
+                         : s.nearest_unit(base);
+
     const auto& ratio = static_cast<LD>(s.bytes()) / static_cast<LD>(unit_base);
 
-    const auto _positionnals = positionnals.value_or(DEFAULT_POSITIONNALS_CONFIG);
-    const auto _positionnal_separators = positionnal_separators.value_or(DEFAULT_POSITIONNAL_SEPARATORS_CONFIG);
+    const auto _positionnals = positionnals.value_or(
+        precision.has_value()
+            ? std::array<Positionnal, 2>{PositionnalValue{'f'},
+                                         DEFAULT_POSITIONNAL_UNIT}
+            : std::array<Positionnal, 2>{DEFAULT_POSITIONNAL_VALUE,
+                                         DEFAULT_POSITIONNAL_UNIT});
 
-    auto it_pos = _positionnals.begin();
-    auto it_sep = _positionnal_separators.begin();
-    const auto end_pos = _positionnals.end();
-    const auto end_sep = _positionnal_separators.end();
+    const auto prec = precision.value_or(DEFAULT_PRECISION);
 
-    for (;it_pos != end_pos; ++it_pos, ++it_sep) {
-      if (std::holds_alternative<PositionnalUnit>(*it_pos)) {
-        const auto& style = std::get<PositionnalUnit>(*it_pos).value_or(DEFAULT_POSITIONNAL_UNIT);
-        res += unit_names.at(static_cast<int>(style));
-        // trailing 's'
-        if (ratio != 1 && (style == size::Style::Long || style == size::Style::LongLowercase)) res += 's';
-      } else if (std::holds_alternative<PositionnalValue>(*it_pos)) {
-        const char type = std::get<PositionnalValue>(*it_pos).value_or(DEFAULT_POSITIONNAL_VALUE);
-        switch (type) {
-          case 'f':
-#ifndef SIZE_KEEP_BYTES_DECIMALS
-            if (unit_base == size::Unit::BYTE || precision.value() == 0)
-#else
-            if (precision.value() == 0)
-#endif
-              res += fmt::format("{:.0f}", ratio);
-            else
-              res += fmt::format(
-                  "{}.{}", (BT)ratio,
-                  fmt::format("{:.{}f}",
-                              fmod(ratio, 1.),
-                              precision.value())
-                      .substr(2));
-            break;
-          case 'e':
-            res += fmt::format("{:.{}e}", ratio, precision.value());
-            break;
-          case 'N':
-            res += fmt::format("{}", ratio);
-            break;
-          default: throw std::invalid_argument("Invalid type for positionnal argument (don't know how you got here)");
-        }
-      }
-      if (it_pos != end_pos && it_sep != end_sep) res += *it_sep;
+    auto res = std::string{""};
+    for(const auto& pos: _positionnals) {
+      if (std::holds_alternative<std::nullopt_t>(pos)) continue;
+      if (std::holds_alternative<PositionnalValue>(pos))
+        res += format_value(unit_base, prec, ratio, std::get<PositionnalValue>(pos));
+      else
+        res += format_unit(unit_names, std::get<PositionnalUnit>(pos));
+
+      if (&pos != &_positionnals.back())
+        res += separator.value_or(" ");
     }
 
-    return fmt::format_to(
-      ctx.out(),
-      fmt::runtime(format_final + "}"),
-      res
-    );
+    return fmt::format_to(ctx.out(), format_final, res);
   }
 };
