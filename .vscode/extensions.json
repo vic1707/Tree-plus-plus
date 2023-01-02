@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    // Generals
+    "usernamehw.errorlens",
+    // CPP
+    "llvm-vs-code-extensions.vscode-clangd",
+    // GO
+    "golang.go",
+    // RUST
+    "rust-lang.rust-analyzer",
+    // ZIG
+    "tiehuis.zig",
+    // V
+    "vlanguage.vscode-vlang"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.cpptools"
+  ]
+}
