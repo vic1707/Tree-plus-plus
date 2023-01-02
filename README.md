@@ -1,6 +1,5 @@
 # WIP tree
 
-
-[![GitHub Forks](https://img.shields.io/github/forks/vic1707/tree.svg?color=6e5494&labelColor=555555&logoColor=ffffff&style=flat-square&logo=github)](https://github.com/vic1707/tree)
-[![GitHub Stars](https://img.shields.io/github/stars/vic1707/tree.svg?color=6e5494&labelColor=555555&logoColor=ffffff&style=flat-square&logo=github)](https://github.com/vic1707/tree)
-
+This is a work in progress, I'm doing this project to learn CPP and some other languages.
+The CPP code is working and can be compiled with recent enough stl.
+The rust implementation is a really early try the logic works but nothing else, it's kind of a POC.
