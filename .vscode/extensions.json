@@ -9,7 +9,7 @@
     // RUST
     "rust-lang.rust-analyzer",
     // ZIG
-    "tiehuis.zig",
+    "ziglang.vscode-zig",
     // V
     "vlanguage.vscode-vlang"
   ],
