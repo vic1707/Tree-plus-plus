@@ -54,15 +54,15 @@ namespace Displayer {
     };
 
     for (auto &child : directory.items) {
-      size_t is_last = int(&child == &directory.items.back()) << 1;
+      size_t is_last = (&child == &directory.items.back()) ? 2 : 0;
       if (std::holds_alternative<FileDirInfos::DirInfos>(child)) {
         auto &dir = std::get<FileDirInfos::DirInfos>(child);
-        this->m_format->display_folder(&dir, prefixes[is_last + 0]);
+        this->m_format->display_folder(&dir, prefixes[is_last]);
         display_dir(dir, prefixes[is_last + 1]);
         continue;
       }
       auto &file = std::get<FileDirInfos::FileInfos>(child);
-      this->m_format->display_file(&file, prefixes[is_last + 0]);
+      this->m_format->display_file(&file, prefixes[is_last]);
     }
   }
 } // namespace Displayer

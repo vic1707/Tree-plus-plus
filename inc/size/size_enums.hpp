@@ -119,7 +119,7 @@ namespace size {
   [[nodiscard]] constexpr const Unit_Names& find_unit_pair(const BT bytes, const int base) {
     if (bytes < static_cast<BT>(units.at(1 + base).first)) return units.at(0);
 
-    for (auto unit = 3 + base; unit < units.size(); unit += 2)
+    for (unsigned long unit = 3 + base; unit < units.size(); unit += 2)
       if (bytes < static_cast<BT>(units.at(unit).first))
         return units.at(unit - 2);
     return units.at(units.size() - 2 + base);

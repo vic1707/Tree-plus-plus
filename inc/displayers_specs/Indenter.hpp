@@ -7,8 +7,6 @@
 /* custom */
 #include <FileDirInfos.hpp>
 
-namespace fs = std::filesystem;
-
 namespace Indenter {
   struct IndenterOptions {
     /* Members */
